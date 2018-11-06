@@ -15,7 +15,7 @@
 	<h:form>
 
 		<h:panelGrid columns="3" cellpadding="2">
-			<h:outputText value="Benutzername: " />
+			<p:outputLabel value="Benutzername: " />
 			<p:inputText id="name" value="#{user.name}" required="true"
 				requiredMessage="Bitte Pflichtfeld eingeben">
 				<f:validator validatorId="usernameValidator"></f:validator>
@@ -24,7 +24,7 @@
 			<h:message for="name" showDetail="true" showSummary="false"
 				style="color:red;" />
 
-			<h:outputText value="Passwort: " />
+			<p:outputLabel value="Passwort: " />
 			<p:password id="password" value="#{user.password}" feedback="true"
 				required="true" requiredMessage="Bitte Pflichtfeld eingeben"  validatorMessage="Passwort ist zu klein, die länge muss mindestens 3 sein">
 				<f:validateLength minimum="3" ></f:validateLength>
@@ -34,14 +34,14 @@
 
 
 		</h:panelGrid>
-		<h:commandButton value="neuen Account erstellen"
-			action="#{user.saveInDB}" />
+		<p:commandButton value="neuen Account erstellen"
+			action="#{user.saveInDB}" ajax="false"/>
 
 	</h:form>
 	<br />
 	<br />
 	<h:form>
-		<h:commandButton value="Zu Login" action="login" />
+		<p:commandButton value="Zu Login" action="login" ajax="false"/>
 	</h:form>
 
 

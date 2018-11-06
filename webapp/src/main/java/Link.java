@@ -26,7 +26,7 @@ public class Link {
 	
 	@Column(name="beschreibung")
 	private String beschreibung;
-
+	
 	
 	public Link() { }
 	

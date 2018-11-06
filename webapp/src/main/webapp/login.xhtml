@@ -14,14 +14,14 @@
 	<h:form>
 
 		<h:panelGrid columns="3" cellpadding="2">
-		<h:outputText value="Benutzername: " />
+		<p:outputLabel value="Benutzername: " />
 		<p:inputText id="name" value="#{userController.user.name}"
 			required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
 
 		<h:message for="name" showDetail="true" showSummary="false"
 			style="color:red;" />
 
-		<h:outputText value="Passwort: " />
+		<p:outputLabel value="Passwort: " />
 		<p:password id="password" value="#{userController.user.password}"
 			required="true" requiredMessage="Bitte Pflichtfeld eingeben" >
 			
@@ -30,13 +30,13 @@
 			style="color:red;" />
 		
 		</h:panelGrid>
-		<h:commandButton value="login"
-			action="#{userController.user.navigationFromLogin}" />
+		<p:commandButton value="login"
+			action="#{userController.user.navigationFromLogin}" ajax="false"/>
 
 	</h:form>
 	<br />
 	<h:form>
-		<h:commandButton value="Zu Regestrieren" action="index" />
+		<p:commandButton value="Zu Regestrieren" action="index" ajax="false" />
 	</h:form>
 
 </h:body>

@@ -4,6 +4,8 @@
 
 <hibernate-configuration>
 
+	
+
     <session-factory>
 
         <!-- JDBC Database connection settings -->
@@ -23,6 +25,8 @@
 
 		<!-- Set the current session context -->
 		<property name="current_session_context_class">thread</property>
+		<!-- Auto update -->
+		<property name="hbm2ddl.auto">update</property>
  
     </session-factory>
 

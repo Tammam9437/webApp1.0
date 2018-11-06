@@ -26,7 +26,6 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-
 	public User() {
 	}
 
@@ -50,22 +49,22 @@ public class User {
 			return false;
 		}
 		ConnectToDB.displayUsers(identicalUsers);
-		//da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
+		// da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
 		setId(identicalUsers.get(0).getId());
 		return true;
 	}
+
 	public boolean userExsistiert(String username) {
 		List<User> identicalUsers;
-		identicalUsers = ConnectToDB
-				.queryUser("from User u where u.name = ' " + username + "'");
+		identicalUsers = ConnectToDB.queryUser("from User u where u.name = ' " + name + "'");
 
 		if (identicalUsers.isEmpty()) {
 			return false;
+		} else {
+			return true;
 		}
-		return true;
+
 	}
-	
-		
 
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {
@@ -97,8 +96,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
 	@Override
 	public String toString() {

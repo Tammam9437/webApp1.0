@@ -4,38 +4,50 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-<head></head>
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>User Home Page</title>
+</h:head>
 
-<body>
+<h:body>
 	<h1>Herzlich Welkommen #{userController.user.name}</h1>
 	<h:form>
-		<h:commandButton value="add new Link"
-			action="#{userController.showAddLinkToggel}"></h:commandButton>
+		<p:commandButton value="add new Link"
+			actionListener="#{userController.showAddLinkToggel}" ajax="false"></p:commandButton>
 	</h:form>
 	<h:form>
-		<h:commandButton value="Show Links"
-			action="#{userController.showLinksToggel}"></h:commandButton>
+		<p:commandButton value="Show Links"
+			actionListener="#{userController.showLinksToggel}" ajax="false"></p:commandButton>
 	</h:form>
 
 	<h:form rendered="#{userController.showAddLink}">
 		<h:panelGrid columns="3" cellpadding="2">
-			<h:outputText value="URL : " />
+			<p:outputLabel value="URL : " />
 			<p:inputText id="link" value="#{userController.link.url}"
-				required="true" requiredMessage="Bitte Pflichtfeld eingeben"/>
-				<h:message for="link" showDetail="true" showSummary="false"
-					style="color:red;" />
+				required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
+			<h:message for="link" showDetail="true" showSummary="false"
+				style="color:red;" />
 
-				<h:outputText value="Beschreibung : " />
-				<p:inputText id="beschreibung"
-					value="#{userController.link.beschreibung}" required="true" requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
-					<h:message for="beschreibung" showDetail="true" showSummary="false"
-			style="color:red;" />
+			<p:outputLabel value="Beschreibung : " />
+			<p:inputText id="beschreibung"
+				value="#{userController.link.beschreibung}" required="true"
+				requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
+			<h:message for="beschreibung" showDetail="true" showSummary="false"
+				style="color:red;" />
 
-				<h:commandButton value="add Link"
-					action="#{userController.addLink()}"></h:commandButton>
+			<p:commandButton value="add Link"
+				actionListener="#{userController.addLink()}" ajax="false"></p:commandButton>
 		</h:panelGrid>
+	</h:form>
+	<br />
+	<h:form enctype="multipart/form-data">
+		<p:growl id="messages" showDetail="true" />
+
+		<p:fileUpload value="#{fileUploadView.file}" mode="simple"
+			skinSimple="true" />
+
+		<p:commandButton value="Submit" ajax="false"
+			actionListener="#{fileUploadView.upload}" disabled="false" />
 	</h:form>
 
 	<h:form rendered="#{userController.showLinkForm}">
@@ -48,7 +60,7 @@
 
 	</h:form>
 
-</body>
+</h:body>
 
 
 </html>
