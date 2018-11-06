@@ -36,27 +36,27 @@ public class User {
 	}
 
 	public String saveInDB() {
-		ConnectToDBUser.saveUserInDB(this);
+		ConnectToDB.saveUserInDB(this);
 		return "login";
 	}
 
 	public boolean confirmLoginData() {
 
 		List<User> identicalUsers;
-		identicalUsers = ConnectToDBUser
+		identicalUsers = ConnectToDB
 				.queryUser("from User u where u.name = '" + name + "' And u.password= '" + password + "'");
 
 		if (identicalUsers.isEmpty()) {
 			return false;
 		}
-		ConnectToDBUser.displayUsers(identicalUsers);
+		ConnectToDB.displayUsers(identicalUsers);
 		//da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
 		setId(identicalUsers.get(0).getId());
 		return true;
 	}
 	public boolean userExsistiert(String username) {
 		List<User> identicalUsers;
-		identicalUsers = ConnectToDBUser
+		identicalUsers = ConnectToDB
 				.queryUser("from User u where u.name = ' " + username + "'");
 
 		if (identicalUsers.isEmpty()) {

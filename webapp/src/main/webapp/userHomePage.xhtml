@@ -20,16 +20,22 @@
 	</h:form>
 
 	<h:form rendered="#{userController.showAddLink}">
-		<h:outputText value="URL : " />
-		<p:inputText id="link" value="#{userController.link.url}" />
-		<br />
-		<br />
-		<h:outputText value="Beschreibung : " />
-		<p:inputText id="beschreibung"
-			value="#{userController.link.beschreibung}" />
-		<br />
-		<br />
-		<h:commandButton value="add Link" action="#{userController.addLink()}"></h:commandButton>
+		<h:panelGrid columns="3" cellpadding="2">
+			<h:outputText value="URL : " />
+			<p:inputText id="link" value="#{userController.link.url}"
+				required="true" requiredMessage="Bitte Pflichtfeld eingeben"/>
+				<h:message for="link" showDetail="true" showSummary="false"
+					style="color:red;" />
+
+				<h:outputText value="Beschreibung : " />
+				<p:inputText id="beschreibung"
+					value="#{userController.link.beschreibung}" required="true" requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
+					<h:message for="beschreibung" showDetail="true" showSummary="false"
+			style="color:red;" />
+
+				<h:commandButton value="add Link"
+					action="#{userController.addLink()}"></h:commandButton>
+		</h:panelGrid>
 	</h:form>
 
 	<h:form rendered="#{userController.showLinkForm}">

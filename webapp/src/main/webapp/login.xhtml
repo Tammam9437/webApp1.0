@@ -13,7 +13,7 @@
 	<h3>Bitte geben Sie Ihre Daten ein</h3>
 	<h:form>
 
-		<h:panelGrid columns="3">
+		<h:panelGrid columns="3" cellpadding="2">
 		<h:outputText value="Benutzername: " />
 		<p:inputText id="name" value="#{userController.user.name}"
 			required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
@@ -23,8 +23,8 @@
 
 		<h:outputText value="Passwort: " />
 		<p:password id="password" value="#{userController.user.password}"
-			required="true" requiredMessage="Bitte Pflichtfeld eingeben" validatorMessage="Passwort ist zu klein, die länge muss mindestens 3 sein">
-			<f:validateLength minimum="3" ></f:validateLength>
+			required="true" requiredMessage="Bitte Pflichtfeld eingeben" >
+			
 			</p:password>
 		<h:message for="password" showDetail="true" showSummary="false"
 			style="color:red;" />

@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class ConnectToDBUser2 {
+public class ConnectToDB {
 
 	private static SessionFactory instance;
 
@@ -54,6 +54,23 @@ public class ConnectToDBUser2 {
 		}
 		return theUsers;
 	}
+	
+	public static User getUserFromDB(int userId) {
+		Session session = getInstance();
+		User user;
+		try {
+			session.beginTransaction();
+
+			
+			user = session.get(User.class, userId);
+
+			
+			session.getTransaction().commit();
+		} finally {
+			getInstance().close();
+		}
+		return user;
+	}
 
 	public static void displayUsers(List<User> theUsers) {
 		for (User tempUser : theUsers) {
@@ -82,6 +99,21 @@ public class ConnectToDBUser2 {
 			getInstance().close();
 		}
 		return theLinks;
+	}
+	public static void saveLinkInDB(Link link) {
+		Session session = getInstance();
+		try {
+
+			session.beginTransaction();
+
+			session.save(link);
+
+			session.getTransaction().commit();
+
+		} finally {
+			getInstance().close();
+		}
+
 	}
 	
 	public static void displayLinks(List<Link> theLinks) {

@@ -25,7 +25,7 @@ public class UserController {
 		Link add = new Link(link.getUrl(), link.getBeschreibung());
 		showAddLink = false;
 		showLinkForm = true;
-		ConnectToDBLink.saveLinkInDB(add);
+		ConnectToDB.saveLinkInDB(add);
 	}
 	
 	public void showAddLinkToggel() {

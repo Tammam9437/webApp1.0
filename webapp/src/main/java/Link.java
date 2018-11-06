@@ -37,15 +37,9 @@ public class Link {
 	}
 	
 	public  List<Link> getLinksFromDB(){
-		List <Link> list = ConnectToDBLink.queryLink("From Link");
+		List <Link> list = ConnectToDB.queryLink("From Link");
 		return 	list;
-	}
-
-//	public void addLink(int userid) {
-//		Link link = new Link(userid, this.url, this.beschreibung);
-//		ConnectToDBLink.saveLinkInDB(link);
-//	}
-	
+	}	
 
 
 	public String getUrl() {

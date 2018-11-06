@@ -14,7 +14,7 @@
 	<h3>Bitte geben Sie Ihre Daten ein</h3>
 	<h:form>
 
-		<h:panelGrid columns="2" cellpadding="2">
+		<h:panelGrid columns="3" cellpadding="2">
 			<h:outputText value="Benutzername: " />
 			<p:inputText id="name" value="#{user.name}" required="true"
 				requiredMessage="Bitte Pflichtfeld eingeben">
@@ -24,15 +24,14 @@
 			<h:message for="name" showDetail="true" showSummary="false"
 				style="color:red;" />
 
-			<br />
-
 			<h:outputText value="Passwort: " />
 			<p:password id="password" value="#{user.password}" feedback="true"
-				required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
+				required="true" requiredMessage="Bitte Pflichtfeld eingeben"  validatorMessage="Passwort ist zu klein, die länge muss mindestens 3 sein">
+				<f:validateLength minimum="3" ></f:validateLength>
+				</p:password>
 			<h:message for="password" showDetail="true" showSummary="false"
 				style="color:red;" />
 
-			<br />
 
 		</h:panelGrid>
 		<h:commandButton value="neuen Account erstellen"
