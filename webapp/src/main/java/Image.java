@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,11 +39,18 @@ public class Image {
 	public void setFile(byte [] file) {
 		this.file = file;
 	}
+
 //	public byte[] getImage() {
-//		return ConnectToDB.queryImage("from Image").get(0).getFile();	
+//		return ConnectToDB.getImageFromDB(2).getFile();	
 //	}
-	public byte[] getImage() {
-		return ConnectToDB.getImageFromDB(2).getFile();	
+	
+	public List<byte[]> getAllImagesFromDB(){
+		List<byte[]> allImagesFromDB = new ArrayList<byte[]>();
+		List<Image> images = ConnectToDB.queryImage("from Image");
+		for(Image image : images) {
+			allImagesFromDB.add(image.getFile());
+		}
+		return allImagesFromDB;
 	}
 
 
