@@ -56,14 +56,12 @@ public class User {
 
 	public boolean userExsistiert(String username) {
 		List<User> identicalUsers;
-		identicalUsers = ConnectToDB.queryUser("from User u where u.name = ' " + name + "'");
-
+		identicalUsers = ConnectToDB.queryUser("from User u where u.name = '" + username + "'");
 		if (identicalUsers.isEmpty()) {
 			return false;
 		} else {
 			return true;
 		}
-
 	}
 
 	public String navigationFromLogin() {

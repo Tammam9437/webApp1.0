@@ -19,7 +19,7 @@ public class ConnectToDB {
 	public static void saveUserInDB(User user) {
 		Session session = getInstance();
 		try {
-
+			
 			session.beginTransaction();
 
 			session.save(user);

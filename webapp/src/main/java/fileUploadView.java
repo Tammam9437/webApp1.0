@@ -1,10 +1,12 @@
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
  
 @ManagedBean
+@SessionScoped
 public class fileUploadView {
      
     private UploadedFile file;
@@ -17,7 +19,7 @@ public class fileUploadView {
         this.file = file;
     }
      
-    public void upload() {
+    public void upload() {   	
         if(file != null) {
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
