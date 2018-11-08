@@ -17,8 +17,8 @@ public class UserController {
 	public UserController() {
 		this.user=new User();
 		this.link= new Link();
-		this.showAddLink = true;
-		this.showLinkForm = true;
+		this.showAddLink = false;
+		this.showLinkForm = false;
 	}
 	
 	public void addLink() {

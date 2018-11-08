@@ -48,7 +48,12 @@
 
 		<p:commandButton value="Submit" ajax="false"
 			actionListener="#{fileUploadView.upload}" disabled="false" />
+			
+			
+		<p:commandButton value="image" ajax="false"
+			actionListener="#{image.getImage()}" disabled="false" />
 	</h:form>
+	<h:graphicImage id="image" alt="uploaded image" url="/image"/> 
 
 	<h:form rendered="#{userController.showLinkForm}">
 		<h2>Links</h2>

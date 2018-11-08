@@ -8,6 +8,7 @@ import org.primefaces.model.UploadedFile;
 public class fileUploadView {
      
     private UploadedFile file;
+    private Image image;
  
     public UploadedFile getFile() {
         return file;
@@ -18,7 +19,10 @@ public class fileUploadView {
     }
      
     public void upload() {
+    	image = new Image();
         if(file != null) {
+        	image.setFile(file.getContents());
+        	image.saveInDB();
             FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
