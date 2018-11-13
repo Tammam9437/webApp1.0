@@ -58,7 +58,7 @@
 		<p:commandButton value="Submit" ajax="false"
 			actionListener="#{fileUploadView.upload}" disabled="false" />
 
-		<h:graphicImage id="image" alt="uploaded image" url="/image" height="300" width="300"/>
+		<h:graphicImage id="image" alt="uploaded image" url="/image" height="300" width="300" rendered="#{fileUploadView.imageFile}"/>
 		
 	</h:form>
 
