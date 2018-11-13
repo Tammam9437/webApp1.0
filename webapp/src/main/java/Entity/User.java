@@ -1,3 +1,4 @@
+package Entity;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import DBConnector.ConnectToDB;
 
 @ManagedBean
 @Entity
@@ -56,7 +59,7 @@ public class User {
 
 	public boolean userExsistiert(String username) {
 		List<User> identicalUsers;
-		identicalUsers = ConnectToDB.queryUser("from User u where u.name = ' " + name + "'");
+		identicalUsers = ConnectToDB.queryUser("from User u where u.name ='" + username + "'");
 
 		if (identicalUsers.isEmpty()) {
 			return false;

@@ -1,8 +1,13 @@
+package DBConnector;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+import Entity.Image;
+import Entity.Link;
+import Entity.User;
 
 public class ConnectToDB {
 

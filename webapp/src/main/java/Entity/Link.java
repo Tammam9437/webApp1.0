@@ -1,3 +1,4 @@
+package Entity;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import DBConnector.ConnectToDB;
 
 @ManagedBean
 @Entity	

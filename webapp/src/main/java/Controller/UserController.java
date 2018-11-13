@@ -1,5 +1,10 @@
+package Controller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import DBConnector.ConnectToDB;
+import Entity.Link;
+import Entity.User;
 
 @ManagedBean
 @SessionScoped

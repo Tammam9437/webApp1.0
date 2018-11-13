@@ -1,8 +1,11 @@
+package View;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
+
+import Entity.Image;
  
 @ManagedBean
 public class fileUploadView {
