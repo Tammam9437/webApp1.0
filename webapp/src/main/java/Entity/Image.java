@@ -43,9 +43,6 @@ public class Image {
 		this.file = file;
 	}
 
-//	public byte[] getImage() {
-//		return ConnectToDB.getImageFromDB(2).getFile();	
-//	}
 	
 	public List<byte[]> getAllImagesFromDB(){
 		List<byte[]> allImagesFromDB = new ArrayList<byte[]>();

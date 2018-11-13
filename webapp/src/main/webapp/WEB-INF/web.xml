@@ -40,7 +40,7 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-class>ImageServlet</servlet-class>
+		<servlet-class>Servlet.ImageServlet</servlet-class>
 		<servlet-name>ImageServlet</servlet-name>
 	</servlet>
 	<servlet-mapping>
