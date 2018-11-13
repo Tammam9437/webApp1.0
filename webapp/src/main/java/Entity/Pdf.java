@@ -43,13 +43,13 @@ public class Pdf {
 		this.file = file;
 	}
 	
-	public List<byte[]> getAllImagesFromDB(){
-		List<byte[]> allImagesFromDB = new ArrayList<byte[]>();
-		List<Image> images = ConnectToDB.queryImage("from Image");
-		for(Image image : images) {
-			allImagesFromDB.add(image.getFile());
+	public List<byte[]> getAllPdfsFromDB(){
+		List<byte[]> allPdfsFromDB = new ArrayList<byte[]>();
+		List<Pdf> pdfs = ConnectToDB.queryPdf("from Pdf");
+		for(Pdf pdf : pdfs) {
+			allPdfsFromDB.add(pdf.getFile());
 		}
-		return allImagesFromDB;
+		return allPdfsFromDB;
 	}
 
 

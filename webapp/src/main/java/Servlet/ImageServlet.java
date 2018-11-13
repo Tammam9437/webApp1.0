@@ -16,6 +16,7 @@ public class ImageServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Image image;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +24,7 @@ public class ImageServlet extends HttpServlet {
 		// Get last uploaded image
 		try {
 			// Image bytes
-			Image image = new Image();
+			image = new Image();
 			List<byte[]> allImagesFromDB = image.getAllImagesFromDB();
 
             byte[] imageBytes = allImagesFromDB.get(allImagesFromDB.size()-1);

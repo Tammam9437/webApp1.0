@@ -11,9 +11,9 @@
 
 <h:body>
 	<h1>Herzlich Welkommen #{userController.user.name}</h1>
-	
+
 	<!-- Buttons -->
-	
+
 	<h:form>
 		<p:commandButton value="add new Link"
 			actionListener="#{userController.showAddLinkToggel}" ajax="false"></p:commandButton>
@@ -22,9 +22,9 @@
 		<p:commandButton value="Show Links"
 			actionListener="#{userController.showLinksToggel}" ajax="false"></p:commandButton>
 	</h:form>
-	
-		<!-- AddLink -->
-		
+
+	<!-- AddLink -->
+
 	<h:form rendered="#{userController.showAddLink}">
 		<h:panelGrid columns="3" cellpadding="2">
 			<p:outputLabel value="URL : " />
@@ -45,8 +45,8 @@
 		</h:panelGrid>
 	</h:form>
 	<br />
-	
-	<!-- Image -->
+
+	<!-- File -->
 
 	<h:form enctype="multipart/form-data"
 		rendered="#{userController.showAddImage}">
@@ -57,13 +57,15 @@
 
 		<p:commandButton value="Submit" ajax="false"
 			actionListener="#{fileUploadView.upload}" disabled="false" />
-
-		<h:graphicImage id="image" alt="uploaded image" url="/image" height="300" width="300" rendered="#{fileUploadView.imageFile}"/>
-		
+		<!-- Image -->
+		<h:graphicImage id="image" alt="uploaded image" url="/Image"
+			height="300" width="300" rendered="#{fileUploadView.imageFile}" />
+		<!-- Pdf -->
+		<p:media value="/Pdf" width="700px" height="700px" player="pdf" rendered="#{fileUploadView.pdfFile}"  />
 	</h:form>
 
 	<!-- Links -->
-	
+
 	<h:form rendered="#{userController.showLinkForm}">
 		<h2>Links</h2>
 		<ul>
