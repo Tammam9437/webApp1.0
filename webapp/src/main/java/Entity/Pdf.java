@@ -16,23 +16,23 @@ import DBConnector.ConnectToDB;
 
 @ManagedBean
 @Entity
-@Table(name = "Image")
+@Table(name = "Pdf")
 @SessionScoped
-public class Image {
+public class Pdf {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idImage")
-	private int idImage;
+	@Column(name = "idPdf")
+	private int idPdf;
 	
 	@Column(name = "file")
 	private byte [] file;
 	
-	public Image() {
+	public Pdf() {
 		
 	}
 	
 	public void saveInDB() {
-		ConnectToDB.saveImageInDB(this);
+		ConnectToDB.savePdfInDB(this);
 	}
 
 	public byte [] getFile() {
@@ -42,7 +42,6 @@ public class Image {
 	public void setFile(byte [] file) {
 		this.file = file;
 	}
-
 	
 	public List<byte[]> getAllImagesFromDB(){
 		List<byte[]> allImagesFromDB = new ArrayList<byte[]>();
@@ -56,7 +55,7 @@ public class Image {
 
 	@Override
 	public String toString() {
-		return "Image [id=" + idImage + ", file=" + Arrays.toString(file) + "]";
+		return "Image [id=" + idPdf + ", file=" + Arrays.toString(file) + "]";
 	}
 	
 }
