@@ -14,7 +14,7 @@ public class UserController {
 	private Link link;
 	private boolean showLinkForm;
 	private boolean showAddLink;
-	private boolean showAddImage;
+	private boolean showUpload;
 	
 	public UserController(User user, Link link) {
 		this.user = user;
@@ -25,7 +25,7 @@ public class UserController {
 		this.link= new Link();
 		this.showAddLink = false;
 		this.showLinkForm = false;
-		this.showAddImage = false;
+		this.showUpload = false;
 	}
 	
 	public void addLink() {
@@ -35,11 +35,11 @@ public class UserController {
 		ConnectToDB.saveLinkInDB(add);
 	}
 	
-	public void showAddImageToggel() {
-		if(showAddImage) {
-			showAddImage=false;
+	public void showUploadToggel() {
+		if(showUpload) {
+			showUpload=false;
 		}else {
-			showAddImage=true;
+			showUpload=true;
 		}
 	}
 	
@@ -86,11 +86,11 @@ public class UserController {
 	public void setShowAddLink(boolean showAddLink) {
 		this.showAddLink = showAddLink;
 	}
-	public boolean isShowAddImage() {
-		return showAddImage;
+	public boolean isshowUpload() {
+		return showUpload;
 	}
-	public void setShowAddImage(boolean showAddImage) {
-		this.showAddImage = showAddImage;
+	public void setshowUpload(boolean showUpload) {
+		this.showUpload = showUpload;
 	}
 
 	
