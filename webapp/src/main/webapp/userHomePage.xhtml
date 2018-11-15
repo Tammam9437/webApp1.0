@@ -67,7 +67,7 @@
 	<h:form rendered="#{userController.showLinkForm}">
 		<h2>Links</h2>
 		<ul>
-			<ui:repeat value="#{userController.link.getLinksFromDB()}" var="link">
+			<ui:repeat value="#{userController.getUserLinks()}" var="link">
 				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
 			</ui:repeat>
 		</ul>

@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import DBConnector.ConnectToDB;
@@ -26,6 +28,10 @@ public class Pdf {
 	
 	@Column(name = "file")
 	private byte [] file;
+	
+	@ManyToOne
+	@JoinColumn(name = "iduser")
+	private User user;
 	
 	public Pdf() {
 		
@@ -52,6 +58,18 @@ public class Pdf {
 		return allPdfsFromDB;
 	}
 
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public int getIdPdf() {
+		return idPdf;
+	}
 
 	@Override
 	public String toString() {

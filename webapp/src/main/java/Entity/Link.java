@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import DBConnector.ConnectToDB;
@@ -30,7 +32,32 @@ public class Link {
 	@Column(name="beschreibung")
 	private String beschreibung;
 	
+	@ManyToOne
+	@JoinColumn(name = "iduser")
+	private User user;
+
 	
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 	public Link() { }
 	
 	
@@ -42,7 +69,9 @@ public class Link {
 	public  List<Link> getLinksFromDB(){
 		List <Link> list = ConnectToDB.queryLink("From Link");
 		return 	list;
-	}	
+	}
+	
+	
 
 
 	public String getUrl() {
@@ -61,6 +90,8 @@ public class Link {
 		this.beschreibung = beschreibung;
 	}
 	
+
+
 	@Override
 	public String toString() {
 		return "Link [id=" + id + ", url=" + url + ", beschreibung=" + beschreibung + "]";

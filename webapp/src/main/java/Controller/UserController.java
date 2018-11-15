@@ -1,4 +1,6 @@
 package Controller;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -27,12 +29,16 @@ public class UserController {
 		this.showLinkForm = false;
 		this.showUpload = false;
 	}
-	
+	//New
 	public void addLink() {
 		Link add = new Link(link.getUrl(), link.getBeschreibung());
 		showAddLink = false;
 		showLinkForm = true;
+		add.setUser(user);
+		user.getLinks().add(add);
 		ConnectToDB.saveLinkInDB(add);
+		link.setUrl("");
+		link.setBeschreibung("");
 	}
 	
 	public void showUploadToggel() {
@@ -45,6 +51,10 @@ public class UserController {
 	
 	public String onClickImage() {
 		return "http://localhost:8080/webapp/image";
+	}
+	public List<Link> getUserLinks() {
+		List <Link> list = ConnectToDB.queryLink("From Link WHERE iduser ='"+user.getId()+"'");
+		return 	list;
 	}
 	
 	
