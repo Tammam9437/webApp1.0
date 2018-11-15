@@ -50,16 +50,16 @@
 		rendered="#{userController.showUpload}">
 		<p:growl id="messages" showDetail="true" />
 
-		<p:fileUpload value="#{fileUploadView.file}" mode="simple"
+		<p:fileUpload value="#{userController.fileUploadView.file}" mode="simple"
 			skinSimple="true" />
 
 		<p:commandButton value="Submit" ajax="false"
-			actionListener="#{fileUploadView.upload}" disabled="false" />
+			actionListener="#{userController.fileUploadView.upload}" disabled="false" />
 		<!-- Image -->
 		<h:graphicImage id="image" alt="uploaded image" url="/Image"
-			height="300" width="300" rendered="#{fileUploadView.imageFile}" />
+			height="300" width="300" rendered="#{userController.fileUploadView.imageFile}" />
 		<!-- Pdf -->
-		<p:media value="/Pdf" width="700px" height="700px" player="pdf" rendered="#{fileUploadView.pdfFile}"  />
+		<p:media value="/Pdf" width="700px" height="700px" player="pdf" rendered="#{userController.fileUploadView.pdfFile}"  />
 	</h:form>
 
 	<!-- Links -->

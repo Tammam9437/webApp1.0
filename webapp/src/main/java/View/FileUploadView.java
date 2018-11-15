@@ -7,22 +7,28 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.model.UploadedFile;
 
+import Controller.UserController;
 import Entity.Image;
 import Entity.Pdf;
 
 @ManagedBean
 @SessionScoped
-public class fileUploadView {
+public class FileUploadView {
 
 	private UploadedFile file;
+	private UserController userController;
 	private Image image;
 	private Pdf pdf;
 	private boolean imageFile;
 	private boolean pdfFile;
 
-	public fileUploadView() {
+	public FileUploadView(UserController userController) {
+		this.userController = userController;
 		imageFile = false;
 		pdfFile = false;
+	}
+	public FileUploadView() {
+		
 	}
 
 	public UploadedFile getFile() {
@@ -46,6 +52,7 @@ public class fileUploadView {
 			if (fileType.equals("image/png") || fileType.equals("image/jpeg")) {
 				image = new Image();
 				image.setFile(file.getContents());
+				image.setUser(userController.getUser());
 				image.saveInDB();
 				allBooleanValueFalse();
 				imageFile = true;
@@ -56,6 +63,7 @@ public class fileUploadView {
 			if (file.getContentType().equals("application/pdf")) {
 				pdf = new Pdf();
 				pdf.setFile(file.getContents());
+				pdf.setUser(userController.getUser());
 				pdf.saveInDB();
 				allBooleanValueFalse();
 				pdfFile = true;
