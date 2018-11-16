@@ -32,6 +32,9 @@ public class Link {
 	@Column(name="beschreibung")
 	private String beschreibung;
 	
+	@Column(name="likes")
+	private int likes;
+	
 	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
@@ -58,7 +61,9 @@ public class Link {
 	}
 
 
-	public Link() { }
+	public Link() {
+		this.likes = 0;
+	}
 	
 	
 	public Link( String url, String beschreibung) {
@@ -71,8 +76,6 @@ public class Link {
 		return 	list;
 	}
 	
-	
-
 
 	public String getUrl() {
 		return url;
@@ -90,6 +93,19 @@ public class Link {
 		this.beschreibung = beschreibung;
 	}
 	
+	public void likesIncrease() {
+		ConnectToDB.updateLink(this.id); ; 
+	}
+
+
+	public int getLikes() {
+		return likes;
+	}
+
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 
 
 	@Override

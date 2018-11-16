@@ -13,16 +13,20 @@
 
 	<!-- Buttons -->
 
+
+
 	<h:form>
+		<p:commandButton value="zu HomePage" action="userHomePage" />
 		<p:commandButton value="show Fotos"></p:commandButton>
-		<p:commandButton value="show Pdfs" />
+		<p:commandButton value="show Pdfs" image="" />
 		<p:commandButton value="Show Links"
 			actionListener="#{userController.showLinksToggel}" ajax="false"></p:commandButton>
 	</h:form>
 
 
 	<!-- Links -->
-	<p:dataTable var="link" value="#{userController.link.getLinksFromDB()}" rendered="#{userController.showLinkForm}">
+	<p:dataTable var="link" value="#{userController.link.getLinksFromDB()}"
+		rendered="#{userController.showLinkForm}">
 		<p:column headerText="beschreibung">
 			<h:outputText value="#{link.beschreibung}" />
 		</p:column>
@@ -34,17 +38,20 @@
 		<p:column headerText="userId">
 			<h:outputText value="#{link.user.name}" />
 		</p:column>
+		<p:column headerText="Likes">
+			<h:outputText value="#{link.likes}" />
+		</p:column>
+		<p:column>
+			<h:form>
+				<p:commandButton value="like" ajax="false" action="#{link.likesIncrease()}" icon="pi pi-star" style="margin-right:20px;"
+					title="Icon Only">
+				</p:commandButton>
+			</h:form>
+
+		</p:column>
+
 
 	</p:dataTable>
-<!-- 	<h:form rendered="#{userController.showLinkForm}">
-		<h2>Links</h2>
-		<ul>
-			<ui:repeat value="#{userController.link.getLinksFromDB()}" var="link">
-				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
-			</ui:repeat>
-		</ul>
-
-	</h:form> -->
 
 </h:body>
 

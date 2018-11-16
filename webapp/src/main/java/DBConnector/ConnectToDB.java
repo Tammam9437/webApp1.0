@@ -243,6 +243,24 @@ public class ConnectToDB {
 
 	}
 	
+	public static void updateLink(int idlink) {
+		Session session = getInstance();
+		try {
+
+			session.beginTransaction();
+
+			Link link = session.get(Link.class, idlink);
+			link.setLikes(link.getLikes()+1);
+			System.out.println("der geholte link");
+			System.out.println(link.toString());
+
+			session.getTransaction().commit();
+
+		} finally {
+			getInstance().close();
+		}
+	}
+	
 	public static void displayLinks(List<Link> theLinks) {
 		for (Link tempLink : theLinks) {
 			System.out.println(tempLink);
