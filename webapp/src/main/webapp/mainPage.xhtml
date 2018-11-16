@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Main Page</title>
+</h:head>
+
+<h:body>
+	<h1>Willkommen zu main Page</h1>
+
+	<!-- Buttons -->
+
+	<h:form>
+		<p:commandButton value="show Fotos"></p:commandButton>
+		<p:commandButton value="show Pdfs" />
+		<p:commandButton value="Show Links"
+			actionListener="#{userController.showLinksToggel}" ajax="false"></p:commandButton>
+	</h:form>
+
+
+	<!-- Links -->
+	<p:dataTable var="link" value="#{userController.link.getLinksFromDB()}" rendered="#{userController.showLinkForm}">
+		<p:column headerText="beschreibung">
+			<h:outputText value="#{link.beschreibung}" />
+		</p:column>
+
+		<p:column headerText="Url">
+			<a href="#{link.url}">#{link.url}</a>
+		</p:column>
+
+		<p:column headerText="userId">
+			<h:outputText value="#{link.user.name}" />
+		</p:column>
+
+	</p:dataTable>
+<!-- 	<h:form rendered="#{userController.showLinkForm}">
+		<h2>Links</h2>
+		<ul>
+			<ui:repeat value="#{userController.link.getLinksFromDB()}" var="link">
+				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
+			</ui:repeat>
+		</ul>
+
+	</h:form> -->
+
+</h:body>
+
+
+</html>

@@ -12,19 +12,24 @@ import Entity.Image;
 
 public class ImageServlet2 extends HttpServlet {
 
-	private static final long serialVersionUID = -6449908958106497977L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Image image;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		// Get last uploaded image
 		try {
 			// Image bytes
-			Image image = new Image();
+			image = new Image();
 			List<byte[]> allImagesFromDB = image.getAllImagesFromDB();
 
-            byte[] lastImageBytes = allImagesFromDB.get(allImagesFromDB.size()-1);
+            byte[] imageBytes = allImagesFromDB.get(allImagesFromDB.size()-1);
 
-			resp.getOutputStream().write(lastImageBytes);
+			resp.getOutputStream().write(imageBytes);
 			resp.getOutputStream().close();
 			
 

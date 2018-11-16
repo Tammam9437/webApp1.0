@@ -28,6 +28,8 @@ public class Image {
 	
 	@Column(name = "file")
 	private byte [] file;
+		
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "iduser")
@@ -40,6 +42,7 @@ public class Image {
 	public void saveInDB() {
 		ConnectToDB.saveImageInDB(this);
 	}
+	
 
 	public byte [] getFile() {
 		return file;
@@ -58,6 +61,13 @@ public class Image {
 		}
 		return allImagesFromDB;
 	}
+	public List<Image> getAllImages(){
+		List<Image> images = ConnectToDB.queryImage("from Image");
+		
+		return images;
+	}
+	
+	
 
 
 	public User getUser() {
