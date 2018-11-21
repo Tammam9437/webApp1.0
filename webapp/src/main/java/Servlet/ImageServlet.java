@@ -25,16 +25,18 @@ public class ImageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		
 		// Get last uploaded image
 		try {
 			// Image bytes
 			image = new Image();
 			List<byte[]> allImagesFromDB = image.getAllImagesFromDB();
-			for(byte [] imageBytes : allImagesFromDB) {
-				resp.getOutputStream().write(imageBytes);
-				resp.reset();	
-			}
+
+            byte[] imageBytes = allImagesFromDB.get(allImagesFromDB.size()-1);
+
+			resp.getOutputStream().write(imageBytes);
+			resp.getOutputStream().close();
+			
+
 			
 
 		} catch (Exception e) {
