@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import DBConnector.ConnectToDB;
+import DBConnector.ConnectToLinkDB;
 import Entity.Link;
 import Entity.User;
 import View.FileUploadView;
@@ -37,7 +37,7 @@ public class UserController {
 		showLinkForm = true;
 		add.setUser(user);
 		user.getLinks().add(add);
-		ConnectToDB.saveLinkInDB(add);
+		ConnectToLinkDB.saveLinkInDB(add);
 		link.setUrl("");
 		link.setBeschreibung("");
 	}
@@ -55,7 +55,7 @@ public class UserController {
 	}
 
 	public List<Link> getUserLinks() {
-		List<Link> list = ConnectToDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'");
+		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'");
 		return list;
 	}
 

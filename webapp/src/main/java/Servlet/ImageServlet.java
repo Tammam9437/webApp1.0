@@ -1,8 +1,6 @@
 package Servlet;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DBConnector.ConnectToDB;
 import Entity.Image;
 
 public class ImageServlet extends HttpServlet {

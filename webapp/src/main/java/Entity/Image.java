@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import DBConnector.ConnectToDB;
+import DBConnector.ConnectToImageDB;
 
 @ManagedBean
 @Entity
@@ -40,7 +40,7 @@ public class Image {
 	}
 	
 	public void saveInDB() {
-		ConnectToDB.saveImageInDB(this);
+		ConnectToImageDB.saveImageInDB(this);
 	}
 	
 
@@ -55,14 +55,14 @@ public class Image {
 	
 	public List<byte[]> getAllImagesFromDB(){
 		List<byte[]> allImagesFromDB = new ArrayList<byte[]>();
-		List<Image> images = ConnectToDB.queryImage("from Image");
+		List<Image> images = ConnectToImageDB.queryImage("from Image");
 		for(Image image : images) {
 			allImagesFromDB.add(image.getFile());
 		}
 		return allImagesFromDB;
 	}
 	public List<Image> getAllImages(){
-		List<Image> images = ConnectToDB.queryImage("from Image");
+		List<Image> images = ConnectToImageDB.queryImage("from Image");
 		
 		return images;
 	}

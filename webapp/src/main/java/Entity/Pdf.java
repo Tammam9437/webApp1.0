@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import DBConnector.ConnectToDB;
+import DBConnector.ConnectToPdfDB;
 
 @ManagedBean
 @Entity
@@ -38,7 +38,7 @@ public class Pdf {
 	}
 	
 	public void saveInDB() {
-		ConnectToDB.savePdfInDB(this);
+		ConnectToPdfDB.savePdfInDB(this);
 	}
 
 	public byte [] getFile() {
@@ -51,7 +51,7 @@ public class Pdf {
 	
 	public List<byte[]> getAllPdfsFromDB(){
 		List<byte[]> allPdfsFromDB = new ArrayList<byte[]>();
-		List<Pdf> pdfs = ConnectToDB.queryPdf("from Pdf");
+		List<Pdf> pdfs = ConnectToPdfDB.queryPdf("from Pdf");
 		for(Pdf pdf : pdfs) {
 			allPdfsFromDB.add(pdf.getFile());
 		}

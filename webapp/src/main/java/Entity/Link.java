@@ -1,6 +1,5 @@
 package Entity;
 import java.util.ArrayList;
-import java.util.*;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -14,9 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
-import DBConnector.ConnectToDB;
+import DBConnector.ConnectToLinkDB;
 
 @ManagedBean
 @Entity	
@@ -76,7 +73,7 @@ public class Link implements Comparable<Link> {
 	}
 	
 	public  List<Link> getLinksFromDB(){
-		ArrayList <Link> list = (ArrayList<Link>) ConnectToDB.queryLink("From Link");
+		ArrayList <Link> list = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link");
 		java.util.Collections.sort(list);
 		return 	list;
 	}
@@ -99,7 +96,7 @@ public class Link implements Comparable<Link> {
 	}
 	
 	public void likesIncrease() {
-		ConnectToDB.updateLink(this.id); ; 
+		ConnectToLinkDB.updateLink(this.id); ; 
 	}
 
 

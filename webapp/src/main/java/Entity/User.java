@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import DBConnector.ConnectToDB;
+import DBConnector.ConnectToUserDB;
 
 @ManagedBean
 @Entity
@@ -51,20 +51,20 @@ public class User {
 	}
 
 	public String saveInDB() {
-		ConnectToDB.saveUserInDB(this);
+		ConnectToUserDB.saveUserInDB(this);
 		return "login";
 	}
 
 	public boolean confirmLoginData() {
 
 		List<User> identicalUsers;
-		identicalUsers = ConnectToDB
+		identicalUsers = ConnectToUserDB
 				.queryUser("from User u where u.name = '" + name + "' And u.password= '" + password + "'");
 
 		if (identicalUsers.isEmpty()) {
 			return false;
 		}
-		ConnectToDB.displayUsers(identicalUsers);
+		ConnectToUserDB.displayUsers(identicalUsers);
 		// da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
 		setId(identicalUsers.get(0).getId());
 		return true;
@@ -72,7 +72,7 @@ public class User {
 
 	public boolean userExsistiert(String username) {
 		List<User> identicalUsers;
-		identicalUsers = ConnectToDB.queryUser("from User u where u.name ='" + username + "'");
+		identicalUsers = ConnectToUserDB.queryUser("from User u where u.name ='" + username + "'");
 
 		if (identicalUsers.isEmpty()) {
 			return false;
