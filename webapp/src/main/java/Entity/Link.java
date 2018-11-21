@@ -1,4 +1,6 @@
 package Entity;
+import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,13 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
 import DBConnector.ConnectToDB;
 
 @ManagedBean
 @Entity	
 @Table(name="Link")
 @SessionScoped
-public class Link {
+public class Link implements Comparable<Link> {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -72,7 +76,8 @@ public class Link {
 	}
 	
 	public  List<Link> getLinksFromDB(){
-		List <Link> list = ConnectToDB.queryLink("From Link");
+		ArrayList <Link> list = (ArrayList<Link>) ConnectToDB.queryLink("From Link");
+		java.util.Collections.sort(list);
 		return 	list;
 	}
 	
@@ -106,11 +111,16 @@ public class Link {
 	public void setLikes(int likes) {
 		this.likes = likes;
 	}
-
+	
 
 	@Override
 	public String toString() {
 		return "Link [id=" + id + ", url=" + url + ", beschreibung=" + beschreibung + "]";
+	}
+
+
+	public int compareTo(Link anotherLink) {
+		return  anotherLink.getLikes() - this.likes;
 	}
 
 	

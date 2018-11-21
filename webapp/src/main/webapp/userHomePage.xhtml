@@ -58,14 +58,18 @@
 			actionListener="#{userController.fileUploadView.upload}"
 			disabled="false" />
 		<!-- Image -->
-		<h:graphicImage id="image" alt="uploaded image" url="/Image"
+		<p:graphicImage id="image" alt="uploaded image" url="/Image"
 			height="300" width="300"
 			rendered="#{userController.fileUploadView.imageFile}" />
+			<h:outputLink value="#{request.contextPath}/Image"
+			rendered="#{userController.fileUploadView.imageFile}" target="_blank">öffne Image in new Tap</h:outputLink>
 		<!-- Pdf -->
 		<p:media value="/Pdf" width="700px" height="700px" player="pdf"
 			rendered="#{userController.fileUploadView.pdfFile}" />
+		<h:outputLink value="#{request.contextPath}/Pdf"
+			rendered="#{userController.fileUploadView.pdfFile}" target="_blank">öffne Pdf in new Tap</h:outputLink>
 	</h:form>
-	
+
 
 	<!-- Links -->
 
