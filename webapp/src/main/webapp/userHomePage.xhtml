@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -11,19 +10,24 @@
 
 <h:body>
 	<h1>Herzlich Welkommen #{userController.user.name}</h1>
+
+	<!-- Buttons -->
+
 	<h:form>
+		<p:commandButton value="zu Main Page" action="mainPage" />
 		<p:commandButton value="add new Link"
 			actionListener="#{userController.showAddLinkToggel}" ajax="false"></p:commandButton>
-	</h:form>
-	<h:form>
+		<p:commandButton value="Upload" ajax="false"
+			actionListener="#{userController.showUploadToggel}" />
 		<p:commandButton value="Show Links"
 			actionListener="#{userController.showLinksToggel}" ajax="false"></p:commandButton>
 	</h:form>
 
+	<!-- AddLink -->
 	<h:form rendered="#{userController.showAddLink}">
 		<h:panelGrid columns="3" cellpadding="2">
 			<p:outputLabel value="URL : " />
-			<p:inputText id="link" value="#{userController.link.url}"
+			<p:inputText type="url" id="link" value="#{userController.link.url}"
 				required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
 			<h:message for="link" showDetail="true" showSummary="false"
 				style="color:red;" />
@@ -40,24 +44,35 @@
 		</h:panelGrid>
 	</h:form>
 	<br />
-	<h:form enctype="multipart/form-data">
+
+	<!-- File -->
+
+	<h:form enctype="multipart/form-data"
+		rendered="#{userController.showUpload}">
 		<p:growl id="messages" showDetail="true" />
 
-		<p:fileUpload value="#{fileUploadView.file}" mode="simple"
-			skinSimple="true" />
+		<p:fileUpload value="#{userController.fileUploadView.file}"
+			mode="simple" skinSimple="true" />
 
 		<p:commandButton value="Submit" ajax="false"
-			actionListener="#{fileUploadView.upload}" disabled="false" />
+			actionListener="#{userController.fileUploadView.upload}"
+			disabled="false" />
+		<!-- Image -->
+		<h:graphicImage id="image" alt="uploaded image" url="/Image"
+			height="300" width="300"
+			rendered="#{userController.fileUploadView.imageFile}" />
+		<!-- Pdf -->
+		<p:media value="/Pdf" width="700px" height="700px" player="pdf"
+			rendered="#{userController.fileUploadView.pdfFile}" />
 	</h:form>
 	
-	<!-- Image -->
-	<h:graphicImage  
-   value = "{#fileUploadView.file.getContents()}"/>
+
+	<!-- Links -->
 
 	<h:form rendered="#{userController.showLinkForm}">
 		<h2>Links</h2>
 		<ul>
-			<ui:repeat value="#{userController.link.getLinksFromDB()}" var="link">
+			<ui:repeat value="#{userController.getUserLinks()}" var="link">
 				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
 			</ui:repeat>
 		</ul>
