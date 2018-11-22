@@ -32,9 +32,11 @@ public class LinkController {
 		showAddLink = false;
 		showLinkForm = true;
 		user.getLinks().add(add);
+		add.setUser(user);
 		ConnectToLinkDB.saveLinkInDB(add);
 		link.setUrl("");
 		link.setBeschreibung("");
+		add.setUser(null);
 	}
 
 	public List<Link> getUserLinks() {

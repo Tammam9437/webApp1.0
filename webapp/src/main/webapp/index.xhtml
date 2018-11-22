@@ -16,7 +16,7 @@
 
 		<h:panelGrid columns="3" cellpadding="2">
 			<p:outputLabel value="Benutzername: " />
-			<p:inputText id="name" value="#{user.name}" required="true"
+			<p:inputText id="name" value="#{mainController.userController.user.name}" required="true"
 				requiredMessage="Bitte Pflichtfeld eingeben">
 				<f:validator validatorId="usernameValidator"></f:validator>
 			</p:inputText>
@@ -25,7 +25,7 @@
 				style="color:red;" />
 
 			<p:outputLabel value="Passwort: " />
-			<p:password id="password" value="#{user.password}" feedback="true"
+			<p:password id="password" value="#{mainController.userController.user.password}" feedback="true"
 				required="true" requiredMessage="Bitte Pflichtfeld eingeben"  validatorMessage="Passwort ist zu klein, die länge muss mindestens 3 sein">
 				<f:validateLength minimum="3" ></f:validateLength>
 				</p:password>
@@ -35,7 +35,7 @@
 
 		</h:panelGrid>
 		<p:commandButton value="neuen Account erstellen"
-			action="#{user.saveInDB()}" ajax="false"/>
+			action="#{mainController.userController.user.saveInDB}" ajax="false"/>
 
 	</h:form>
 	<br />

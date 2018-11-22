@@ -55,21 +55,6 @@ public class User {
 		return "login";
 	}
 
-	public boolean confirmLoginData() {
-
-		List<User> identicalUsers;
-		identicalUsers = ConnectToUserDB
-				.queryUser("from User u where u.name = '" + name + "' And u.password= '" + password + "'");
-
-		if (identicalUsers.isEmpty()) {
-			return false;
-		}
-		ConnectToUserDB.displayUsers(identicalUsers);
-		// da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
-		setId(identicalUsers.get(0).getId());
-		return true;
-	}
-
 	public boolean userExsistiert(String username) {
 		List<User> identicalUsers;
 		identicalUsers = ConnectToUserDB.queryUser("from User u where u.name ='" + username + "'");
@@ -82,11 +67,8 @@ public class User {
 
 	}
 
-	public String navigationFromLogin() {
-		if (confirmLoginData()) {
-			return "userHomePage";
-		}
-		return "error";
+	public String getPassword() {
+		return password;
 	}
 
 	public int getId() {
@@ -103,10 +85,6 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
 	}
 
 	public void setPassword(String password) {

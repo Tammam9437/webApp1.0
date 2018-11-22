@@ -9,38 +9,38 @@
 </h:head>
 
 <h:body>
-	<h1>Herzlich Welkommen #{userController.user.name}</h1>
+	<h1>Herzlich Welkommen #{mainController.userController.user.name}</h1>
 
 	<!-- Buttons -->
 
 	<h:form>
 		<p:commandButton value="zu Main Page" action="mainPage" />
 		<p:commandButton value="add new Link"
-			actionListener="#{userController.showAddLinkToggel}" ajax="false"></p:commandButton>
+			actionListener="#{mainController.linkController.showAddLinkToggel}" ajax="false"></p:commandButton>
 		<p:commandButton value="Upload" ajax="false"
-			actionListener="#{userController.showUploadToggel}" />
+			actionListener="#{mainController.uploadController.showUploadToggel}" />
 		<p:commandButton value="Show Links"
-			actionListener="#{userController.showLinksToggel}" ajax="false"></p:commandButton>
+			actionListener="#{mainController.linkController.showLinksToggel}" ajax="false"></p:commandButton>
 	</h:form>
 
 	<!-- AddLink -->
-	<h:form rendered="#{userController.showAddLink}">
+	<h:form rendered="#{mainController.linkController.showAddLink}">
 		<h:panelGrid columns="3" cellpadding="2">
 			<p:outputLabel value="URL : " />
-			<p:inputText type="url" id="link" value="#{userController.link.url}"
+			<p:inputText type="url" id="link" value="#{mainController.linkController.link.url}"
 				required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
 			<h:message for="link" showDetail="true" showSummary="false"
 				style="color:red;" />
 
 			<p:outputLabel value="Beschreibung : " />
 			<p:inputText id="beschreibung"
-				value="#{userController.link.beschreibung}" required="true"
+				value="#{mainController.linkController.link.beschreibung}" required="true"
 				requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
 			<h:message for="beschreibung" showDetail="true" showSummary="false"
 				style="color:red;" />
 
 			<p:commandButton value="add Link"
-				actionListener="#{userController.addLink()}" ajax="false"></p:commandButton>
+				actionListener="#{mainController.linkController.addLink}" ajax="false"></p:commandButton>
 		</h:panelGrid>
 	</h:form>
 	<br />
@@ -48,35 +48,35 @@
 	<!-- File -->
 
 	<h:form enctype="multipart/form-data"
-		rendered="#{userController.showUpload}">
+		rendered="#{mainController.uploadController.showUpload}">
 		<p:growl id="messages" showDetail="true" />
 
-		<p:fileUpload value="#{userController.fileUploadView.file}"
+		<p:fileUpload value="#{mainController.fileUploadView.file}"
 			mode="simple" skinSimple="true" />
 
 		<p:commandButton value="Submit" ajax="false"
-			actionListener="#{userController.fileUploadView.upload}"
+			actionListener="#{mainController.fileUploadView.upload}"
 			disabled="false" />
 		<!-- Image -->
 		<p:graphicImage id="image" alt="uploaded image" url="/Image"
 			height="300" width="300"
-			rendered="#{userController.fileUploadView.imageFile}" />
+			rendered="#{mainController.fileUploadView.imageFile}" />
 			<h:outputLink value="#{request.contextPath}/Image"
-			rendered="#{userController.fileUploadView.imageFile}" target="_blank">öffne Image in new Tap</h:outputLink>
+			rendered="#{mainController.fileUploadView.imageFile}" target="_blank">öffne Image in new Tap</h:outputLink>
 		<!-- Pdf -->
 		<p:media value="/Pdf" width="700px" height="700px" player="pdf"
-			rendered="#{userController.fileUploadView.pdfFile}" />
+			rendered="#{mainController.fileUploadView.pdfFile}" />
 		<h:outputLink value="#{request.contextPath}/Pdf"
-			rendered="#{userController.fileUploadView.pdfFile}" target="_blank">öffne Pdf in new Tap</h:outputLink>
+			rendered="#{mainController.fileUploadView.pdfFile}" target="_blank">öffne Pdf in new Tap</h:outputLink>
 	</h:form>
 
 
 	<!-- Links -->
 
-	<h:form rendered="#{userController.showLinkForm}">
+	<h:form rendered="#{mainController.linkController.showLinkForm}">
 		<h2>Links</h2>
 		<ul>
-			<ui:repeat value="#{userController.getUserLinks()}" var="link">
+			<ui:repeat value="#{mainController.linkController.userLinks}" var="link">
 				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
 			</ui:repeat>
 		</ul>

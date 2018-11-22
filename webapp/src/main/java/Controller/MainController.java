@@ -1,12 +1,13 @@
 package Controller;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import View.FileUploadView;
 
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class MainController {
 	private UserController userController;
 	private LikeController likeController;
