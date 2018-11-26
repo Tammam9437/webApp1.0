@@ -41,8 +41,8 @@ public class Link implements Comparable<Link> {
 	@JoinColumn(name = "iduser")
 	private User user;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Like.class, mappedBy = "link", cascade = CascadeType.ALL)
-	private List<Like> likes = new ArrayList<Like>();
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "link", cascade = CascadeType.ALL)
+	private List<Li> likes = new ArrayList<Li>();
 
 	public int getId() {
 		return id;
@@ -76,11 +76,19 @@ public class Link implements Comparable<Link> {
 	}
 	
 	public void addLike(User user) {
-		Like like = new Like();
+		Li like = new Li();
 		like.setLink(this);
 		like.setUser(user);
 		likes.add(like);
 		ConnectToLikeDB.saveLikeInDB(like);
+	}
+	
+	public boolean isUserEnteredLike(User user) {
+		List<Li> userLinkLikes = ConnectToLikeDB.getUserLinkLikes(user, this);
+		if(userLinkLikes.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	public String getUrl() {
@@ -99,11 +107,11 @@ public class Link implements Comparable<Link> {
 		this.beschreibung = beschreibung;
 	}
 
-	public List<Like> getLikes() {
+	public List<Li> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(List<Like> likes) {
+	public void setLikes(List<Li> likes) {
 		this.likes = likes;
 	}
 	public int getLikesNumber() {

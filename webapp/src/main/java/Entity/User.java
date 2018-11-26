@@ -42,8 +42,8 @@ public class User {
 	@OneToMany(targetEntity = Pdf.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Pdf> pdfs = new ArrayList<Pdf>();
 	
-	@OneToMany(targetEntity = Like.class, mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Like> likes = new ArrayList<Like>();
+	@OneToMany(targetEntity = Li.class, mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Li> likes = new ArrayList<Li>();
 
 	public User() {
 	

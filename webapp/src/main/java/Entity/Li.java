@@ -14,9 +14,9 @@ import DBConnector.ConnectToLikeDB;
 
 @ManagedBean
 @Entity
-@Table(name = "Likes")
+@Table(name = "Li")
 @SessionScoped
-public class Like {
+public class Li {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idlike")
@@ -30,7 +30,7 @@ public class Like {
 	@JoinColumn(name = "iduser")
 	private User user;
 	
-	public Like() {
+	public Li() {
 		
 	}
 	

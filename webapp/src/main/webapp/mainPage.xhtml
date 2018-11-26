@@ -43,8 +43,8 @@
 		</p:column>
 		<p:column>
 			<h:form>
-				<p:commandButton value="like" ajax="false"
-					action="#{link.addLike(mainController.userController.user)}"
+				<p:commandButton value="like" ajax="false" disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
+				  	action="#{link.addLike(mainController.userController.user)}"
 					style="margin-right:20px;" >
 				</p:commandButton>
 			</h:form>

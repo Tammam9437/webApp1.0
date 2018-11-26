@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 
 import DBConnector.ConnectToLikeDB;
 import DBConnector.ConnectToLinkDB;
-import Entity.Like;
+import Entity.Li;
 import Entity.Link;
 import Entity.User;
 
@@ -57,7 +57,7 @@ public class LinkController {
 	}
 	
 	public void saveLike() {
-		Like like = new Like();
+		Li like = new Li();
 		like.saveInDB();
 	}
 

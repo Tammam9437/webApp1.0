@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import Entity.Image;
-import Entity.Like;
+import Entity.Li;
 import Entity.Link;
 import Entity.Pdf;
 import Entity.User;
@@ -20,12 +20,12 @@ public class ConnectToLikeDB {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
-					.addAnnotatedClass(Like.class).buildSessionFactory();
+					.addAnnotatedClass(Li.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
 
-	public static void saveLikeInDB(Like like) {
+	public static void saveLikeInDB(Li like) {
 		Session session = getInstance();
 		try {
 
@@ -41,13 +41,13 @@ public class ConnectToLikeDB {
 
 	}
 
-	public static Like getPdfFromDB(int idlike) {
+	public static Li getPdfFromDB(int idlike) {
 		Session session = getInstance();
-		Like like;
+		Li like;
 		try {
 			session.beginTransaction();
 
-			like = session.get(Like.class, idlike);
+			like = session.get(Li.class, idlike);
 
 			session.getTransaction().commit();
 		} finally {
@@ -56,21 +56,25 @@ public class ConnectToLikeDB {
 		return like;
 	}
 	
-	public static List<Like> getUserLikes(User user){
-		List<Like> userLikes = queryLike("From Likes WHERE iduser ='" + user.getId() + "'");
+	public static List<Li> getUserLikes(User user){
+		List<Li> userLikes = queryLike("From Likes WHERE iduser ='" + user.getId() + "'");
 		return userLikes;
 	}
 
-	public static List<Like> getLinkLikes(Link link){
-		List<Like> userLikes = queryLike("From Likes WHERE iduser ='" + link.getId() + "'");
+	public static List<Li> getLinkLikes(Link link){
+		List<Li> userLikes = queryLike("From Likes WHERE iduser ='" + link.getId() + "'");
 		return userLikes;
+	}
+	public static List<Li> getUserLinkLikes(User user,Link link){
+		List<Li> userLinkLikes = queryLike("From Li WHERE iduser ='" + user.getId() + "'"+" AND idlink ='"+ link.getId() + "'");
+		return userLinkLikes;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Like> queryLike(String query) {
+	public static List<Li> queryLike(String query) {
 
 		Session session = getInstance();
-		List<Like> theLikes;
+		List<Li> theLikes;
 
 		try {
 
@@ -89,8 +93,8 @@ public class ConnectToLikeDB {
 		return theLikes;
 	}
 
-	public static void displayLikes(List<Like> theLikes) {
-		for (Like tempLike : theLikes) {
+	public static void displayLikes(List<Li> theLikes) {
+		for (Li tempLike : theLikes) {
 			System.out.println(tempLike);
 		}
 	}
