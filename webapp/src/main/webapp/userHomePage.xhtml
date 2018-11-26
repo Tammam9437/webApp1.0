@@ -16,31 +16,39 @@
 	<h:form>
 		<p:commandButton value="zu Main Page" action="mainPage" />
 		<p:commandButton value="add new Link"
-			actionListener="#{mainController.linkController.showAddLinkToggel}" ajax="false"></p:commandButton>
+			actionListener="#{mainController.linkController.showAddLinkToggel}"
+			ajax="false"></p:commandButton>
 		<p:commandButton value="Upload" ajax="false"
 			actionListener="#{mainController.uploadController.showUploadToggel}" />
 		<p:commandButton value="Show Links"
-			actionListener="#{mainController.linkController.showLinksToggel}" ajax="false"></p:commandButton>
+			actionListener="#{mainController.linkController.showLinksToggel}"
+			ajax="false"></p:commandButton>
+		<p:commandButton value="Show your favourite Links"
+			actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
+			ajax="false"></p:commandButton>
 	</h:form>
 
 	<!-- AddLink -->
 	<h:form rendered="#{mainController.linkController.showAddLink}">
 		<h:panelGrid columns="3" cellpadding="2">
 			<p:outputLabel value="URL : " />
-			<p:inputText type="url" id="link" value="#{mainController.linkController.link.url}"
-				required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
+			<p:inputText type="url" id="link"
+				value="#{mainController.linkController.link.url}" required="true"
+				requiredMessage="Bitte Pflichtfeld eingeben" />
 			<h:message for="link" showDetail="true" showSummary="false"
 				style="color:red;" />
 
 			<p:outputLabel value="Beschreibung : " />
 			<p:inputText id="beschreibung"
-				value="#{mainController.linkController.link.beschreibung}" required="true"
+				value="#{mainController.linkController.link.beschreibung}"
+				required="true"
 				requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
 			<h:message for="beschreibung" showDetail="true" showSummary="false"
 				style="color:red;" />
 
 			<p:commandButton value="add Link"
-				actionListener="#{mainController.linkController.addLink}" ajax="false"></p:commandButton>
+				actionListener="#{mainController.linkController.addLink}"
+				ajax="false"></p:commandButton>
 		</h:panelGrid>
 	</h:form>
 	<br />
@@ -61,7 +69,7 @@
 		<p:graphicImage id="image" alt="uploaded image" url="/Image"
 			height="300" width="300"
 			rendered="#{mainController.fileUploadView.imageFile}" />
-			<h:outputLink value="#{request.contextPath}/Image"
+		<h:outputLink value="#{request.contextPath}/Image"
 			rendered="#{mainController.fileUploadView.imageFile}" target="_blank">öffne Image in new Tap</h:outputLink>
 		<!-- Pdf -->
 		<p:media value="/Pdf" width="700px" height="700px" player="pdf"
@@ -76,11 +84,22 @@
 	<h:form rendered="#{mainController.linkController.showLinkForm}">
 		<h2>Links</h2>
 		<ul>
-			<ui:repeat value="#{mainController.linkController.userLinks}" var="link">
+			<ui:repeat value="#{mainController.linkController.userLinks}"
+				var="link">
 				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
 			</ui:repeat>
 		</ul>
 
+	</h:form>
+
+	<h:form rendered="#{mainController.linkController.showFavouriteLinks}">
+		<h2>Dein favorite Links</h2>
+		<ul>
+			<ui:repeat value="#{mainController.userController.favoritesLinks()}"
+				var="like">
+				<li><a href="#{like.link.url}">#{like.link.beschreibung}</a></li>
+			</ui:repeat>
+		</ul>
 	</h:form>
 
 </h:body>

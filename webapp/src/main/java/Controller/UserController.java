@@ -5,7 +5,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import DBConnector.ConnectToLikeDB;
 import DBConnector.ConnectToUserDB;
+import Entity.Li;
 import Entity.User;
 
 @ManagedBean
@@ -34,6 +36,11 @@ public class UserController {
 		// da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
 		user.setId(identicalUsers.get(0).getId());
 		return true;
+	}
+	
+	public List<Li> favoritesLinks(){
+		List<Li> likes = ConnectToLikeDB.getUserLikes(user);
+		return likes;
 	}
 	
 	

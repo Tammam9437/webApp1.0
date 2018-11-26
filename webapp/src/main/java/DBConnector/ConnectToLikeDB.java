@@ -57,12 +57,12 @@ public class ConnectToLikeDB {
 	}
 	
 	public static List<Li> getUserLikes(User user){
-		List<Li> userLikes = queryLike("From Likes WHERE iduser ='" + user.getId() + "'");
+		List<Li> userLikes = queryLike("From Li WHERE iduser ='" + user.getId() + "'");
 		return userLikes;
 	}
 
 	public static List<Li> getLinkLikes(Link link){
-		List<Li> userLikes = queryLike("From Likes WHERE iduser ='" + link.getId() + "'");
+		List<Li> userLikes = queryLike("From Li WHERE iduser ='" + link.getId() + "'");
 		return userLikes;
 	}
 	public static List<Li> getUserLinkLikes(User user,Link link){

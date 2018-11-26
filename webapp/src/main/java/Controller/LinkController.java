@@ -20,12 +20,22 @@ public class LinkController {
 
 	private boolean showLinkForm;
 	private boolean showAddLink;
+	private boolean showFavouriteLinks;
+
+	public boolean isShowFavouriteLinks() {
+		return showFavouriteLinks;
+	}
+
+	public void setShowFavouriteLinks(boolean showFavouriteLinks) {
+		this.showFavouriteLinks = showFavouriteLinks;
+	}
 
 	public LinkController(MainController mainController) {
 		this.mainController = mainController;
 		this.link = new Link();
 		this.showAddLink = false;
 		this.showLinkForm = false;
+		this.showFavouriteLinks = false;
 	}
 
 	public void addLink() {
@@ -53,6 +63,13 @@ public class LinkController {
 			showAddLink = false;
 		} else {
 			showAddLink = true;
+		}
+	}
+	public void showFavouriteLinksToggel() {
+		if (showFavouriteLinks) {
+			showFavouriteLinks = false;
+		} else {
+			showFavouriteLinks = true;
 		}
 	}
 	

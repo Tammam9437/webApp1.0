@@ -1,10 +1,13 @@
 package Entity;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import DBConnector.ConnectToImageDB;
 
@@ -61,11 +67,28 @@ public class Image {
 		}
 		return allImagesFromDB;
 	}
-	public List<Image> getAllImages(){
-		List<Image> images = ConnectToImageDB.queryImage("from Image");
+	public ArrayList<Image> getAllImages(){
+		ArrayList<Image> images = (ArrayList<Image>) ConnectToImageDB.queryImage("from Image");
 		
 		return images;
 	}
+	
+	public Image getoneimage() {
+		ArrayList<Image> imgs = getAllImages();
+		return imgs.get(1);
+	}
+	
+	public StreamedContent getImage() {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+			// So, we're rendering the HTML. Return a stub StreamedContent so that it will
+			// generate right URL.
+			return new DefaultStreamedContent();
+		} else {
+					return new DefaultStreamedContent(new ByteArrayInputStream(file));
+		}
+	} 
 	
 	
 
