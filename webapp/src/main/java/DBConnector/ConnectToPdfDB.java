@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import Entity.Image;
+import Entity.Like;
 import Entity.Link;
 import Entity.Pdf;
 import Entity.User;
@@ -19,7 +20,7 @@ public class ConnectToPdfDB {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
-					.buildSessionFactory();
+					.addAnnotatedClass(Like.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}

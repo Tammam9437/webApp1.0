@@ -12,7 +12,7 @@ import Entity.Link;
 import Entity.Pdf;
 import Entity.User;
 
-public class ConnectToUserDB {
+public class ConnectToLikeDB {
 
 	private static SessionFactory instance;
 
@@ -25,13 +25,13 @@ public class ConnectToUserDB {
 		return instance.getCurrentSession();
 	}
 
-	public static void saveUserInDB(User user) {
+	public static void saveLikeInDB(Like like) {
 		Session session = getInstance();
 		try {
 
 			session.beginTransaction();
 
-			session.save(user);
+			session.save(like);
 
 			session.getTransaction().commit();
 
@@ -41,11 +41,36 @@ public class ConnectToUserDB {
 
 	}
 
+	public static Like getPdfFromDB(int idlike) {
+		Session session = getInstance();
+		Like like;
+		try {
+			session.beginTransaction();
+
+			like = session.get(Like.class, idlike);
+
+			session.getTransaction().commit();
+		} finally {
+			getInstance().close();
+		}
+		return like;
+	}
+	
+	public static List<Like> getUserLikes(User user){
+		List<Like> userLikes = queryLike("From Likes WHERE iduser ='" + user.getId() + "'");
+		return userLikes;
+	}
+
+	public static List<Like> getLinkLikes(Link link){
+		List<Like> userLikes = queryLike("From Likes WHERE iduser ='" + link.getId() + "'");
+		return userLikes;
+	}
+
 	@SuppressWarnings("unchecked")
-	public static List<User> queryUser(String query) {
+	public static List<Like> queryLike(String query) {
 
 		Session session = getInstance();
-		List<User> theUsers;
+		List<Like> theLikes;
 
 		try {
 
@@ -53,7 +78,7 @@ public class ConnectToUserDB {
 			session.beginTransaction();
 
 			// query students
-			theUsers = session.createQuery(query).list();
+			theLikes = session.createQuery(query).list();
 
 			// commit transaction
 			session.getTransaction().commit();
@@ -61,27 +86,12 @@ public class ConnectToUserDB {
 		} finally {
 			getInstance().close();
 		}
-		return theUsers;
+		return theLikes;
 	}
 
-	public static User getUserFromDB(int userId) {
-		Session session = getInstance();
-		User user;
-		try {
-			session.beginTransaction();
-
-			user = session.get(User.class, userId);
-
-			session.getTransaction().commit();
-		} finally {
-			getInstance().close();
-		}
-		return user;
-	}
-
-	public static void displayUsers(List<User> theUsers) {
-		for (User tempUser : theUsers) {
-			System.out.println(tempUser);
+	public static void displayLikes(List<Like> theLikes) {
+		for (Like tempLike : theLikes) {
+			System.out.println(tempLike);
 		}
 	}
 

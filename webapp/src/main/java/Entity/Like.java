@@ -1,5 +1,4 @@
 package Entity;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
@@ -11,31 +10,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import DBConnector.ConnectToLikeDB;
+
 @ManagedBean
 @Entity
-@Table(name = "Like")
+@Table(name = "Likes")
 @SessionScoped
 public class Like {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idlike")
 	private int id;
-
-	@ManyToOne
-	@JoinColumn(name = "iduser")
-	private User user;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "idlink")
 	private Link link;
+	
+	@ManyToOne
+	@JoinColumn(name = "iduser")
+	private User user;
+	
+	public Like() {
+		
+	}
+	
+	public void saveInDB() {
+		ConnectToLikeDB.saveLikeInDB(this);;
 
-	public Like(User user, Link link) {
-		this.user = user;
-		this.link = link;
+}
+
+	public Link getLink() {
+		return link;
 	}
 
-	public Like() {
+	public void setLink(Link link) {
+		this.link = link;
 	}
 
 	public User getUser() {
@@ -44,14 +53,6 @@ public class Like {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Link getLink() {
-		return link;
-	}
-
-	public void setLink(Link link) {
-		this.link = link;
 	}
 
 	public int getId() {

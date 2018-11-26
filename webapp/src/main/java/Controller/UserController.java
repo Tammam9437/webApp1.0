@@ -36,6 +36,7 @@ public class UserController {
 		return true;
 	}
 	
+	
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {
 			return "userHomePage";

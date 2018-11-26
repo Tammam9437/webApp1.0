@@ -17,7 +17,7 @@
 
 	<h:form>
 		<p:commandButton value="zu HomePage" action="userHomePage" />
-		<p:commandButton value="show Fotos"></p:commandButton>
+		<p:commandButton value="show Fotos" actionListener="#{mainController.linkController.saveLike()}"></p:commandButton>
 		<p:commandButton value="show Pdfs" image="" />
 		<p:commandButton value="Show Links"
 			actionListener="#{mainController.linkController.showLinksToggel}" ajax="false"></p:commandButton>
@@ -39,12 +39,12 @@
 			<h:outputText value="#{link.user.name}" />
 		</p:column>
 		<p:column headerText="Likes">
-			<h:outputText value="#{link.likes}" />
+			<h:outputText value="#{link.likesNumber}" />
 		</p:column>
 		<p:column>
 			<h:form>
 				<p:commandButton value="like" ajax="false"
-					action="#{link.likesIncrease}"
+					action="#{link.addLike(mainController.userController.user)}"
 					style="margin-right:20px;" >
 				</p:commandButton>
 			</h:form>

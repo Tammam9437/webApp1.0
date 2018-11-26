@@ -5,7 +5,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import DBConnector.ConnectToLikeDB;
 import DBConnector.ConnectToLinkDB;
+import Entity.Like;
 import Entity.Link;
 import Entity.User;
 
@@ -44,6 +46,7 @@ public class LinkController {
 		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'");
 		return list;
 	}
+	
 
 	public void showAddLinkToggel() {
 		if (showAddLink) {
@@ -51,6 +54,11 @@ public class LinkController {
 		} else {
 			showAddLink = true;
 		}
+	}
+	
+	public void saveLike() {
+		Like like = new Like();
+		like.saveInDB();
 	}
 
 	public void showLinksToggel() {
