@@ -11,6 +11,7 @@ import Entity.Li;
 import Entity.Link;
 import Entity.Pdf;
 import Entity.User;
+import Entity.YoutubeLink;
 
 public class ConnectToLinkDB {
 
@@ -19,7 +20,7 @@ public class ConnectToLinkDB {
 	private static Session getInstance() {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
-					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class).addAnnotatedClass(Li.class)
+					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class).addAnnotatedClass(Li.class).addAnnotatedClass(YoutubeLink.class)
 					.buildSessionFactory();
 		}
 		return instance.getCurrentSession();

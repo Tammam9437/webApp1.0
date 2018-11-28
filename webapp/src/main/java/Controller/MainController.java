@@ -2,7 +2,6 @@ package Controller;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import View.FileUploadView;
 
@@ -13,6 +12,7 @@ public class MainController {
 	private LikeController likeController;
 	private LinkController linkController;
 	private FileUploadView fileUploadView;
+	private VideoController videoController;
 	private UploadController uploadController;
 
 	public MainController() {
@@ -20,6 +20,7 @@ public class MainController {
 		this.likeController = new LikeController(this);
 		this.linkController = new LinkController(this);
 		this.fileUploadView = new FileUploadView(this);
+		this.videoController = new VideoController(this);
 		this.uploadController = new UploadController(this);
 	}
 
@@ -61,6 +62,14 @@ public class MainController {
 
 	public void setUploadController(UploadController uploadController) {
 		this.uploadController = uploadController;
+	}
+
+	public VideoController getVideoController() {
+		return videoController;
+	}
+
+	public void setVideoController(VideoController videoController) {
+		this.videoController = videoController;
 	}
 
 }

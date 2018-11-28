@@ -5,7 +5,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import DBConnector.ConnectToLikeDB;
 import DBConnector.ConnectToLinkDB;
 import Entity.Li;
 import Entity.Link;

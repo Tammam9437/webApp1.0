@@ -8,24 +8,20 @@
 	<title>Fotos</title>
 </h:head>
 
-<h:body>
-
-	<h:form>
-		<h2>Fotos</h2>
-		
-		<p:graphicImage value="#{img.oneimage.image}" 
-					height="300" width="300"
-					 />
-		<ul>
-			<ui:repeat value="#{image.allImages}" var="img">
-				<p:graphicImage value="#{img.oneimage.image}" 
-					height="300" width="300"
-					 />
-			</ui:repeat>
-		</ul>
-
-	</h:form>
-
+<h:body>	
+	 <h3>On-Demand Loading</h3>
+    <p:accordionPanel dynamic="true" cache="true">
+        <p:tab  title="Godfather Part I">
+           <iframe width="420" height="345" src="#{link.youtube()}"> </iframe>
+        </p:tab>
+        <p:tab title="Godfather Part II">
+           <iframe width="420" height="345" src="#{link.youtube()}"> </iframe>
+        </p:tab>
+        <p:tab title="Godfather Part III">
+           <iframe width="420" height="345" src="#{link.youtube()}"> </iframe>
+        </p:tab>
+    </p:accordionPanel>
+	
 </h:body>
 
 

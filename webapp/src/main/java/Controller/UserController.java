@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import DBConnector.ConnectToLikeDB;
 import DBConnector.ConnectToUserDB;
 import Entity.Li;
+import Entity.Link;
 import Entity.User;
 
 @ManagedBean
@@ -22,12 +23,12 @@ public class UserController {
 		this.mainController = mainController;
 		this.user = new User();
 	}
-	
+
 	public boolean confirmLoginData() {
 
 		List<User> identicalUsers;
-		identicalUsers = ConnectToUserDB
-				.queryUser("from User u where u.name = '" + user.getName() + "' And u.password= '" + user.getPassword() + "'");
+		identicalUsers = ConnectToUserDB.queryUser(
+				"from User u where u.name = '" + user.getName() + "' And u.password= '" + user.getPassword() + "'");
 
 		if (identicalUsers.isEmpty()) {
 			return false;
@@ -37,13 +38,12 @@ public class UserController {
 		user.setId(identicalUsers.get(0).getId());
 		return true;
 	}
-	
-	public List<Li> favoritesLinks(){
+
+	public List<Li> favoritesLinks() {
 		List<Li> likes = ConnectToLikeDB.getUserLikes(user);
 		return likes;
 	}
-	
-	
+
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {
 			return "userHomePage";

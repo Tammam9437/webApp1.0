@@ -117,6 +117,10 @@ public class Link implements Comparable<Link> {
 	public int getLikesNumber() {
 		return this.likes.size();
 	}
+	
+	public String youtube() {
+		return "https://www.youtube.com/embed/";
+	}
 
 	@Override
 	public String toString() {

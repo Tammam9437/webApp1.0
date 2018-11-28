@@ -23,6 +23,12 @@
 		<p:commandButton value="Show Links"
 			actionListener="#{mainController.linkController.showLinksToggel}"
 			ajax="false"></p:commandButton>
+		<p:commandButton value="Dein youtube Videos anzeigen"
+			actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
+			ajax="false"></p:commandButton>
+		<p:commandButton value="Add Youtube Videos anzeigen"
+			actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
+			ajax="false"></p:commandButton>
 		<p:commandButton value="Show your favourite Links"
 			actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
 			ajax="false"></p:commandButton>
@@ -92,6 +98,51 @@
 
 	</h:form>
 
+	<!-- Add Youtube video -->
+	<h:form
+		rendered="#{mainController.videoController.showAddYoutubeVideo}">
+		<h:panelGrid columns="3" cellpadding="2">
+			<p:outputLabel value="URL : " />
+			<p:inputText type="url" id="link"
+				value="#{mainController.videoController.youtubeLink.url}"
+				required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
+			<h:message for="link" showDetail="true" showSummary="false"
+				style="color:red;" />
+
+			<p:outputLabel value="Beschreibung : " />
+			<p:inputText id="beschreibung"
+				value="#{mainController.videoController.youtubeLink.beschreibung}"
+				required="true"
+				requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
+			<h:message for="beschreibung" showDetail="true" showSummary="false"
+				style="color:red;" />
+
+			<p:commandButton value="add Youtube Video"
+				actionListener="#{mainController.videoController.addYoutubeVideo()}"
+				ajax="false"></p:commandButton>
+		</h:panelGrid>
+	</h:form>
+	<br />
+
+	<!-- Youtube vedios -->
+	<h:form rendered="#{mainController.videoController.showYoutubeVideos}">
+		<h2>Dein Youtube Videos</h2>
+		<ui:repeat value="#{mainController.videoController.userYoutubeLinks}"
+			var="link">
+			<p:accordionPanel dynamic="true" cache="true">
+			
+				var="link">
+
+				<p:tab title="#{link.beschreibung}">
+					<iframe width="420" height="345" src="#{link.url}"> </iframe>
+				</p:tab>
+			</p:accordionPanel>
+		</ui:repeat>
+
+
+	</h:form>
+
+	<!-- favorit Links -->
 	<h:form rendered="#{mainController.linkController.showFavouriteLinks}">
 		<h2>Dein favorite Links</h2>
 		<ul>
