@@ -24,7 +24,7 @@ public class UploadController {
 			showUpload = true;
 		}
 	}
-
+	
 	public String onClickImage() {
 		return "http://localhost:8080/webapp/image";
 	}

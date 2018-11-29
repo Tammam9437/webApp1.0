@@ -14,6 +14,7 @@ public class MainController {
 	private FileUploadView fileUploadView;
 	private VideoController videoController;
 	private UploadController uploadController;
+	private ImageController imageController;
 
 	public MainController() {
 		this.userController = new UserController(this);
@@ -22,6 +23,7 @@ public class MainController {
 		this.fileUploadView = new FileUploadView(this);
 		this.videoController = new VideoController(this);
 		this.uploadController = new UploadController(this);
+		this.imageController = new ImageController(this);
 	}
 
 	public UserController getUserController() {
@@ -70,6 +72,14 @@ public class MainController {
 
 	public void setVideoController(VideoController videoController) {
 		this.videoController = videoController;
+	}
+
+	public ImageController getImageController() {
+		return imageController;
+	}
+
+	public void setImageController(ImageController imageController) {
+		this.imageController = imageController;
 	}
 
 }

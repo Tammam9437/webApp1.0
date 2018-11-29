@@ -18,23 +18,39 @@
 	<!-- Buttons -->
 	<div class="topnav">
 		<h:form>
-			<p:commandLink styleClass="topnav-link" value="zu Main Page" action="mainPage" />
+			<!-- Navigation -->
+			<p:commandLink styleClass="topnav-link" value="zu Main Page"
+				action="mainPage" />
+			<!-- Add Link -->
 			<p:commandLink styleClass="topnav-link" value="add new Link"
 				actionListener="#{mainController.linkController.showAddLinkToggel}"
 				ajax="false"></p:commandLink>
+			<!-- Upload -->
 			<p:commandLink styleClass="topnav-link" value="Upload" ajax="false"
 				actionListener="#{mainController.uploadController.showUploadToggel}" />
+			<!-- Show User Links -->
 			<p:commandLink styleClass="topnav-link" value="Show Links"
 				actionListener="#{mainController.linkController.showLinksToggel}"
 				ajax="false"></p:commandLink>
-			<p:commandLink styleClass="topnav-link" value="Dein youtube Videos anzeigen"
+			<!-- Show User Youtube Videos -->
+			<p:commandLink styleClass="topnav-link"
+				value="Dein youtube Videos anzeigen"
 				actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
 				ajax="false"></p:commandLink>
-			<p:commandLink styleClass="topnav-link" value="Add Youtube Videos anzeigen"
+			<!-- Add Youtube Vedio -->
+			<p:commandLink styleClass="topnav-link"
+				value="Add Youtube Videos anzeigen"
 				actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
 				ajax="false"></p:commandLink>
-			<p:commandLink styleClass="topnav-link" value="Show your favourite Links"
+			<!-- Show Favorit Links -->
+			<p:commandLink styleClass="topnav-link"
+				value="Show your favourite Links"
 				actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
+				ajax="false"></p:commandLink>
+
+			<p:commandLink styleClass="topnav-link"
+				value="Show your Fotos"
+				actionListener="#{mainController.imageController.showUserImagesToggel()}"
 				ajax="false"></p:commandLink>
 		</h:form>
 	</div>
@@ -158,7 +174,19 @@
 			</ui:repeat>
 		</ul>
 	</h:form>
+	
+	<!--Show User Images -->
+ 
+ 		<h:form rendered="#{mainController.imageController.showUserImages}">
+		
+		<p:galleria cache="false" value="#{mainController.imageController.userImages}" var="image"
+			panelWidth="500" panelHeight="313" showCaption="true">
+			<p:graphicImage title="" value="#{imageStreamer.image}" width="500" height="313">
+				<f:param name="id" value="#{image.idImage}" />
+			</p:graphicImage>
+		</p:galleria>
 
+	</h:form>
 </h:body>
 
 

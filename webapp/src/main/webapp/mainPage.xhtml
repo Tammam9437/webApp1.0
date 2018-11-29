@@ -22,10 +22,10 @@
 		<h:form>
 			<p:commandLink styleClass="topnav-link" value="zu HomePage"
 				action="userHomePage" />
-			<p:commandLink styleClass="topnav-link" value="show Fotos" />
+			<p:commandLink styleClass="topnav-link" value="show Fotos" actionListener="#{mainController.imageController.showImagesToggel()}" ajax="false" />
 			<p:commandLink styleClass="topnav-link" value="show Pdfs" />
 			<p:commandLink styleClass="topnav-link" value="Show Links"
-				action="#{mainController.linkController.showLinksToggel}"
+				actionListener="#{mainController.linkController.showLinksToggel}"
 				ajax="false"></p:commandLink>
 		</h:form>
 
@@ -64,6 +64,18 @@
 
 
 	</p:dataTable>
+	
+	<!-- Images -->
+		<h:form rendered="#{mainController.imageController.showImages}">
+		
+		<p:galleria cache="false" value="#{mainController.imageController.allImagesFromDB}" var="image"
+			panelWidth="500" panelHeight="313" showCaption="true">
+			<p:graphicImage title="" value="#{imageStreamer.image}" width="500" height="313">
+				<f:param name="id" value="#{image.idImage}" />
+			</p:graphicImage>
+		</p:galleria>
+
+	</h:form>
 	
 
 </h:body>

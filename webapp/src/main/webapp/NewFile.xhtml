@@ -8,20 +8,19 @@
 	<title>Fotos</title>
 </h:head>
 
-<h:body>	
-	 <h3>On-Demand Loading</h3>
-    <p:accordionPanel dynamic="true" cache="true">
-        <p:tab  title="Godfather Part I">
-           <iframe width="420" height="345" src="#{link.youtube()}"> </iframe>
-        </p:tab>
-        <p:tab title="Godfather Part II">
-           <iframe width="420" height="345" src="#{link.youtube()}"> </iframe>
-        </p:tab>
-        <p:tab title="Godfather Part III">
-           <iframe width="420" height="345" src="#{link.youtube()}"> </iframe>
-        </p:tab>
-    </p:accordionPanel>
-	
+<h:body>
+
+	<h:form>
+		
+		<p:galleria cache="false" value="#{mainController.imageController.allImagesFromDB}" var="image"
+			panelWidth="500" panelHeight="313" showCaption="true">
+			<p:graphicImage title="" value="#{imageStreamer.image}" width="500" height="313">
+				<f:param name="id" value="#{image.idImage}" />
+			</p:graphicImage>
+		</p:galleria>
+
+	</h:form>
+
 </h:body>
 
 
