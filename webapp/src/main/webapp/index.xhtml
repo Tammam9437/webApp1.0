@@ -8,15 +8,19 @@
 
 <h:head>
 	<title>Registrieren</title>
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
 </h:head>
 <h:body>
-	<h1>Registrieren</h1>
+	<div class="header">
+		<h1>Registrieren</h1>
+	</div>
 	<h3>Bitte geben Sie Ihre Daten ein</h3>
-	<h:form>
 
+	<h:form styleClass="input-form">
 		<h:panelGrid columns="3" cellpadding="2">
 			<p:outputLabel value="Benutzername: " />
-			<p:inputText id="name" value="#{mainController.userController.user.name}" required="true"
+			<p:inputText id="name"
+				value="#{mainController.userController.user.name}" required="true"
 				requiredMessage="Bitte Pflichtfeld eingeben">
 				<f:validator validatorId="usernameValidator"></f:validator>
 			</p:inputText>
@@ -25,23 +29,28 @@
 				style="color:red;" />
 
 			<p:outputLabel value="Passwort: " />
-			<p:password id="password" value="#{mainController.userController.user.password}" feedback="true"
-				required="true" requiredMessage="Bitte Pflichtfeld eingeben"  validatorMessage="Passwort ist zu klein, die länge muss mindestens 3 sein">
-				<f:validateLength minimum="3" ></f:validateLength>
-				</p:password>
+			<p:password id="password"
+				value="#{mainController.userController.user.password}"
+				feedback="true" required="true"
+				requiredMessage="Bitte Pflichtfeld eingeben"
+				validatorMessage="Passwort ist zu klein, die länge muss mindestens 3 sein">
+				<f:validateLength minimum="3"></f:validateLength>
+			</p:password>
 			<h:message for="password" showDetail="true" showSummary="false"
 				style="color:red;" />
 
 
 		</h:panelGrid>
-		<p:commandButton value="neuen Account erstellen"
-			action="#{mainController.userController.user.saveInDB}" ajax="false"/>
+		<div>
+			<p:commandButton id="commandButton" value="neuen Account erstellen"
+				action="#{mainController.userController.user.saveInDB}" ajax="false" />
+		</div>
 
 	</h:form>
 	<br />
 	<br />
-	<h:form>
-		<p:commandButton value="Zu Login" action="login" ajax="false"/>
+	<h:form styleClass="button-form">
+		<p:commandButton value="Zu Login" action="login" ajax="false" />
 	</h:form>
 
 

@@ -6,28 +6,39 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Main Page</title>
+	<link rel="stylesheet" type="text/css" href="css/userHomePage.css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 </h:head>
 
 <h:body>
-	<h1>Willkommen zu main Page</h1>
+	<div class="header">
+		<h1>Willkommen zu main Page</h1>
+
+	</div>
 
 	<!-- Buttons -->
 
 
+	<div class="topnav">
+		<h:form>
+			<p:commandLink styleClass="topnav-link" value="zu HomePage"
+				action="userHomePage" />
+			<p:commandLink styleClass="topnav-link" value="show Fotos" />
+			<p:commandLink styleClass="topnav-link" value="show Pdfs" />
+			<p:commandLink styleClass="topnav-link" value="Show Links"
+				action="#{mainController.linkController.showLinksToggel}"
+				ajax="false"></p:commandLink>
+		</h:form>
 
-	<h:form>
-		<p:commandButton value="zu HomePage" action="userHomePage" />
-		<p:commandButton value="show Fotos"></p:commandButton>
-		<p:commandButton value="show Pdfs" image="" />
-		<p:commandButton value="Show Links"
-			actionListener="#{mainController.linkController.showLinksToggel}" ajax="false"></p:commandButton>
-	</h:form>
+	</div>
 
 
 	<!-- Links -->
-	<p:dataTable var="link" value="#{mainController.linkController.link.linksFromDB}"
+	<p:dataTable  var="link"
+		value="#{mainController.linkController.link.linksFromDB}"
 		rendered="#{mainController.linkController.showLinkForm}">
-		<p:column headerText="beschreibung">
+		<p:column  headerText="beschreibung">
 			<h:outputText value="#{link.beschreibung}" />
 		</p:column>
 
@@ -42,10 +53,12 @@
 			<h:outputText value="#{link.likesNumber}" />
 		</p:column>
 		<p:column>
+			
 			<h:form>
-				<p:commandButton value="like" ajax="false" disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
-				  	action="#{link.addLike(mainController.userController.user)}"
-					style="margin-right:20px;" >
+				<p:commandButton styleClass="glyphicon glyphicon-thumbs-up" ajax="false"
+					disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
+					action="#{link.addLike(mainController.userController.user)}"
+					title="Like">
 				</p:commandButton>
 			</h:form>
 
@@ -53,7 +66,8 @@
 
 
 	</p:dataTable>
-	
+
+
 
 </h:body>
 

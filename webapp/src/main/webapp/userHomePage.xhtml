@@ -6,33 +6,39 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>User Home Page</title>
+	<link rel="stylesheet" type="text/css" href="css/userHomePage.css" />
+	<h:outputStylesheet
+		name="webjars/font-awesome/4.0.3/css/font-awesome.css" />
 </h:head>
 
 <h:body>
-	<h1>Herzlich Welkommen #{mainController.userController.user.name}</h1>
-
+	<div class="header">
+		<h1>Herzlich Welkommen #{mainController.userController.user.name}</h1>
+	</div>
 	<!-- Buttons -->
+	<div class="topnav">
+		<h:form>
+			<p:commandLink styleClass="topnav-link" value="zu Main Page" action="mainPage" />
+			<p:commandLink styleClass="topnav-link" value="add new Link"
+				actionListener="#{mainController.linkController.showAddLinkToggel}"
+				ajax="false"></p:commandLink>
+			<p:commandLink styleClass="topnav-link" value="Upload" ajax="false"
+				actionListener="#{mainController.uploadController.showUploadToggel}" />
+			<p:commandLink styleClass="topnav-link" value="Show Links"
+				actionListener="#{mainController.linkController.showLinksToggel}"
+				ajax="false"></p:commandLink>
+			<p:commandLink styleClass="topnav-link" value="Dein youtube Videos anzeigen"
+				actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
+				ajax="false"></p:commandLink>
+			<p:commandLink styleClass="topnav-link" value="Add Youtube Videos anzeigen"
+				actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
+				ajax="false"></p:commandLink>
+			<p:commandLink styleClass="topnav-link" value="Show your favourite Links"
+				actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
+				ajax="false"></p:commandLink>
+		</h:form>
+	</div>
 
-	<h:form>
-		<p:commandButton value="zu Main Page" action="mainPage" />
-		<p:commandButton value="add new Link"
-			actionListener="#{mainController.linkController.showAddLinkToggel}"
-			ajax="false"></p:commandButton>
-		<p:commandButton value="Upload" ajax="false"
-			actionListener="#{mainController.uploadController.showUploadToggel}" />
-		<p:commandButton value="Show Links"
-			actionListener="#{mainController.linkController.showLinksToggel}"
-			ajax="false"></p:commandButton>
-		<p:commandButton value="Dein youtube Videos anzeigen"
-			actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
-			ajax="false"></p:commandButton>
-		<p:commandButton value="Add Youtube Videos anzeigen"
-			actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
-			ajax="false"></p:commandButton>
-		<p:commandButton value="Show your favourite Links"
-			actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
-			ajax="false"></p:commandButton>
-	</h:form>
 
 	<!-- AddLink -->
 	<h:form rendered="#{mainController.linkController.showAddLink}">

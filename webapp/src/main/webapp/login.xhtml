@@ -7,35 +7,44 @@
 
 <h:head>
 	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
 </h:head>
 <h:body>
-	<h1>Login</h1>
+	<div class="header">
+		<h1>Login</h1>
+	</div>
+	
 	<h3>Bitte geben Sie Ihre Daten ein</h3>
-	<h:form>
+	<h:form styleClass="input-form">
 
 		<h:panelGrid columns="3" cellpadding="2">
-		<p:outputLabel value="Benutzername: " />
-		<p:inputText id="name" value="#{mainController.userController.user.name}"
-			required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
+			<p:outputLabel value="Benutzername: " />
+			<p:inputText id="name"
+				value="#{mainController.userController.user.name}" required="true"
+				requiredMessage="Bitte Pflichtfeld eingeben" />
 
-		<h:message for="name" showDetail="true" showSummary="false"
-			style="color:red;" />
+			<h:message for="name" showDetail="true" showSummary="false"
+				style="color:red;" />
 
-		<p:outputLabel value="Passwort: " />
-		<p:password id="password" value="#{mainController.userController.user.password}"
-			required="true" requiredMessage="Bitte Pflichtfeld eingeben" >
-			
+			<p:outputLabel value="Passwort: " />
+			<p:password id="password"
+				value="#{mainController.userController.user.password}"
+				required="true" requiredMessage="Bitte Pflichtfeld eingeben">
+
 			</p:password>
-		<h:message for="password" showDetail="true" showSummary="false"
-			style="color:red;" />
-		
-		</h:panelGrid>
-		<p:commandButton value="login"
-			action="#{mainController.userController.navigationFromLogin}" ajax="false"/>
+			<h:message for="password" showDetail="true" showSummary="false"
+				style="color:red;" />
 
+		</h:panelGrid>
+		<div>
+			<p:commandButton styleClass="commandButton" value="login"
+			action="#{mainController.userController.navigationFromLogin}"
+			ajax="false" />
+		</div>
+		
 	</h:form>
 	<br />
-	<h:form>
+	<h:form styleClass="button-form">
 		<p:commandButton value="Zu Regestrieren" action="index" ajax="false" />
 	</h:form>
 
