@@ -25,7 +25,8 @@
 				requiredMessage="Bitte Pflichtfeld eingeben">
 				<f:validator validatorId="existsUsernameValidator"></f:validator>
 			</p:inputText>
-			<!-- Email -->
+			<h:message for="name" showDetail="true" showSummary="false"
+				style="color:red;" />
 			<p:outputLabel value="Email: " />
 			<p:inputText id="email" type="email"
 				value="#{mainController.userController.email.name}" required="true"
