@@ -5,10 +5,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import DBConnector.ConnectToEmailDB;
 import DBConnector.ConnectToLikeDB;
 import DBConnector.ConnectToUserDB;
+import Entity.Email;
 import Entity.Li;
-import Entity.Link;
 import Entity.User;
 
 @ManagedBean
@@ -18,10 +19,19 @@ public class UserController {
 	private MainController mainController;
 
 	private User user;
+	private Email email ;
 
 	public UserController(MainController mainController) {
 		this.mainController = mainController;
 		this.user = new User();
+		this.email = new Email();
+	}
+	
+	public String saveUserInDB() {
+		email.setUser(user);
+		user.setEmail(email);
+		ConnectToUserDB.saveUserInDB(user);
+		return "login";
 	}
 
 	public boolean confirmLoginData() {
@@ -61,6 +71,14 @@ public class UserController {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Email getEmail() {
+		return email;
+	}
+
+	public void setEmail(Email email) {
+		this.email = email;
 	}
 
 }

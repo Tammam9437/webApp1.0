@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import DBConnector.ConnectToUserDB;
@@ -35,18 +36,21 @@ public class User {
 
 	@OneToMany(targetEntity = Link.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Link> links = new ArrayList<Link>();
-	
+
 	@OneToMany(targetEntity = Image.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Image> images = new ArrayList<Image>();
-	
+
 	@OneToMany(targetEntity = Pdf.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Pdf> pdfs = new ArrayList<Pdf>();
-	
+
 	@OneToMany(targetEntity = Li.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Li> likes = new ArrayList<Li>();
 
+	@OneToOne(targetEntity = Email.class, mappedBy = "user", cascade = CascadeType.ALL)
+	private Email email;
+
 	public User() {
-	
+		this.email = new Email();
 	}
 
 	public User(String name, String password) {
@@ -54,10 +58,10 @@ public class User {
 		this.password = password;
 	}
 
-	public String saveInDB() {
-		ConnectToUserDB.saveUserInDB(this);
-		return "login";
-	}
+//	public String saveInDB() {
+//		ConnectToUserDB.saveUserInDB(this);
+//		return "login";
+//	}
 
 	public boolean userExsistiert(String username) {
 		List<User> identicalUsers;
@@ -117,6 +121,14 @@ public class User {
 
 	public void setPdfs(List<Pdf> pdfs) {
 		this.pdfs = pdfs;
+	}
+
+	public Email getEmail() {
+		return email;
+	}
+
+	public void setEmail(Email email) {
+		this.email = email;
 	}
 
 	@Override

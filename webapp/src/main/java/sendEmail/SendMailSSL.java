@@ -22,16 +22,16 @@ public class SendMailSSL {
 		Session session = Session.getDefaultInstance(props,
 			new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("username","password");
+					return new PasswordAuthentication("Wepapp332111@gmail.com","0932167205");
 				}
 			});
 
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("from@no-spam.com"));
+			message.setFrom(new InternetAddress("Wepapp332111@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse("to@no-spam.com"));
+					InternetAddress.parse("nader9437@gmail.com"));
 			message.setSubject("Testing Subject");
 			message.setText("Dear Mail Crawler," +
 					"\n\n No spam to my email, please!");

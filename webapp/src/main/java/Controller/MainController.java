@@ -15,6 +15,7 @@ public class MainController {
 	private VideoController videoController;
 	private UploadController uploadController;
 	private ImageController imageController;
+	private SendEmailController sendEmailController;
 
 	public MainController() {
 		this.userController = new UserController(this);
@@ -24,6 +25,15 @@ public class MainController {
 		this.videoController = new VideoController(this);
 		this.uploadController = new UploadController(this);
 		this.imageController = new ImageController(this);
+		this.sendEmailController = new SendEmailController(this);
+	}
+
+	public SendEmailController getSendEmailController() {
+		return sendEmailController;
+	}
+
+	public void setSendEmailController(SendEmailController sendEmailController) {
+		this.sendEmailController = sendEmailController;
 	}
 
 	public UserController getUserController() {

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import Entity.Email;
 import Entity.Image;
 import Entity.Li;
 import Entity.Link;
@@ -20,7 +21,8 @@ public class ConnectToLinkDB {
 	private static Session getInstance() {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
-					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class).addAnnotatedClass(Li.class).addAnnotatedClass(YoutubeLink.class)
+					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
+					.addAnnotatedClass(Li.class).addAnnotatedClass(YoutubeLink.class).addAnnotatedClass(Email.class)
 					.buildSessionFactory();
 		}
 		return instance.getCurrentSession();
@@ -65,23 +67,6 @@ public class ConnectToLinkDB {
 		}
 
 	}
-
-//	public static void updateLink(int idlink) {
-//		Session session = getInstance();
-//		try {
-//
-//			session.beginTransaction();
-//
-//			Link link = session.get(Link.class, idlink);
-//			System.out.println("der geholte link");
-//			System.out.println(link.toString());
-//
-//			session.getTransaction().commit();
-//
-//		} finally {
-//			getInstance().close();
-//		}
-//	}
 
 	public static void displayLinks(List<Link> theLinks) {
 		for (Link tempLink : theLinks) {

@@ -17,15 +17,23 @@
 	<h3>Bitte geben Sie Ihre Daten ein</h3>
 
 	<h:form styleClass="input-form">
-		<h:panelGrid columns="3" cellpadding="2">
+		<h:panelGrid columns="3" cellpadding="3">
+		
 			<p:outputLabel value="Benutzername: " />
 			<p:inputText id="name"
 				value="#{mainController.userController.user.name}" required="true"
 				requiredMessage="Bitte Pflichtfeld eingeben">
-				<f:validator validatorId="usernameValidator"></f:validator>
+				<f:validator validatorId="existsUsernameValidator"></f:validator>
+			</p:inputText>
+			<!-- Email -->
+			<p:outputLabel value="Email: " />
+			<p:inputText id="email" type="email"
+				value="#{mainController.userController.email.name}" required="true"
+				requiredMessage="Bitte Pflichtfeld eingeben">
+				<f:validator validatorId="existsEmailValidator"></f:validator>
 			</p:inputText>
 
-			<h:message for="name" showDetail="true" showSummary="false"
+			<h:message for="email" showDetail="true" showSummary="false"
 				style="color:red;" />
 
 			<p:outputLabel value="Passwort: " />
@@ -43,7 +51,7 @@
 		</h:panelGrid>
 		<div>
 			<p:commandButton id="commandButton" value="neuen Account erstellen"
-				action="#{mainController.userController.user.saveInDB}" ajax="false" />
+				action="#{mainController.userController.saveUserInDB()}" ajax="false" />
 		</div>
 
 	</h:form>

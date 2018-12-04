@@ -61,7 +61,7 @@ public class Link implements Comparable<Link> {
 	}
 
 	public Link() {
-//		this.likes = ConnectToLikeDB.getLinkLikes(this);
+
 	}
 
 	public Link(String url, String beschreibung) {

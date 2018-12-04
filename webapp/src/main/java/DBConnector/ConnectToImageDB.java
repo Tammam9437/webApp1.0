@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import Entity.Email;
 import Entity.Image;
 import Entity.Li;
 import Entity.Link;
@@ -19,7 +20,7 @@ public class ConnectToImageDB {
 	private static Session getInstance() {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
-					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
+					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class).addAnnotatedClass(Email.class)
 					.addAnnotatedClass(Li.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();

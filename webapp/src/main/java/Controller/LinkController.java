@@ -52,7 +52,7 @@ public class LinkController {
 
 	public List<Link> getUserLinks() {
 		User user = mainController.getUserController().getUser();
-		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'");
+		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'"+" AND DTYPE != 'YoutubeLink'");
 		return list;
 	}
 	
