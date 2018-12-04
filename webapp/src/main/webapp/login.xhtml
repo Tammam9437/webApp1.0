@@ -13,7 +13,7 @@
 	<div class="header">
 		<h1>Login</h1>
 	</div>
-	
+
 	<h3>Bitte geben Sie Ihre Daten ein</h3>
 	<h:form styleClass="input-form">
 
@@ -38,11 +38,16 @@
 		</h:panelGrid>
 		<div>
 			<p:commandButton styleClass="commandButton" value="login"
-			action="#{mainController.userController.navigationFromLogin}"
-			ajax="false" />
+				action="#{mainController.userController.navigationFromLogin}"
+				ajax="false" />
 		</div>
-		
+
 	</h:form>
+
+	<h:form>
+		<p:commandLink value="Passwort vergessen?" action="forgetPassword"></p:commandLink>
+	</h:form>
+
 	<br />
 	<h:form styleClass="button-form">
 		<p:commandButton value="Zu Regestrieren" action="index" ajax="false" />
