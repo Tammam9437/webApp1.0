@@ -5,7 +5,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import DBConnector.ConnectToEmailDB;
 import DBConnector.ConnectToLikeDB;
 import DBConnector.ConnectToUserDB;
 import Entity.Email;
@@ -31,7 +30,14 @@ public class UserController {
 		email.setUser(user);
 		user.setEmail(email);
 		ConnectToUserDB.saveUserInDB(user);
+		user = null;
+		email = null;
 		return "login";
+	}
+	
+	public String changePassword() {
+		ConnectToUserDB.updateUserPassword(user.getId(), user.getPassword());
+		return "successChangePassword";
 	}
 
 	public boolean confirmLoginData() {

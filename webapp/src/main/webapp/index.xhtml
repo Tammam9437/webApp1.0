@@ -18,7 +18,7 @@
 
 	<h:form styleClass="input-form">
 		<h:panelGrid columns="3" cellpadding="3">
-		
+
 			<p:outputLabel value="Benutzername: " />
 			<p:inputText id="name"
 				value="#{mainController.userController.user.name}" required="true"
@@ -52,7 +52,19 @@
 		</h:panelGrid>
 		<div>
 			<p:commandButton id="commandButton" value="neuen Account erstellen"
-				action="#{mainController.userController.saveUserInDB()}" ajax="false" />
+				action="#{mainController.userController.saveUserInDB()}"
+				ajax="false" />
+
+		<!-- 	<p:dialog modal="true" visible="true" header="Status">
+				<p:ajaxStatus>
+					<f:facet name="start">
+						<h:outputText value="Loading..." />
+					</f:facet>
+					<f:facet name="complete">
+						<h:outputText value="Completed" />
+					</f:facet>
+				</p:ajaxStatus>
+			</p:dialog> -->
 		</div>
 
 	</h:form>

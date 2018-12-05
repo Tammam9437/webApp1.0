@@ -41,6 +41,23 @@ public class ConnectToUserDB {
 		}
 
 	}
+	
+	public static void updateUserPassword(int userId, String password) {
+		Session session = getInstance();
+		try {
+
+			session.beginTransaction();
+
+			User user = session.get(User.class, userId);
+			user.setPassword(password);
+			
+			session.getTransaction().commit();
+
+		} finally {
+			getInstance().close();
+		}
+
+	}
 
 	@SuppressWarnings("unchecked")
 	public static List<User> queryUser(String query) {
