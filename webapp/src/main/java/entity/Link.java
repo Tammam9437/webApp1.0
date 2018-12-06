@@ -40,6 +40,10 @@ public class Link implements Comparable<Link> {
 	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "category")
+	private Category category;
 
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "link", cascade = CascadeType.ALL)
 	private List<Li> likes = new ArrayList<Li>();

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import entity.Category;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -21,7 +22,8 @@ public class ConnectToUserDB {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
-					.addAnnotatedClass(Email.class).addAnnotatedClass(Li.class).buildSessionFactory();
+					.addAnnotatedClass(Email.class).addAnnotatedClass(Li.class).addAnnotatedClass(Category.class)
+					.buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
@@ -41,7 +43,7 @@ public class ConnectToUserDB {
 		}
 
 	}
-	
+
 	public static void updateUserPassword(int userId, String password) {
 		Session session = getInstance();
 		try {
@@ -50,7 +52,7 @@ public class ConnectToUserDB {
 
 			User user = session.get(User.class, userId);
 			user.setPassword(password);
-			
+
 			session.getTransaction().commit();
 
 		} finally {

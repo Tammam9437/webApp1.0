@@ -13,9 +13,8 @@ import entity.Li;
 import entity.Link;
 import entity.Pdf;
 import entity.User;
-import entity.YoutubeLink;
 
-public class ConnectToLinkDB {
+public class ConnectToCategoryDB {
 
 	private static SessionFactory instance;
 
@@ -23,18 +22,48 @@ public class ConnectToLinkDB {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
-					.addAnnotatedClass(Li.class).addAnnotatedClass(YoutubeLink.class).addAnnotatedClass(Email.class)
-					.addAnnotatedClass(Category.class).buildSessionFactory();
+					.addAnnotatedClass(Email.class).addAnnotatedClass(Li.class).addAnnotatedClass(Category.class)
+					.buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
 
-	// **************** Link ****************
+	public static void saveCategoryInDB(Category category) {
+		Session session = getInstance();
+		try {
+
+			session.beginTransaction();
+
+			session.save(category);
+
+			session.getTransaction().commit();
+
+		} finally {
+			getInstance().close();
+		}
+
+	}
+
+	public static Category getImageFromDB(int idCategory) {
+		Session session = getInstance();
+		Category category;
+		try {
+			session.beginTransaction();
+
+			category = session.get(Category.class, idCategory);
+
+			session.getTransaction().commit();
+		} finally {
+			getInstance().close();
+		}
+		return category;
+	}
+
 	@SuppressWarnings("unchecked")
-	public static List<Link> queryLink(String query) {
+	public static List<Category> queryImage(String query) {
 
 		Session session = getInstance();
-		List<Link> theLinks;
+		List<Category> theCategorys;
 
 		try {
 
@@ -42,7 +71,7 @@ public class ConnectToLinkDB {
 			session.beginTransaction();
 
 			// query students
-			theLinks = session.createQuery(query).list();
+			theCategorys = session.createQuery(query).list();
 
 			// commit transaction
 			session.getTransaction().commit();
@@ -50,28 +79,13 @@ public class ConnectToLinkDB {
 		} finally {
 			getInstance().close();
 		}
-		return theLinks;
+		return theCategorys;
 	}
 
-	public static void saveLinkInDB(Link link) {
-		Session session = getInstance();
-		try {
-
-			session.beginTransaction();
-
-			session.save(link);
-
-			session.getTransaction().commit();
-
-		} finally {
-			getInstance().close();
-		}
-
-	}
-
-	public static void displayLinks(List<Link> theLinks) {
-		for (Link tempLink : theLinks) {
-			System.out.println(tempLink);
+	public static void displayImages(List<Category> theCategorys) {
+		for (Category tempCategory : theCategorys) {
+			System.out.println(tempCategory);
 		}
 	}
+
 }

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import entity.Category;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -20,8 +21,9 @@ public class ConnectToLikeDB {
 	private static Session getInstance() {
 		if (instance == null) {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
-					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class).addAnnotatedClass(Email.class).addAnnotatedClass(Email.class)
-					.addAnnotatedClass(Li.class).buildSessionFactory();
+					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
+					.addAnnotatedClass(Email.class).addAnnotatedClass(Email.class).addAnnotatedClass(Li.class)
+					.addAnnotatedClass(Category.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
@@ -56,18 +58,20 @@ public class ConnectToLikeDB {
 		}
 		return like;
 	}
-	
-	public static List<Li> getUserLikes(User user){
+
+	public static List<Li> getUserLikes(User user) {
 		List<Li> userLikes = queryLike("From Li WHERE iduser ='" + user.getId() + "'");
 		return userLikes;
 	}
 
-	public static List<Li> getLinkLikes(Link link){
+	public static List<Li> getLinkLikes(Link link) {
 		List<Li> userLikes = queryLike("From Li WHERE iduser ='" + link.getId() + "'");
 		return userLikes;
 	}
-	public static List<Li> getUserLinkLikes(User user,Link link){
-		List<Li> userLinkLikes = queryLike("From Li WHERE iduser ='" + user.getId() + "'"+" AND idlink ='"+ link.getId() + "'");
+
+	public static List<Li> getUserLinkLikes(User user, Link link) {
+		List<Li> userLinkLikes = queryLike(
+				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idlink ='" + link.getId() + "'");
 		return userLinkLikes;
 	}
 

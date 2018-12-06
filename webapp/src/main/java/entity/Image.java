@@ -29,11 +29,13 @@ public class Image {
 	@Column(name = "file")
 	private byte [] file;
 		
-	
-	
 	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name = "category")
+	private Category category;
 	
 	public Image() {
 		

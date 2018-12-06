@@ -36,6 +36,10 @@ public class Pdf {
 	@JoinColumn(name = "iduser")
 	private User user;
 	
+	@ManyToOne
+	@JoinColumn(name = "category")
+	private Category category;
+	
 	public Pdf() {
 		name = "";
 	}
