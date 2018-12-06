@@ -32,19 +32,26 @@ body {
 	display: flex;
 	justify-content: space-around;
 }
-.topnav:hover{
-	color: blue;
 
-	}
-.topnav-Link:hover{
-	color: blue;
+.main, .nebenNav{
+	
+}
 
-	}
+.main {
+	width: 100%;
+	margin-top : 10px;
+}
+
+.nebenNav {
+	float: left;
+	width: 15%;
+	background-color:rgb(102, 153, 255);
+	text-align: center;
+}
 
 .data-table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 80%;
 	margin: 0 auto;
 }
 

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Main Page</title>
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+</h:head>
+
+<h:body>
+	<div class="header">
+		<h1>Willkommen zu main Page</h1>
+
+	</div>
+
+	<!-- Buttons -->
+
+
+	<div class="topnav">
+		<h:form>
+			<p:commandLink styleClass="topnav-link" value="zu HomePage"
+				action="userHomePage" />
+			<p:commandLink styleClass="topnav-link" value="show Fotos"
+				actionListener="#{mainController.imageController.showImagesToggel()}"
+				ajax="false" />
+			<p:commandLink styleClass="topnav-link" value="show Pdfs"
+				disabled="true" />
+			<p:commandLink styleClass="topnav-link" value="Show Links"
+				actionListener="#{mainController.linkController.showLinksToggel}"
+				ajax="false"></p:commandLink>
+		</h:form>
+
+	</div>
+
+
+	<div class="nebenNav">
+
+
+	</div>
+
+	<div class="main">
+
+		<!-- Links -->
+		<p:dataTable styleClass="data-table" var="link"
+			value="#{mainController.linkController.link.linksFromDB}"
+			rendered="#{mainController.linkController.showLinkForm}">
+			<p:column styleClass="beschreibung" headerText="beschreibung">
+				<h:outputText value="#{link.beschreibung}" />
+			</p:column>
+
+			<p:column styleClass="url" headerText="Url">
+				<a href="#{link.url}">#{link.url}</a>
+			</p:column>
+
+			<p:column styleClass="userId" headerText="userId">
+				<h:outputText value="#{link.user.name}" />
+			</p:column>
+			<p:column styleClass="likes" headerText="Likes">
+				<h:outputText value="#{link.likesNumber}" />
+			</p:column>
+			<p:column styleClass="likeButon">
+
+				<h:form>
+					<p:commandButton ajax="false"
+						disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
+						action="#{link.addLike(mainController.userController.user)}"
+						title="Like">
+					</p:commandButton>
+				</h:form>
+
+			</p:column>
+
+
+		</p:dataTable>
+
+		<!-- Images -->
+		<h:form rendered="#{mainController.imageController.showImages}">
+
+			<p:galleria cache="false"
+				value="#{mainController.imageController.allImagesFromDB}"
+				var="image" panelWidth="500" panelHeight="313" showCaption="true">
+				<p:graphicImage title="" value="#{imageStreamer.image}" width="500"
+					height="313">
+					<f:param name="id" value="#{image.idImage}" />
+				</p:graphicImage>
+			</p:galleria>
+
+		</h:form>
+
+
+
+	</div>
+
+</h:body>
+
+
+</html>

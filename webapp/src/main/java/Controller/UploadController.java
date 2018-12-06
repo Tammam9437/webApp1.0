@@ -1,7 +1,12 @@
 package Controller;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import DBConnector.ConnectToPdfDB;
+import Entity.Pdf;
 
 @ManagedBean
 @SessionScoped
@@ -21,10 +26,16 @@ public class UploadController {
 		if (showUpload) {
 			showUpload = false;
 		} else {
+			mainController.closeAll();
 			showUpload = true;
 		}
 	}
-	
+
+	public List<Pdf> getAllPdfsFromDB() {
+		List<Pdf> list = ConnectToPdfDB.queryPdf("From Pdf ");
+		return list;
+	}
+
 	public String onClickImage() {
 		return "http://localhost:8080/webapp/image";
 	}

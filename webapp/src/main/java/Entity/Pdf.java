@@ -26,6 +26,9 @@ public class Pdf {
 	@Column(name = "idPdf")
 	private int idPdf;
 	
+	@Column(name = "name")
+	private String name;
+	
 	@Column(name = "file")
 	private byte [] file;
 	
@@ -34,7 +37,7 @@ public class Pdf {
 	private User user;
 	
 	public Pdf() {
-		
+		name = "";
 	}
 	
 	public void saveInDB() {
@@ -69,6 +72,14 @@ public class Pdf {
 
 	public int getIdPdf() {
 		return idPdf;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

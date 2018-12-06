@@ -3,6 +3,8 @@ package Controller;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
+import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
+
 import View.FileUploadView;
 
 @ManagedBean
@@ -27,6 +29,18 @@ public class MainController {
 		this.imageController = new ImageController(this);
 		this.sendEmailController = new SendEmailController(this);
 	}
+	
+	public void closeAll(){
+		imageController.setShowImages(false);
+		imageController.setShowUserImages(false);
+		linkController.setShowAddLink(false);
+		linkController.setShowFavouriteLinks(false);
+		linkController.setShowLinkForm(false);
+		uploadController.setShowUpload(false);
+		videoController.setShowAddYoutubeVideo(false);
+		videoController.setShowYoutubeVideos(false);
+	}
+	
 
 	public SendEmailController getSendEmailController() {
 		return sendEmailController;

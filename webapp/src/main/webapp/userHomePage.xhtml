@@ -39,7 +39,7 @@
 				ajax="false"></p:commandLink>
 			<!-- Add Youtube Vedio -->
 			<p:commandLink styleClass="topnav-link"
-				value="Add Youtube Videos anzeigen"
+				value="Add Youtube Video"
 				actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
 				ajax="false"></p:commandLink>
 			<!-- Show Favorit Links -->
@@ -149,19 +149,11 @@
 	<!-- Youtube vedios -->
 	<h:form rendered="#{mainController.videoController.showYoutubeVideos}">
 		<h2>Dein Youtube Videos</h2>
-		<ui:repeat value="#{mainController.videoController.userYoutubeLinks}"
-			var="link">
-			<p:accordionPanel dynamic="true" cache="true">
-			
-				var="link">
-
-				<p:tab title="#{link.beschreibung}">
-					<iframe width="420" height="345" src="#{link.url}"> </iframe>
+			<p:accordionPanel dynamic="true" cache="true" multiple="true" value="#{mainController.videoController.userYoutubeLinks}" var="video">
+				<p:tab title="#{video.beschreibung}">
+					<iframe width="420" height="345" src="#{video.url}"> </iframe>
 				</p:tab>
 			</p:accordionPanel>
-		</ui:repeat>
-
-
 	</h:form>
 
 	<!-- favorit Links -->
@@ -182,7 +174,7 @@
 		<p:galleria cache="false" value="#{mainController.imageController.userImages}" var="image"
 			panelWidth="500" panelHeight="313" showCaption="true">
 			<p:graphicImage title="" value="#{imageStreamer.image}" width="500" height="313">
-				<f:param name="id" value="#{image.idImage}" />
+				<f:param name="imageId" value="#{image.idImage}" />
 			</p:graphicImage>
 		</p:galleria>
 

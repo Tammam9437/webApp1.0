@@ -34,6 +34,7 @@ public class VideoController {
 		if (showYoutubeVideos) {
 			showYoutubeVideos = false;
 		} else {
+			mainController.closeAll();
 			showYoutubeVideos = true;
 		}
 	}
@@ -42,6 +43,7 @@ public class VideoController {
 		if (showAddYoutubeVideo) {
 			showAddYoutubeVideo = false;
 		} else {
+			mainController.closeAll();
 			showAddYoutubeVideo = true;
 		}
 	}
@@ -62,6 +64,11 @@ public class VideoController {
 	public List<Link> getUserYoutubeLinks() {
 		User user = mainController.getUserController().getUser();
 		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'"+" AND DTYPE = 'YoutubeLink'");
+		return list;
+	}
+	
+	public List<Link> getYoutubeLinks(){
+		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink'");
 		return list;
 	}
 

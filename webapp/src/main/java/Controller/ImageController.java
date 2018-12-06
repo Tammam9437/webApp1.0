@@ -40,6 +40,7 @@ public class ImageController {
 		if (showImages) {
 			showImages = false;
 		} else {
+			mainController.closeAll();
 			showImages = true;
 		}
 	}
@@ -47,6 +48,7 @@ public class ImageController {
 		if (showUserImages) {
 			showUserImages = false;
 		} else {
+			mainController.closeAll();
 			showUserImages = true;
 		}
 	}

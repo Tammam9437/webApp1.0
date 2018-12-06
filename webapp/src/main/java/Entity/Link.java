@@ -70,7 +70,7 @@ public class Link implements Comparable<Link> {
 	}
 
 	public List<Link> getLinksFromDB() {
-		ArrayList<Link> list = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link");
+		ArrayList<Link> list = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' ");
 		java.util.Collections.sort(list);
 		return list;
 	}

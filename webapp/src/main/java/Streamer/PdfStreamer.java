@@ -1,4 +1,4 @@
-package Controller;
+package Streamer;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,14 +11,14 @@ import javax.faces.event.PhaseId;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-import DBConnector.ConnectToImageDB;
-import Entity.Image;
+import DBConnector.ConnectToPdfDB;
+import Entity.Pdf;
 
 @ManagedBean
 @ApplicationScoped
-public class ImageStreamer {
+public class PdfStreamer {
 
-	public StreamedContent getImage() throws IOException {
+	public StreamedContent getPdf() throws IOException {
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
@@ -28,10 +28,9 @@ public class ImageStreamer {
 		} else {
 			// So, browser is requesting the image. Return a real StreamedContent with the
 			// image bytes.
-			String imageId = context.getExternalContext().getRequestParameterMap().get("id");
-			System.out.println(imageId);
-			Image image = ConnectToImageDB.getImageFromDB(Integer.parseInt(imageId));
-			return new DefaultStreamedContent(new ByteArrayInputStream(image.getFile()));
+			String PdfId = context.getExternalContext().getRequestParameterMap().get("pdfId");
+			Pdf pdf = ConnectToPdfDB.getPdfFromDB(Integer.parseInt(PdfId));
+			return new DefaultStreamedContent(new ByteArrayInputStream(pdf.getFile()));
 		}
 	}
 

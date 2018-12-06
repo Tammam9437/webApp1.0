@@ -61,6 +61,7 @@ public class LinkController {
 		if (showAddLink) {
 			showAddLink = false;
 		} else {
+			mainController.closeAll();
 			showAddLink = true;
 		}
 	}
@@ -68,6 +69,7 @@ public class LinkController {
 		if (showFavouriteLinks) {
 			showFavouriteLinks = false;
 		} else {
+			mainController.closeAll();
 			showFavouriteLinks = true;
 		}
 	}
@@ -81,6 +83,7 @@ public class LinkController {
 		if (showLinkForm) {
 			showLinkForm = false;
 		} else {
+			mainController.closeAll();
 			showLinkForm = true;
 		}
 	}
