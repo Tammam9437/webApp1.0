@@ -43,8 +43,12 @@ public class ConnectToCategoryDB {
 		}
 
 	}
+	
+//	public static int getCategoryIdFromDB(String name) {
+//		
+//	}
 
-	public static Category getImageFromDB(int idCategory) {
+	public static Category getCategoryFromDB(int idCategory) {
 		Session session = getInstance();
 		Category category;
 		try {
@@ -60,7 +64,7 @@ public class ConnectToCategoryDB {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Category> queryImage(String query) {
+	public static List<Category> queryCategory(String query) {
 
 		Session session = getInstance();
 		List<Category> theCategorys;
@@ -82,7 +86,7 @@ public class ConnectToCategoryDB {
 		return theCategorys;
 	}
 
-	public static void displayImages(List<Category> theCategorys) {
+	public static void displayCategorys(List<Category> theCategorys) {
 		for (Category tempCategory : theCategorys) {
 			System.out.println(tempCategory);
 		}

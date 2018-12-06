@@ -38,8 +38,7 @@
 				actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
 				ajax="false"></p:commandLink>
 			<!-- Add Youtube Vedio -->
-			<p:commandLink styleClass="topnav-link"
-				value="Add Youtube Video"
+			<p:commandLink styleClass="topnav-link" value="Add Youtube Video"
 				actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
 				ajax="false"></p:commandLink>
 			<!-- Show Favorit Links -->
@@ -48,8 +47,7 @@
 				actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
 				ajax="false"></p:commandLink>
 
-			<p:commandLink styleClass="topnav-link"
-				value="Show your Fotos"
+			<p:commandLink styleClass="topnav-link" value="Show your Fotos"
 				actionListener="#{mainController.imageController.showUserImagesToggel()}"
 				ajax="false"></p:commandLink>
 		</h:form>
@@ -73,6 +71,17 @@
 				requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
 			<h:message for="beschreibung" showDetail="true" showSummary="false"
 				style="color:red;" />
+
+
+			<p:outputLabel value="DropDown:" for="dd" />
+			<p:autoComplete  id="dd" dropdown="true"
+				value="#{mainController.categoryController.category}"
+				completeMethod="#{mainController.categoryController.completeCategory}"
+				var="category" itemLabel="#{category.name}" itemValue="#{category}" converter="categoryConverter" forceSelection="true" required="true" requiredMessage="Geben sie bitte einen kategorie ein" />
+
+
+
+			<!--  -->
 
 			<p:commandButton value="add Link"
 				actionListener="#{mainController.linkController.addLink}"
@@ -149,11 +158,13 @@
 	<!-- Youtube vedios -->
 	<h:form rendered="#{mainController.videoController.showYoutubeVideos}">
 		<h2>Dein Youtube Videos</h2>
-			<p:accordionPanel dynamic="true" cache="true" multiple="true" value="#{mainController.videoController.userYoutubeLinks}" var="video">
-				<p:tab title="#{video.beschreibung}">
-					<iframe width="420" height="345" src="#{video.url}"> </iframe>
-				</p:tab>
-			</p:accordionPanel>
+		<p:accordionPanel dynamic="true" cache="true" multiple="true"
+			value="#{mainController.videoController.userYoutubeLinks}"
+			var="video">
+			<p:tab title="#{video.beschreibung}">
+				<iframe width="420" height="345" src="#{video.url}"> </iframe>
+			</p:tab>
+		</p:accordionPanel>
 	</h:form>
 
 	<!-- favorit Links -->
@@ -166,14 +177,16 @@
 			</ui:repeat>
 		</ul>
 	</h:form>
-	
+
 	<!--Show User Images -->
- 
- 		<h:form rendered="#{mainController.imageController.showUserImages}">
-		
-		<p:galleria cache="false" value="#{mainController.imageController.userImages}" var="image"
+
+	<h:form rendered="#{mainController.imageController.showUserImages}">
+
+		<p:galleria cache="false"
+			value="#{mainController.imageController.userImages}" var="image"
 			panelWidth="500" panelHeight="313" showCaption="true">
-			<p:graphicImage title="" value="#{imageStreamer.image}" width="500" height="313">
+			<p:graphicImage title="" value="#{imageStreamer.image}" width="500"
+				height="313">
 				<f:param name="imageId" value="#{image.idImage}" />
 			</p:graphicImage>
 		</p:galleria>

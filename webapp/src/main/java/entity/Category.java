@@ -16,18 +16,18 @@ import javax.persistence.Table;
 
 @ManagedBean
 @Entity
-@Table(name = "Email")
+@Table(name = "Category")
 @SessionScoped
 public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idEmail")
-	private int idEmail;
-	
+	@Column(name = "idCategory")
+	private int idCategory;
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@OneToMany(targetEntity = Link.class, mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Link> links = new ArrayList<Link>();
 
@@ -36,18 +36,24 @@ public class Category {
 
 	@OneToMany(targetEntity = Pdf.class, mappedBy = "category", cascade = CascadeType.ALL)
 	private List<Pdf> pdfs = new ArrayList<Pdf>();
-	
+
 	public Category() {
-		
+
 	}
+
+
 
 	public String getName() {
 		return name;
 	}
 
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 
 	public List<Link> getLinks() {
 		return links;
@@ -73,9 +79,15 @@ public class Category {
 		this.pdfs = pdfs;
 	}
 
-	public int getIdEmail() {
-		return idEmail;
+	public int getIdCategory() {
+		return idCategory;
 	}
-	
+
+
+
+	@Override
+	public String toString() {
+		return name ;
+	}
 	
 }

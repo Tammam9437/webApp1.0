@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Registrieren</title>
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
+</h:head>
+<h:body>
+	<div class="header">
+		<h1>Registrieren</h1>
+	</div>
+	<h3>Bitte geben Sie Ihre Daten ein</h3>
+
+	<h:form styleClass="input-form">
+		<h:panelGrid columns="3" cellpadding="3">
+
+			<p:outputLabel value="Benutzername: " />
+			<p:inputText id="name"
+				value="#{mainController.userController.user.name}" required="true"
+				requiredMessage="Bitte Pflichtfeld eingeben">
+				<f:validator validatorId="existsUsernameValidator"></f:validator>
+			</p:inputText>
+			<h:message for="name" showDetail="true" showSummary="false"
+				style="color:red;" />
+			<p:outputLabel value="Email: " />
+			<p:inputText id="email" type="email"
+				value="#{mainController.userController.email.name}" required="true"
+				requiredMessage="Bitte Pflichtfeld eingeben">
+				<f:validator validatorId="existsEmailValidator"></f:validator>
+			</p:inputText>
+
+			<h:message for="email" showDetail="true" showSummary="false"
+				style="color:red;" />
+
+			<p:outputLabel value="Passwort: " />
+			<p:password id="password"
+				value="#{mainController.userController.user.password}"
+				feedback="true" required="true"
+				requiredMessage="Bitte Pflichtfeld eingeben"
+				validatorMessage="Passwort ist zu klein, die länge muss mindestens 3 sein">
+				<f:validateLength minimum="3"></f:validateLength>
+			</p:password>
+			<h:message for="password" showDetail="true" showSummary="false"
+				style="color:red;" />
+
+
+		</h:panelGrid>
+		<div>
+			<p:commandButton id="commandButton" value="neuen Account erstellen"
+				action="#{mainController.userController.saveUserInDB()}"
+				ajax="false" />
+
+		<!-- 	<p:dialog modal="true" visible="true" header="Status">
+				<p:ajaxStatus>
+					<f:facet name="start">
+						<h:outputText value="Loading..." />
+					</f:facet>
+					<f:facet name="complete">
+						<h:outputText value="Completed" />
+					</f:facet>
+				</p:ajaxStatus>
+			</p:dialog> -->
+		</div>
+
+	</h:form>
+	<br />
+	<br />
+	<h:form styleClass="button-form">
+		<p:commandButton value="Zu Login" action="login" ajax="false" />
+	</h:form>
+
+
+
+</h:body>
+</html>

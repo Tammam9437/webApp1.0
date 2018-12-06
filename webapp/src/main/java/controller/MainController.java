@@ -3,8 +3,6 @@ package controller;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import org.hibernate.exception.spi.ViolatedConstraintNameExtracter;
-
 import view.FileUploadView;
 
 @ManagedBean
@@ -18,6 +16,7 @@ public class MainController {
 	private UploadController uploadController;
 	private ImageController imageController;
 	private SendEmailController sendEmailController;
+	private CategoryController categoryController;
 
 	public MainController() {
 		this.userController = new UserController(this);
@@ -28,6 +27,7 @@ public class MainController {
 		this.uploadController = new UploadController(this);
 		this.imageController = new ImageController(this);
 		this.sendEmailController = new SendEmailController(this);
+		this.categoryController = new CategoryController(this);
 	}
 	
 	public void closeAll(){
@@ -104,6 +104,14 @@ public class MainController {
 
 	public void setImageController(ImageController imageController) {
 		this.imageController = imageController;
+	}
+
+	public CategoryController getCategoryController() {
+		return categoryController;
+	}
+
+	public void setCategoryController(CategoryController categoryController) {
+		this.categoryController = categoryController;
 	}
 
 }
