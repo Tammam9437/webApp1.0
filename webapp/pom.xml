@@ -21,6 +21,14 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.3.7.Final</version>
 		</dependency>
+		<!-- faces servlet -->
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>javax.faces-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- support servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -67,7 +75,7 @@
 			<version>1.4</version>
 		</dependency>
 
-		<!-- font-awesome Primefaces-->
+		<!-- font-awesome Primefaces -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>font-awesome</artifactId>
@@ -93,5 +101,22 @@
 
 	<build>
 		<finalName>webapp</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat9-maven-plugin</artifactId>
+				<version>9</version>
+			</plugin>
+		</plugins>
+
 	</build>
 </project>
