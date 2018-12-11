@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import dbConnector.ConnectToLinkDB;
+import entity.Category;
 import entity.Li;
 import entity.Link;
 import entity.User;
@@ -40,10 +41,12 @@ public class LinkController {
 	public void addLink() {
 		Link add = new Link(link.getUrl(), link.getBeschreibung());
 		User user = mainController.getUserController().getUser();
+		Category category = mainController.getCategoryController().getCategory();
 		showAddLink = false;
 		showLinkForm = true;
 		user.getLinks().add(add);
 		add.setUser(user);
+		add.setCategory(category);
 		ConnectToLinkDB.saveLinkInDB(add);
 		link.setUrl("");
 		link.setBeschreibung("");

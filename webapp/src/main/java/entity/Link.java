@@ -37,11 +37,11 @@ public class Link implements Comparable<Link> {
 	@Column(name = "beschreibung")
 	private String beschreibung;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "iduser")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "category")
 	private Category category;
 
@@ -129,6 +129,14 @@ public class Link implements Comparable<Link> {
 	@Override
 	public String toString() {
 		return "Link [id=" + id + ", url=" + url + ", beschreibung=" + beschreibung + "]";
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public int compareTo(Link anotherLink) {

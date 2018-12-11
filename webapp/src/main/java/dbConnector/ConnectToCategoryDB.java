@@ -44,9 +44,6 @@ public class ConnectToCategoryDB {
 
 	}
 	
-//	public static int getCategoryIdFromDB(String name) {
-//		
-//	}
 
 	public static Category getCategoryFromDB(int idCategory) {
 		Session session = getInstance();

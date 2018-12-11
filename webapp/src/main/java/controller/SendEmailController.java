@@ -14,7 +14,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import dbConnector.ConnectToEmailDB;
-import dbConnector.ConnectToUserDB;
 import entity.Email;
 import entity.User;
 
