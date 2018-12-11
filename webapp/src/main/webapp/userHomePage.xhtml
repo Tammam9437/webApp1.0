@@ -98,7 +98,17 @@
 
 		<p:fileUpload value="#{mainController.fileUploadView.file}"
 			mode="simple" skinSimple="true" />
-
+		<br />
+		<p:outputLabel value="Kategorie:" for="dd" />
+		<p:autoComplete id="dd" dropdown="true"
+			value="#{mainController.categoryController.category}"
+			completeMethod="#{mainController.categoryController.completeCategory}"
+			var="category" itemLabel="#{category.name}" itemValue="#{category}"
+			converter="categoryConverter" forceSelection="true" required="true"
+			requiredMessage="Geben sie bitte einen kategorie ein" />
+		<h:message for="dd" showDetail="true" showSummary="false"
+			style="color:red;" />
+		<br />
 		<p:commandButton value="Submit" ajax="false"
 			actionListener="#{mainController.fileUploadView.upload}"
 			disabled="false" />
@@ -146,6 +156,16 @@
 				required="true"
 				requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
 			<h:message for="beschreibung" showDetail="true" showSummary="false"
+				style="color:red;" />
+
+			<p:outputLabel value="Kategorie:" for="dd" />
+			<p:autoComplete id="dd" dropdown="true"
+				value="#{mainController.categoryController.category}"
+				completeMethod="#{mainController.categoryController.completeCategory}"
+				var="category" itemLabel="#{category.name}" itemValue="#{category}"
+				converter="categoryConverter" forceSelection="true" required="true"
+				requiredMessage="Geben sie bitte einen kategorie ein" />
+			<h:message for="dd" showDetail="true" showSummary="false"
 				style="color:red;" />
 
 			<p:commandButton value="add Youtube Video"

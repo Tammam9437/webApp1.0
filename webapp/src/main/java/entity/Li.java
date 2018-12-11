@@ -23,11 +23,11 @@ public class Li {
 	@Column(name = "idlike")
 	private int id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "idlink")
 	private Link link;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
 	

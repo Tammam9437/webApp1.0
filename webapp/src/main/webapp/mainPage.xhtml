@@ -38,7 +38,21 @@
 
 	</div>
 
+	<h:form>
 
+		<br />
+		<p:outputLabel value="Kategorie:" for="dd" />
+		<p:autoComplete id="dd" dropdown="true"
+			value="#{mainController.categoryController.category}"
+			completeMethod="#{mainController.categoryController.completeCategory}"
+			var="category" itemLabel="#{category.name}" itemValue="#{category}"
+			converter="categoryConverter" forceSelection="true" required="true"
+			requiredMessage="Geben sie bitte einen kategorie ein" />
+		<h:message for="dd" showDetail="true" showSummary="false"
+			style="color:red;" />
+		<br />
+
+	</h:form>
 	<!-- Links -->
 	<p:dataTable styleClass="data-table" var="link"
 		value="#{mainController.linkController.link.linksFromDB}"
@@ -90,14 +104,13 @@
 	<h:form rendered="#{mainController.videoController.showYoutubeVideos}">
 		<h2>Youtube Videos</h2>
 		<p:accordionPanel dynamic="true" cache="true" multiple="true"
-			value="#{mainController.videoController.youtubeLinks}"
-			var="video">
+			value="#{mainController.videoController.youtubeLinks}" var="video">
 			<p:tab title="#{video.beschreibung}">
 				<iframe width="420" height="345" src="#{video.url}"> </iframe>
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>
-	
+
 	<!-- Show Pdfs -->
 	<h:form rendered="#{mainController.uploadController.showUpload}">
 		<h2>Pdfs</h2>
@@ -105,9 +118,9 @@
 			value="#{mainController.uploadController.allPdfsFromDB}" var="pdf">
 			<p:tab title="name">
 				<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
-					player="pdf" >
+					player="pdf">
 					<f:param name="pdfId" value="#{pdf.idPdf}" />
-					</p:media>
+				</p:media>
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>

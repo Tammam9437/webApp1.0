@@ -59,6 +59,13 @@ public class ConnectToCategoryDB {
 		}
 		return category;
 	}
+	
+	public static Category getCategoryByName(String name) {
+		
+		List<Category> list = ConnectToCategoryDB.queryCategory("From Category WHERE name ='" + name + "'");
+		Category category = list.get(list.size() - 1);
+		return category;
+	}
 
 	@SuppressWarnings("unchecked")
 	public static List<Category> queryCategory(String query) {

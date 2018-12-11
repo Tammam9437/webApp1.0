@@ -33,16 +33,16 @@ public class Pdf {
 	@Column(name = "file")
 	private byte [] file;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "category")
 	private Category category;
 	
 	public Pdf() {
-		name = "";
+		name = " ";
 	}
 	
 	public void saveInDB() {
@@ -85,6 +85,14 @@ public class Pdf {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override

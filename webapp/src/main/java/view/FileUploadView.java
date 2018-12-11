@@ -55,6 +55,7 @@ public class FileUploadView {
 				image = new Image();
 				image.setFile(file.getContents());
 				image.setUser(mainController.getUserController().getUser());
+				image.setCategory(mainController.getCategoryController().getCategory());
 				image.saveInDB();
 				allBooleanValueFalse();
 				imageFile = true;
@@ -66,6 +67,7 @@ public class FileUploadView {
 				pdf = new Pdf();
 				pdf.setFile(file.getContents());
 				pdf.setUser(mainController.getUserController().getUser());
+				pdf.setCategory(mainController.getCategoryController().getCategory());
 				pdf.saveInDB();
 				allBooleanValueFalse();
 				pdfFile = true;

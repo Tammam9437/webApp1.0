@@ -37,11 +37,11 @@ public class Link implements Comparable<Link> {
 	@Column(name = "beschreibung")
 	private String beschreibung;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "category")
 	private Category category;
 

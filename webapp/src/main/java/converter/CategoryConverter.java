@@ -7,6 +7,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
+import dbConnector.ConnectToCategoryDB;
 import entity.Category;
 
 
@@ -17,8 +18,7 @@ public class CategoryConverter implements Converter {
         if(value != null && value.trim().length() > 0) {
             try {
             	
-            	Category category = new Category();
-            	category.setName(value);
+            	Category category = ConnectToCategoryDB.getCategoryByName(value);
             	return category;
 
             } catch(NumberFormatException e) {

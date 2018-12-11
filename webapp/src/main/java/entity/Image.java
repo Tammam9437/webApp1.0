@@ -30,7 +30,7 @@ public class Image {
 	@Column(name = "file")
 	private byte [] file;
 		
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
 	
@@ -74,6 +74,14 @@ public class Image {
 
 	public int getIdImage() {
 		return idImage;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override
