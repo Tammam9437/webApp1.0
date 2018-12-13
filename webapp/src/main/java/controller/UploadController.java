@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import dbConnector.ConnectToCategoryDB;
+import dbConnector.ConnectToLinkDB;
 import dbConnector.ConnectToPdfDB;
 import entity.Category;
 import entity.Pdf;
@@ -18,13 +19,25 @@ public class UploadController {
 	private MainController mainController;
 
 	private boolean showUpload;
+	
+	private boolean showPdfs;
 
 	public UploadController(MainController mainController) {
 		this.mainController = mainController;
 
 		this.showUpload = false;
+		this.showPdfs = false;
 	}
 
+	public void showPdfsToggel() {
+		if (showPdfs) {
+			showPdfs = false;
+		} else {
+			mainController.closeAll();
+			showPdfs = true;
+		}
+	}
+	
 	public void showUploadToggel() {
 		if (showUpload) {
 			showUpload = false;
@@ -32,6 +45,10 @@ public class UploadController {
 			mainController.closeAll();
 			showUpload = true;
 		}
+	}
+	
+	public void deletePdf(int pdfId) {
+		ConnectToPdfDB.deletePdfFromDB(pdfId);
 	}
 	
 	public List<Pdf> getPdfsInCategory() {
@@ -48,6 +65,26 @@ public class UploadController {
 			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf");
 		}else {
 			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE category = "+ categoryId );
+		}
+		java.util.Collections.sort(filteredList);
+		return filteredList;
+	}
+	
+	public List<Pdf> getUserPdfsInCategory() {
+		String currentCategory = mainController.getFilterController().getCurrentCategory();
+		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
+		int userId = mainController.getUserController().getUser().getId();
+		int categoryId = -1;
+		ArrayList<Pdf> filteredList;
+		for(Category category : categoryList) {
+			if(category.getName().equalsIgnoreCase(currentCategory)) {
+				categoryId = category.getIdCategory();
+			}
+		}
+		if(categoryId < 0) {
+			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE iduser = "+ userId);
+		}else {
+			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE category = "+ categoryId + " AND iduser = "+ userId );
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
@@ -72,6 +109,14 @@ public class UploadController {
 
 	public void setShowUpload(boolean showUpload) {
 		this.showUpload = showUpload;
+	}
+
+	public boolean isShowPdfs() {
+		return showPdfs;
+	}
+
+	public void setShowPdfs(boolean showPdfs) {
+		this.showPdfs = showPdfs;
 	}
 
 }

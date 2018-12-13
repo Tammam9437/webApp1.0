@@ -61,6 +61,9 @@ public class LinkController {
 				.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE != 'YoutubeLink'");
 		return list;
 	}
+	public void deleteLink(int linkId) {
+		ConnectToLinkDB.deleteLinkFromDB(linkId);
+	}
 
 	public List<Link> getLinksInCategory() {
 		String currentCategory = mainController.getFilterController().getCurrentCategory();

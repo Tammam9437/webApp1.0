@@ -52,6 +52,36 @@ public class ConnectToLinkDB {
 		}
 		return theLinks;
 	}
+	
+	public static Link getLinkFromDB(int linkId) {
+		Session session = getInstance();
+		Link link;
+		try {
+			session.beginTransaction();
+
+			link = session.get(Link.class, linkId);
+
+			session.getTransaction().commit();
+		} finally {
+			getInstance().close();
+		}
+		return link;
+	}
+	
+	public static void deleteLinkFromDB(int linkId) {
+		Session session = getInstance();
+		try {
+			session.beginTransaction();
+			
+			session.createQuery("delete from Link where id= " + linkId).executeUpdate();
+			
+			session.getTransaction().commit();
+			
+		}finally {
+			getInstance().close();
+		}
+	}
+	
 
 	public static void saveLinkInDB(Link link) {
 		Session session = getInstance();

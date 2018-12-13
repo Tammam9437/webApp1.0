@@ -41,6 +41,7 @@ public class MainController {
 		uploadController.setShowUpload(false);
 		videoController.setShowAddYoutubeVideo(false);
 		videoController.setShowYoutubeVideos(false);
+		uploadController.setShowPdfs(false);
 	}
 	
 

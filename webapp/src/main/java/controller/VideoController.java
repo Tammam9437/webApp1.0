@@ -16,23 +16,22 @@ import entity.YoutubeLink;
 @ManagedBean
 @SessionScoped
 public class VideoController {
-	
+
 	private MainController mainController;
-	
+
 	private YoutubeLink youtubeLink;
-	
+
 	private boolean showAddYoutubeVideo;
-	
+
 	private boolean showYoutubeVideos;
-	
-	
+
 	public VideoController(MainController mainController) {
 		this.mainController = mainController;
 		this.youtubeLink = new YoutubeLink();
 		this.showYoutubeVideos = false;
 		this.showAddYoutubeVideo = false;
 	}
-	
+
 	public void showYoutubeVideosToggel() {
 		if (showYoutubeVideos) {
 			showYoutubeVideos = false;
@@ -41,7 +40,7 @@ public class VideoController {
 			showYoutubeVideos = true;
 		}
 	}
-	
+
 	public void showAddYoutubeVideoToggel() {
 		if (showAddYoutubeVideo) {
 			showAddYoutubeVideo = false;
@@ -50,7 +49,7 @@ public class VideoController {
 			showAddYoutubeVideo = true;
 		}
 	}
-	
+
 	public void addYoutubeVideo() {
 		YoutubeLink add = new YoutubeLink(youtubeLink.getUrl(), youtubeLink.getBeschreibung());
 		User user = mainController.getUserController().getUser();
@@ -65,33 +64,40 @@ public class VideoController {
 		youtubeLink.setBeschreibung("");
 		add.setUser(null);
 	}
-	
+
 	public List<Link> getUserYoutubeLinks() {
 		User user = mainController.getUserController().getUser();
-		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'"+" AND DTYPE = 'YoutubeLink'");
+		List<Link> list = ConnectToLinkDB
+				.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE = 'YoutubeLink'");
 		return list;
 	}
-	
+
 	public List<Link> getVideosInCategory() {
 		String currentCategory = mainController.getFilterController().getCurrentCategory();
 		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
 		int categoryId = -1;
 		ArrayList<Link> filteredList;
-		for(Category category : categoryList) {
-			if(category.getName().equalsIgnoreCase(currentCategory)) {
+		for (Category category : categoryList) {
+			if (category.getName().equalsIgnoreCase(currentCategory)) {
 				categoryId = category.getIdCategory();
 			}
 		}
 		if (categoryId < 0) {
 			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink'");
-		}else {
-			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink' AND category =" + categoryId );
+		} else {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB
+					.queryLink("From Link WHERE DTYPE = 'YoutubeLink' AND category =" + categoryId);
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
 	}
-	
-	public List<Link> getYoutubeLinks(){
+
+	public void deleteVedio(int videoId) {
+		ConnectToLinkDB.deleteLinkFromDB(videoId);
+	}
+
+
+	public List<Link> getYoutubeLinks() {
 		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink'");
 		return list;
 	}
@@ -125,7 +131,7 @@ public class VideoController {
 	}
 
 	public void setShowAddYoutubeVideo(boolean showAddYoutubeVideo) {
-		this.showAddYoutubeVideo= showAddYoutubeVideo;
+		this.showAddYoutubeVideo = showAddYoutubeVideo;
 	}
 
 	public boolean isShowAddYoutubeVideo() {

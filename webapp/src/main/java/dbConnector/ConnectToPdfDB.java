@@ -43,6 +43,20 @@ public class ConnectToPdfDB {
 		}
 
 	}
+	
+	public static void deletePdfFromDB(int pdfId) {
+		Session session = getInstance();
+		try {
+			session.beginTransaction();
+			
+			session.createQuery("delete from Pdf where id= " + pdfId).executeUpdate();
+			
+			session.getTransaction().commit();
+			
+		}finally {
+			getInstance().close();
+		}
+	}
 
 	public static Pdf getPdfFromDB(int idPdf) {
 		Session session = getInstance();
