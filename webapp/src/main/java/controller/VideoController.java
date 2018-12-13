@@ -1,11 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import dbConnector.ConnectToCategoryDB;
 import dbConnector.ConnectToLinkDB;
+import entity.Category;
 import entity.Link;
 import entity.User;
 import entity.YoutubeLink;
@@ -51,10 +54,12 @@ public class VideoController {
 	public void addYoutubeVideo() {
 		YoutubeLink add = new YoutubeLink(youtubeLink.getUrl(), youtubeLink.getBeschreibung());
 		User user = mainController.getUserController().getUser();
+		Category category = mainController.getCategoryController().getCategory();
 		showAddYoutubeVideo = false;
 		showYoutubeVideos = true;
 		user.getLinks().add(add);
 		add.setUser(user);
+		add.setCategory(category);
 		ConnectToLinkDB.saveLinkInDB(add);
 		youtubeLink.setUrl("");
 		youtubeLink.setBeschreibung("");
@@ -65,6 +70,25 @@ public class VideoController {
 		User user = mainController.getUserController().getUser();
 		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'"+" AND DTYPE = 'YoutubeLink'");
 		return list;
+	}
+	
+	public List<Link> getVideosInCategory() {
+		String currentCategory = mainController.getFilterController().getCurrentCategory();
+		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
+		int categoryId = -1;
+		ArrayList<Link> filteredList;
+		for(Category category : categoryList) {
+			if(category.getName().equalsIgnoreCase(currentCategory)) {
+				categoryId = category.getIdCategory();
+			}
+		}
+		if (categoryId < 0) {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink'");
+		}else {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink' AND category =" + categoryId );
+		}
+		java.util.Collections.sort(filteredList);
+		return filteredList;
 	}
 	
 	public List<Link> getYoutubeLinks(){

@@ -1,11 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import dbConnector.ConnectToCategoryDB;
 import dbConnector.ConnectToPdfDB;
+import entity.Category;
 import entity.Pdf;
 
 @ManagedBean
@@ -29,6 +32,25 @@ public class UploadController {
 			mainController.closeAll();
 			showUpload = true;
 		}
+	}
+	
+	public List<Pdf> getPdfsInCategory() {
+		String currentCategory = mainController.getFilterController().getCurrentCategory();
+		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
+		int categoryId = -1;
+		ArrayList<Pdf> filteredList;
+		for(Category category : categoryList) {
+			if(category.getName().equalsIgnoreCase(currentCategory)) {
+				categoryId = category.getIdCategory();
+			}
+		}
+		if(categoryId < 0) {
+			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf");
+		}else {
+			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE category = "+ categoryId );
+		}
+		java.util.Collections.sort(filteredList);
+		return filteredList;
 	}
 
 	public List<Pdf> getAllPdfsFromDB() {

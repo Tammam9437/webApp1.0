@@ -1,10 +1,12 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import dbConnector.ConnectToCategoryDB;
 import dbConnector.ConnectToLinkDB;
 import entity.Category;
 import entity.Li;
@@ -55,10 +57,29 @@ public class LinkController {
 
 	public List<Link> getUserLinks() {
 		User user = mainController.getUserController().getUser();
-		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'"+" AND DTYPE != 'YoutubeLink'");
+		List<Link> list = ConnectToLinkDB
+				.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE != 'YoutubeLink'");
 		return list;
 	}
-	
+
+	public List<Link> getLinksInCategory() {
+		String currentCategory = mainController.getFilterController().getCurrentCategory();
+		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
+		int categoryId = -1;
+		ArrayList<Link> filteredList;
+		for(Category category : categoryList) {
+			if(category.getName().equalsIgnoreCase(currentCategory)) {
+				categoryId = category.getIdCategory();
+			}
+		}
+		if(categoryId < 0) {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' ");
+		}else {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' AND category = "+ categoryId );
+		}
+		java.util.Collections.sort(filteredList);
+		return filteredList;
+	}
 
 	public void showAddLinkToggel() {
 		if (showAddLink) {
@@ -68,6 +89,7 @@ public class LinkController {
 			showAddLink = true;
 		}
 	}
+
 	public void showFavouriteLinksToggel() {
 		if (showFavouriteLinks) {
 			showFavouriteLinks = false;
@@ -76,7 +98,7 @@ public class LinkController {
 			showFavouriteLinks = true;
 		}
 	}
-	
+
 	public void saveLike() {
 		Li like = new Li();
 		like.saveInDB();

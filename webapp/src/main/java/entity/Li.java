@@ -1,7 +1,6 @@
 package entity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +30,15 @@ public class Li {
 	@JoinColumn(name = "iduser")
 	private User user;
 	
+	@ManyToOne
+	@JoinColumn(name = "idImage")
+	private Image image;
+	
+	@ManyToOne
+	@JoinColumn(name = "idPdf")
+	private Pdf pdf;
+	
+	
 	public Li() {
 		
 	}
@@ -58,6 +66,22 @@ public class Li {
 
 	public int getId() {
 		return id;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	public Pdf getPdf() {
+		return pdf;
+	}
+
+	public void setPdf(Pdf pdf) {
+		this.pdf = pdf;
 	}
 
 }

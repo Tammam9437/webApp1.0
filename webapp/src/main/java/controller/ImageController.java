@@ -1,11 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import dbConnector.ConnectToCategoryDB;
 import dbConnector.ConnectToImageDB;
+import entity.Category;
 import entity.Image;
 import entity.User;
 
@@ -51,6 +54,25 @@ public class ImageController {
 			mainController.closeAll();
 			showUserImages = true;
 		}
+	}
+	
+	public List<Image> getImagesInCategory() {
+		String currentCategory = mainController.getFilterController().getCurrentCategory();
+		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
+		int categoryId = -1;
+		ArrayList<Image> filteredList;
+		for(Category category : categoryList) {
+			if(category.getName().equalsIgnoreCase(currentCategory)) {
+				categoryId = category.getIdCategory();
+			}
+		}
+		if(categoryId < 0) {
+			filteredList = (ArrayList<Image>) ConnectToImageDB.queryImage("From Image");
+		}else {
+			filteredList = (ArrayList<Image>) ConnectToImageDB.queryImage("From Image WHERE category = "+ categoryId );
+		}
+		java.util.Collections.sort(filteredList);
+		return filteredList;
 	}
 
 	public MainController getMainController() {

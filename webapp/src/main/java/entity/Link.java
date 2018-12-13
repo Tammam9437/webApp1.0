@@ -138,7 +138,7 @@ public class Link implements Comparable<Link> {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
+	@Override
 	public int compareTo(Link anotherLink) {
 		return anotherLink.getLikes().size() - this.likes.size();
 	}
