@@ -3,11 +3,12 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import dbConnector.ConnectToCategoryDB;
-import dbConnector.ConnectToLinkDB;
 import dbConnector.ConnectToPdfDB;
 import entity.Category;
 import entity.Pdf;
@@ -49,7 +50,13 @@ public class UploadController {
 	
 	public void deletePdf(int pdfId) {
 		ConnectToPdfDB.deletePdfFromDB(pdfId);
+		addMessage("Delete Pdf","Pdf has been deleted."); 
 	}
+	
+	public void addMessage(String summary, String detail) {  
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);  
+		FacesContext.getCurrentInstance().addMessage(null, message);  
+		}  
 	
 	public List<Pdf> getPdfsInCategory() {
 		String currentCategory = mainController.getFilterController().getCurrentCategory();

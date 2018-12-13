@@ -225,7 +225,8 @@
 	</h:form>
 
 	<!-- Show Pdfs -->
-	<h:form rendered="#{mainController.uploadController.showPdfs}">
+	<h:form id="pdfForm"
+		rendered="#{mainController.uploadController.showPdfs}">
 		<h2>Pdfs</h2>
 
 		<!-- Filter -->
@@ -242,15 +243,28 @@
 		<br />
 
 		<p:accordionPanel dynamic="true" cache="true" multiple="true"
-			value="#{mainController.uploadController.userPdfsInCategory}" var="pdf">
+			value="#{mainController.uploadController.userPdfsInCategory}"
+			var="pdf">
 			<p:tab title="name">
 				<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
 					player="pdf">
 					<f:param name="pdfId" value="#{pdf.idPdf}" />
 				</p:media>
-					<p:commandButton value="löschen"
+				<!-- Delete -->
+				<p:growl id="message" showDetail="true" />
+				<p:commandButton value="löschen"
 					actionListener="#{mainController.uploadController.deletePdf(pdf.idPdf)}"
-					ajax="false"></p:commandButton>
+					update="pdfForm">
+					<p:confirm header="Confirmation" message="Are you sure?"
+						icon="fa fa-exclamation-triangle" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Yes" type="button"
+						styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+				</p:confirmDialog>
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>
