@@ -70,15 +70,11 @@
 				<h:outputText value="#{link.likesNumber}" />
 			</p:column>
 			<p:column styleClass="likeButon">
-
-				<h:form>
 					<p:commandButton ajax="false"
 						disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
 						action="#{link.addLike(mainController.userController.user)}"
-						value="Like">
+						icon="fa fa-thumbs-o-up">
 					</p:commandButton>
-				</h:form>
-
 			</p:column>
 
 
