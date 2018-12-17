@@ -20,6 +20,7 @@ public class FileUploadView {
 	private UploadedFile file;
 	private Image image;
 	private Pdf pdf;
+	private String fileName;
 	private boolean imageFile;
 	private boolean pdfFile;
 
@@ -56,6 +57,7 @@ public class FileUploadView {
 				image.setFile(file.getContents());
 				image.setUser(mainController.getUserController().getUser());
 				image.setCategory(mainController.getCategoryController().getCategory());
+				image.setName(fileName);
 				image.saveInDB();
 				allBooleanValueFalse();
 				imageFile = true;
@@ -68,6 +70,7 @@ public class FileUploadView {
 				pdf.setFile(file.getContents());
 				pdf.setUser(mainController.getUserController().getUser());
 				pdf.setCategory(mainController.getCategoryController().getCategory());
+				pdf.setName(fileName);
 				pdf.saveInDB();
 				allBooleanValueFalse();
 				pdfFile = true;
@@ -91,6 +94,14 @@ public class FileUploadView {
 
 	public void setPdfFile(boolean pdfFile) {
 		this.pdfFile = pdfFile;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }

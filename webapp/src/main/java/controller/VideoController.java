@@ -93,6 +93,7 @@ public class VideoController {
 	}
 
 	public void deleteVedio(int videoId) {
+		System.out.println("Deleting Video");
 		ConnectToLinkDB.deleteLinkFromDB(videoId);
 	}
 

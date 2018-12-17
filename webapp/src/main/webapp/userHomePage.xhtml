@@ -101,6 +101,12 @@
 
 		<p:fileUpload value="#{mainController.fileUploadView.file}"
 			mode="simple" skinSimple="true" />
+
+		<p:outputLabel value="Name : " for="name"/>
+		<p:inputText id="name"
+			value="#{mainController.fileUploadView.fileName}"
+			required="true"
+			requiredMessage="geben Sie Bitte einen Namen ein" />
 		<br />
 		<p:outputLabel value="Kategorie:" for="dd" />
 		<p:autoComplete id="dd" dropdown="true"
@@ -131,15 +137,28 @@
 
 	<!-- Links -->
 
-	<h:form rendered="#{mainController.linkController.showLinkForm}">
+	<h:form id="linkForm"
+		rendered="#{mainController.linkController.showLinkForm}">
 		<h2>Links</h2>
 		<ul>
 			<ui:repeat value="#{mainController.linkController.userLinks}"
 				var="link">
 				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
+
+				<p:growl id="message" showDetail="true" />
 				<p:commandButton value="löschen"
 					actionListener="#{mainController.linkController.deleteLink(link.id)}"
-					ajax="false"></p:commandButton>
+					update="linkForm">
+					<p:confirm header="Confirmation" message="Are you sure?"
+						icon="fa fa-exclamation-triangle" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Yes" type="button"
+						styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+				</p:confirmDialog>
 			</ui:repeat>
 		</ul>
 
@@ -182,7 +201,8 @@
 	<br />
 
 	<!-- Youtube vedios -->
-	<h:form rendered="#{mainController.videoController.showYoutubeVideos}">
+	<h:form id="videoForm"
+		rendered="#{mainController.videoController.showYoutubeVideos}">
 		<h2>Dein Youtube Videos</h2>
 		<p:accordionPanel dynamic="true" cache="true" multiple="true"
 			value="#{mainController.videoController.userYoutubeLinks}"
@@ -190,9 +210,20 @@
 			<p:tab title="#{video.beschreibung}">
 				<iframe width="420" height="345" src="#{video.url}"> </iframe>
 				<!-- Delete -->
+				<p:growl id="message" showDetail="true" />
 				<p:commandButton value="löschen"
 					actionListener="#{mainController.videoController.deleteVedio(video.id)}"
-					ajax="false"></p:commandButton>
+					update="videoForm">
+					<p:confirm header="Confirmation" message="Are you sure?"
+						icon="fa fa-exclamation-triangle" />
+				</p:commandButton>
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Yes" type="button"
+						styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+				</p:confirmDialog>
 			</p:tab>
 		</p:accordionPanel>
 
@@ -245,7 +276,7 @@
 		<p:accordionPanel dynamic="true" cache="true" multiple="true"
 			value="#{mainController.uploadController.userPdfsInCategory}"
 			var="pdf">
-			<p:tab title="name">
+			<p:tab title="#{pdf.name}">
 				<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
 					player="pdf">
 					<f:param name="pdfId" value="#{pdf.idPdf}" />
@@ -268,7 +299,6 @@
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>
-
 
 </h:body>
 

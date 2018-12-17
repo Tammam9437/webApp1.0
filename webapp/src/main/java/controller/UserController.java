@@ -30,8 +30,8 @@ public class UserController {
 		email.setUser(user);
 		user.setEmail(email);
 		ConnectToUserDB.saveUserInDB(user);
-		user = null;
-		email = null;
+		user = new User();
+		email = new Email();
 		return "login";
 	}
 	

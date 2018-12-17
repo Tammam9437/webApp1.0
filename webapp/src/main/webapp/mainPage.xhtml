@@ -155,7 +155,7 @@
 
 		<p:accordionPanel dynamic="true" cache="true" multiple="true"
 			value="#{mainController.uploadController.pdfsInCategory}" var="pdf">
-			<p:tab title="name">
+			<p:tab title="#{pdf.name}">
 				<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
 					player="pdf">
 					<f:param name="pdfId" value="#{pdf.idPdf}" />

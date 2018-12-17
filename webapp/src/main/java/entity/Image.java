@@ -31,6 +31,9 @@ public class Image implements Comparable<Image>{
 	
 	@Column(name = "file")
 	private byte [] file;
+	
+	@Column(name = "name")
+	private String name;
 		
 	@ManyToOne
 	@JoinColumn(name = "iduser")
@@ -99,6 +102,14 @@ public class Image implements Comparable<Image>{
 	@Override
 	public int compareTo(Image anotherImage) {
 		return anotherImage.getLikes().size() - this.likes.size();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
