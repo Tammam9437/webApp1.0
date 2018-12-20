@@ -99,14 +99,21 @@
 		rendered="#{mainController.uploadController.showUpload}">
 		<p:growl id="messages" showDetail="true" />
 
-		<p:fileUpload value="#{mainController.fileUploadView.file}"
-			mode="simple" skinSimple="true" />
-
+		<p:fileUpload id="fileUpload" value="#{mainController.fileUploadView.file}" skinSimple="true"
+			mode="simple" dragDropSupport="false" accept=".pdf, .jpeg, .png" 
+                  update="messages" sizeLimit="4194304" fileLimit="1" allowTypes="/(pdf)|((\.|\/)(gif|jpe?g|png))$/" validator="fileUploadValidator" />
+                  
+         <h:message for="fileUpload" showDetail="true" showSummary="false"
+			style="color:red;" />         
+		<br/>
+		
 		<p:outputLabel value="Name : " for="name"/>
 		<p:inputText id="name"
 			value="#{mainController.fileUploadView.fileName}"
 			required="true"
 			requiredMessage="geben Sie Bitte einen Namen ein" />
+		<h:message for="name" showDetail="true" showSummary="false"
+			style="color:red;" /> 	
 		<br />
 		<p:outputLabel value="Kategorie:" for="dd" />
 		<p:autoComplete id="dd" dropdown="true"

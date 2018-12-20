@@ -65,7 +65,7 @@ public class FileUploadView {
 				FacesContext.getCurrentInstance().addMessage(null, message);
 
 			}
-			if (file.getContentType().equals("application/pdf")) {
+			if (fileType.equals("application/pdf")) {
 				pdf = new Pdf();
 				pdf.setFile(file.getContents());
 				pdf.setUser(mainController.getUserController().getUser());
