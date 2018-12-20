@@ -92,7 +92,8 @@ public class User {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		// die eingabe von Space Ignorieren
+		this.name = name.replaceAll("\\s+","");
 	}
 
 	public void setPassword(String password) {
