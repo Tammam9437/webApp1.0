@@ -69,7 +69,7 @@ public class ImageController {
 		if(categoryId < 0) {
 			filteredList = (ArrayList<Image>) ConnectToImageDB.queryImage("From Image");
 		}else {
-			filteredList = (ArrayList<Image>) ConnectToImageDB.queryImage("From Image WHERE category = "+ categoryId );
+			filteredList = (ArrayList<Image>) ConnectToImageDB.queryImage("From Image WHERE idcategory = "+ categoryId );
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;

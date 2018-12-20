@@ -86,7 +86,7 @@ public class VideoController {
 			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink'");
 		} else {
 			filteredList = (ArrayList<Link>) ConnectToLinkDB
-					.queryLink("From Link WHERE DTYPE = 'YoutubeLink' AND category =" + categoryId);
+					.queryLink("From Link WHERE DTYPE = 'YoutubeLink' AND idcategory =" + categoryId);
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;

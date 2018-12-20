@@ -78,7 +78,7 @@ public class LinkController {
 		if(categoryId < 0) {
 			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' ");
 		}else {
-			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' AND category = "+ categoryId );
+			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' AND idcategory = "+ categoryId );
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;

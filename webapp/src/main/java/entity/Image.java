@@ -40,7 +40,7 @@ public class Image implements Comparable<Image>{
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "category")
+	@JoinColumn(name = "idcategory")
 	private Category category;
 	
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "image", cascade = CascadeType.ALL)

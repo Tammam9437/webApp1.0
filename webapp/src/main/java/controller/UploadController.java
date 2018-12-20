@@ -71,7 +71,7 @@ public class UploadController {
 		if(categoryId < 0) {
 			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf");
 		}else {
-			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE category = "+ categoryId );
+			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE idcategory = "+ categoryId );
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
@@ -91,7 +91,7 @@ public class UploadController {
 		if(categoryId < 0) {
 			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE iduser = "+ userId);
 		}else {
-			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE category = "+ categoryId + " AND iduser = "+ userId );
+			filteredList = (ArrayList<Pdf>) ConnectToPdfDB.queryPdf("From Pdf WHERE idcategory = "+ categoryId + " AND iduser = "+ userId );
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
