@@ -18,6 +18,10 @@
 	<!-- Buttons -->
 	<div class="topnav">
 		<h:form>
+		<!-- Abmelden -->
+		<p:commandButton styleClass="topnav-link" icon="fa fa-power-off" 
+				action="#{mainController.userController.logOut()}"
+				ajax="false"></p:commandButton>
 			<!-- Navigation -->
 			<p:commandLink styleClass="topnav-link" value="zu Main Page"
 				action="mainPage" />
@@ -101,7 +105,7 @@
 
 		<p:fileUpload id="fileUpload" value="#{mainController.fileUploadView.file}" skinSimple="true"
 			mode="simple" dragDropSupport="false" accept=".pdf, .jpeg, .png" 
-                  update="messages" sizeLimit="4194304" fileLimit="1" allowTypes="/(pdf)|((\.|\/)(gif|jpe?g|png))$/" validator="fileUploadValidator" />
+                  update="messages" sizeLimit="4194304" fileLimit="1" allowTypes="/(pdf)|((\.|\/)(gif|jpe?g|png))$/" validator="fileUploadValidator" fileLimitMessage="Der Datei muss kleiner als 4 MB  "/>
                   
          <h:message for="fileUpload" showDetail="true" showSummary="false"
 			style="color:red;" />         

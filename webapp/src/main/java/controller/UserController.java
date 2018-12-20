@@ -54,6 +54,12 @@ public class UserController {
 		user.setId(identicalUsers.get(0).getId());
 		return true;
 	}
+	
+	public String logOut() {
+		this.user = new User();
+		this.email = new Email();
+		return "login";
+	}
 
 	public List<Li> favoritesLinks() {
 		List<Li> likes = ConnectToLikeDB.getUserLikes(user);
