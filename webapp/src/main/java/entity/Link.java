@@ -45,7 +45,7 @@ public class Link implements Comparable<Link> {
 	@JoinColumn(name = "idcategory")
 	private Category category;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "link", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "link", cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Li> likes = new ArrayList<Li>();
 
 	public int getId() {

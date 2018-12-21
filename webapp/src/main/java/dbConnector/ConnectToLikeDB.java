@@ -44,7 +44,58 @@ public class ConnectToLikeDB {
 
 	}
 
-	public static Li getPdfFromDB(int idlike) {
+	public static void deleteLikeFromDB(int likeId) {
+		Session session = getInstance();
+		try {
+			session.beginTransaction();
+
+			session.createQuery("delete from Li where id= " + likeId).executeUpdate();
+
+			session.getTransaction().commit();
+
+		} finally {
+			getInstance().close();
+		}
+	}
+	
+	public static void queryDeleteLikeFromDB(String query) {
+		Session session = getInstance();
+		try {
+			session.beginTransaction();
+
+			session.createQuery(query).executeUpdate();
+
+			session.getTransaction().commit();
+
+		} finally {
+			getInstance().close();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Li> queryLike(String query) {
+	
+		Session session = getInstance();
+		List<Li> theLikes;
+	
+		try {
+	
+			// start a transaction
+			session.beginTransaction();
+	
+			// query students
+			theLikes = session.createQuery(query).list();
+	
+			// commit transaction
+			session.getTransaction().commit();
+	
+		} finally {
+			getInstance().close();
+		}
+		return theLikes;
+	}
+
+	public static Li getLikeFromDB(int idlike) {
 		Session session = getInstance();
 		Li like;
 		try {
@@ -73,29 +124,6 @@ public class ConnectToLikeDB {
 		List<Li> userLinkLikes = queryLike(
 				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idlink ='" + link.getId() + "'");
 		return userLinkLikes;
-	}
-
-	@SuppressWarnings("unchecked")
-	public static List<Li> queryLike(String query) {
-
-		Session session = getInstance();
-		List<Li> theLikes;
-
-		try {
-
-			// start a transaction
-			session.beginTransaction();
-
-			// query students
-			theLikes = session.createQuery(query).list();
-
-			// commit transaction
-			session.getTransaction().commit();
-
-		} finally {
-			getInstance().close();
-		}
-		return theLikes;
 	}
 
 	public static void displayLikes(List<Li> theLikes) {

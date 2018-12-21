@@ -101,7 +101,7 @@
 
 	<h:form enctype="multipart/form-data"
 		rendered="#{mainController.uploadController.showUpload}">
-		<p:growl id="messages" showDetail="true" />
+		<p:growl id="messages" showDetail="false" />
 
 		<p:fileUpload id="fileUpload" value="#{mainController.fileUploadView.file}" skinSimple="true"
 			mode="simple" dragDropSupport="false" accept=".pdf, .jpeg, .png" 

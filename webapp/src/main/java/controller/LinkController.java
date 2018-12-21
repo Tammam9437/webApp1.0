@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import dbConnector.ConnectToCategoryDB;
+import dbConnector.ConnectToLikeDB;
 import dbConnector.ConnectToLinkDB;
 import entity.Category;
 import entity.Li;
@@ -62,6 +63,8 @@ public class LinkController {
 		return list;
 	}
 	public void deleteLink(int linkId) {
+		ConnectToLikeDB.queryDeleteLikeFromDB("delete from Li where idlink= " + linkId);
+		System.out.println(linkId);
 		ConnectToLinkDB.deleteLinkFromDB(linkId);
 	}
 
