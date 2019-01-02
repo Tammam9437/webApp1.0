@@ -55,12 +55,25 @@ public class LinkController {
 		link.setBeschreibung("");
 		add.setUser(null);
 	}
-
-	public List<Link> getUserLinks() {
+	
+	public List<Link> getUserLinksInCategory() {
 		User user = mainController.getUserController().getUser();
-		List<Link> list = ConnectToLinkDB
-				.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE != 'YoutubeLink'");
-		return list;
+		String currentCategory = mainController.getFilterController().getCurrentCategory();
+		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
+		int categoryId = -1;
+		ArrayList<Link> filteredList;
+		for(Category category : categoryList) {
+			if(category.getName().equalsIgnoreCase(currentCategory)) {
+				categoryId = category.getIdCategory();
+			}
+		}
+		if(categoryId < 0) {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE != 'YoutubeLink'");
+		}else {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE != 'YoutubeLink' "+ "AND idcategory = "+ categoryId );
+		}
+		java.util.Collections.sort(filteredList);
+		return filteredList;
 	}
 	public void deleteLink(int linkId) {
 		ConnectToLikeDB.queryDeleteLikeFromDB("delete from Li where idlink= " + linkId);

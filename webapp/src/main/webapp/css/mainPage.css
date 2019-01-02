@@ -48,7 +48,7 @@ a:hover{
 .data-table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 }
 
@@ -77,6 +77,10 @@ a:hover{
 	color: blue;
 }
 
+.category{
+	width: 3cm;
+}
+
 .beschreibung {
 	width: 5cm;
 }
@@ -90,9 +94,12 @@ a:hover{
 }
 
 .likes {
-	width: 5cm;
+	width: 3cm;
 }
 
-likeButon {
+.likeButton {
+	width: 5cm;
+}
+.deleteButton {
 	width: 5cm;
 }

@@ -55,6 +55,11 @@
 		<!--  Links -->
 		<p:dataTable styleClass="data-table" var="link"
 			value="#{mainController.linkController.linksInCategory}">
+			
+			<p:column styleClass="category" headerText="Kategory">
+				<h:outputText value="#{link.category}" />
+			</p:column>
+			
 			<p:column styleClass="beschreibung" headerText="beschreibung">
 				<h:outputText value="#{link.beschreibung}" />
 			</p:column>
@@ -63,7 +68,7 @@
 				<a href="#{link.url}">#{link.url}</a>
 			</p:column>
 
-			<p:column styleClass="userId" headerText="userId">
+			<p:column styleClass="user" headerText="userId">
 				<h:outputText value="#{link.user.name}" />
 			</p:column>
 			<p:column styleClass="likes" headerText="Likes">

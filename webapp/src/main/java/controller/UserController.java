@@ -18,14 +18,14 @@ public class UserController {
 	private MainController mainController;
 
 	private User user;
-	private Email email ;
+	private Email email;
 
 	public UserController(MainController mainController) {
 		this.mainController = mainController;
 		this.user = new User();
 		this.email = new Email();
 	}
-	
+
 	public String saveUserInDB() {
 		email.setUser(user);
 		user.setEmail(email);
@@ -34,7 +34,7 @@ public class UserController {
 		email = new Email();
 		return "login";
 	}
-	
+
 	public String changePassword() {
 		ConnectToUserDB.updateUserPassword(user.getId(), user.getPassword());
 		return "successChangePassword";
@@ -54,7 +54,7 @@ public class UserController {
 		user.setId(identicalUsers.get(0).getId());
 		return true;
 	}
-	
+
 	public String logOut() {
 		this.user = new User();
 		this.email = new Email();
@@ -65,6 +65,7 @@ public class UserController {
 		List<Li> likes = ConnectToLikeDB.getUserLikes(user);
 		return likes;
 	}
+
 
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {

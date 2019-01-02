@@ -6,9 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>User Home Page</title>
-	<link rel="stylesheet" type="text/css" href="css/userHomePage.css" />
-	<h:outputStylesheet
-		name="webjars/font-awesome/4.0.3/css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css"  />
 </h:head>
 
 <h:body>
@@ -18,10 +16,9 @@
 	<!-- Buttons -->
 	<div class="topnav">
 		<h:form>
-		<!-- Abmelden -->
-		<p:commandButton styleClass="topnav-link" icon="fa fa-power-off" 
-				action="#{mainController.userController.logOut()}"
-				ajax="false"></p:commandButton>
+			<!-- Abmelden -->
+			<p:commandButton styleClass="topnav-link" icon="fa fa-power-off"
+				action="#{mainController.userController.logOut()}" ajax="false"></p:commandButton>
 			<!-- Navigation -->
 			<p:commandLink styleClass="topnav-link" value="zu Main Page"
 				action="mainPage" />
@@ -103,21 +100,24 @@
 		rendered="#{mainController.uploadController.showUpload}">
 		<p:growl id="messages" showDetail="false" />
 
-		<p:fileUpload id="fileUpload" value="#{mainController.fileUploadView.file}" skinSimple="true"
-			mode="simple" dragDropSupport="false" accept=".pdf, .jpeg, .png" 
-                  update="messages" sizeLimit="4194304" fileLimit="1" allowTypes="/(pdf)|((\.|\/)(gif|jpe?g|png))$/" validator="fileUploadValidator" fileLimitMessage="Der Datei muss kleiner als 4 MB  "/>
-                  
-         <h:message for="fileUpload" showDetail="true" showSummary="false"
-			style="color:red;" />         
-		<br/>
-		
-		<p:outputLabel value="Name : " for="name"/>
+		<p:fileUpload id="fileUpload"
+			value="#{mainController.fileUploadView.file}" skinSimple="true"
+			mode="simple" dragDropSupport="false" accept=".pdf, .jpeg, .png"
+			update="messages" sizeLimit="4194304" fileLimit="1"
+			allowTypes="/(pdf)|((\.|\/)(gif|jpe?g|png))$/"
+			validator="fileUploadValidator"
+			fileLimitMessage="Der Datei muss kleiner als 4 MB  " />
+
+		<h:message for="fileUpload" showDetail="true" showSummary="false"
+			style="color:red;" />
+		<br />
+
+		<p:outputLabel value="Name : " for="name" />
 		<p:inputText id="name"
-			value="#{mainController.fileUploadView.fileName}"
-			required="true"
+			value="#{mainController.fileUploadView.fileName}" required="true"
 			requiredMessage="geben Sie Bitte einen Namen ein" />
 		<h:message for="name" showDetail="true" showSummary="false"
-			style="color:red;" /> 	
+			style="color:red;" />
 		<br />
 		<p:outputLabel value="Kategorie:" for="dd" />
 		<p:autoComplete id="dd" dropdown="true"
@@ -148,32 +148,60 @@
 
 	<!-- Links -->
 
-	<h:form id="linkForm"
-		rendered="#{mainController.linkController.showLinkForm}">
-		<h2>Links</h2>
-		<ul>
-			<ui:repeat value="#{mainController.linkController.userLinks}"
-				var="link">
-				<li><a href="#{link.url}">#{link.beschreibung}</a></li>
 
+	<h:form rendered="#{mainController.linkController.showLinkForm}">
+		<!-- Filter -->
+
+		<br />
+		<p:outputLabel value="Kategorie:" for="dd" />
+		<p:autoComplete id="dd" dropdown="true"
+			value="#{mainController.filterController.currentCategory}"
+			completeMethod="#{mainController.filterController.completeCategory}"
+			var="categoryName" itemLabel="#{categoryName}"
+			itemValue="#{categoryName}" forceSelection="true" />
+
+		<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+		<br />
+
+		<!--  Links -->
+		<p:dataTable styleClass="data-table" var="link"
+			value="#{mainController.linkController.userLinksInCategory}">
+
+			<p:column styleClass="category" headerText="Kategory">
+				<h:outputText value="#{link.category}" />
+			</p:column>
+
+			<p:column styleClass="beschreibung" headerText="beschreibung">
+				<h:outputText value="#{link.beschreibung}" />
+			</p:column>
+
+			<p:column styleClass="url" headerText="Url">
+				<a href="#{link.url}">#{link.url}</a>
+			</p:column>
+
+			<p:column styleClass="likes" headerText="Likes">
+				<h:outputText value="#{link.likesNumber}" />
+			</p:column>
+			<p:column styleClass="deleteButton">
 				<p:growl id="message" showDetail="true" />
-				<p:commandButton value="löschen"
+				<p:commandButton styleClass="deleteButton" icon="fa fa-trash"
 					actionListener="#{mainController.linkController.deleteLink(link.id)}"
-					update="linkForm">
+					ajax="false">
 					<p:confirm header="Confirmation" message="Are you sure?"
 						icon="fa fa-exclamation-triangle" />
 				</p:commandButton>
-
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 					<p:commandButton value="Yes" type="button"
 						styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
 					<p:commandButton value="No" type="button"
 						styleClass="ui-confirmdialog-no" icon="fa fa-times" />
 				</p:confirmDialog>
-			</ui:repeat>
-		</ul>
+			</p:column>
 
+
+		</p:dataTable>
 	</h:form>
+
 
 	<!-- Add Youtube video -->
 	<h:form
@@ -241,14 +269,38 @@
 	</h:form>
 
 	<!-- favorit Links -->
+	
 	<h:form rendered="#{mainController.linkController.showFavouriteLinks}">
-		<h2>Dein favorite Links</h2>
-		<ul>
-			<ui:repeat value="#{mainController.userController.favoritesLinks()}"
-				var="like">
-				<li><a href="#{like.link.url}">#{like.link.beschreibung}</a></li>
-			</ui:repeat>
-		</ul>
+		<h2>Dein favorits Links</h2>
+
+		<!--  Links -->
+		<p:dataTable styleClass="data-table" var="like"
+			value="#{mainController.userController.favoritesLinks()}">
+
+			<p:column styleClass="category" headerText="Kategory">
+				<h:outputText value="#{like.link.category}" />
+			</p:column>
+
+			<p:column styleClass="beschreibung" headerText="beschreibung">
+				<h:outputText value="#{like.link.beschreibung}" />
+			</p:column>
+
+			<p:column styleClass="url" headerText="Url">
+				<a href="#{like.link.url}">#{like.link.url}</a>
+			</p:column>
+
+			<p:column styleClass="likes" headerText="Likes">
+				<h:outputText value="#{like.link.likesNumber}" />
+			</p:column>
+			<p:column styleClass="likeButon">
+					<p:commandButton ajax="false"
+						action="#{like.link.deleteUserLike(mainController.userController.user)}"
+						icon="fa fa-thumbs-down">
+					</p:commandButton>
+			</p:column>
+
+
+		</p:dataTable>
 	</h:form>
 
 	<!--Show User Images -->
@@ -283,7 +335,7 @@
 
 		<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
 		<br />
-			<!-- User Pdfs -->
+		<!-- User Pdfs -->
 		<p:accordionPanel dynamic="true" cache="true" multiple="true"
 			value="#{mainController.uploadController.userPdfsInCategory}"
 			var="pdf">

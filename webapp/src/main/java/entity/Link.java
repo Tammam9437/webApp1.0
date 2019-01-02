@@ -40,12 +40,12 @@ public class Link implements Comparable<Link> {
 	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idcategory")
 	private Category category;
 
-	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "link", cascade = CascadeType.ALL, orphanRemoval = true )
+	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "link", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Li> likes = new ArrayList<Li>();
 
 	public int getId() {
@@ -78,7 +78,7 @@ public class Link implements Comparable<Link> {
 		java.util.Collections.sort(list);
 		return list;
 	}
-	
+
 	public void addLike(User user) {
 		Li like = new Li();
 		like.setLink(this);
@@ -86,10 +86,14 @@ public class Link implements Comparable<Link> {
 		likes.add(like);
 		ConnectToLikeDB.saveLikeInDB(like);
 	}
-	
+
+	public void deleteUserLike(User user) {
+		ConnectToLikeDB.queryDeleteLikeFromDB("DELETE FROM Li WHERE idlink = " + this.id + " AND iduser = "+ user.getId() );
+	}
+
 	public boolean isUserEnteredLike(User user) {
 		List<Li> userLinkLikes = ConnectToLikeDB.getUserLinkLikes(user, this);
-		if(userLinkLikes.isEmpty()) {
+		if (userLinkLikes.isEmpty()) {
 			return false;
 		}
 		return true;
@@ -118,10 +122,11 @@ public class Link implements Comparable<Link> {
 	public void setLikes(List<Li> likes) {
 		this.likes = likes;
 	}
+
 	public int getLikesNumber() {
 		return this.likes.size();
 	}
-	
+
 	public String youtube() {
 		return "https://www.youtube.com/embed/";
 	}
@@ -138,6 +143,7 @@ public class Link implements Comparable<Link> {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
 	@Override
 	public int compareTo(Link anotherLink) {
 		return anotherLink.getLikes().size() - this.likes.size();
