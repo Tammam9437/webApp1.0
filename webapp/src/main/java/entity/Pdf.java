@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import dbConnector.ConnectToLikeDB;
 import dbConnector.ConnectToPdfDB;
 
 @ManagedBean
@@ -69,6 +70,22 @@ public class Pdf implements Comparable<Pdf>{
 			allPdfsFromDB.add(pdf.getFile());
 		}
 		return allPdfsFromDB;
+	}
+	
+	public boolean isUserEnteredLike(User user) {
+		List<Li> userPdfLikes = ConnectToLikeDB.getUserPdfLikes(user, this);
+		if (userPdfLikes.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void addLike(User user) {
+		Li like = new Li();
+		like.setPdf(this);
+		like.setUser(user);
+		likes.add(like);
+		ConnectToLikeDB.saveLikeInDB(like);
 	}
 
 

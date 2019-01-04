@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>User Home Page</title>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css"  />
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
 </h:head>
 
 <h:body>
@@ -110,24 +110,27 @@
 
 		<h:message for="fileUpload" showDetail="true" showSummary="false"
 			style="color:red;" />
+			
 		<br />
+		<h:panelGrid columns="3" cellpadding="3">
 
-		<p:outputLabel value="Name : " for="name" />
-		<p:inputText id="name"
-			value="#{mainController.fileUploadView.fileName}" required="true"
-			requiredMessage="geben Sie Bitte einen Namen ein" />
-		<h:message for="name" showDetail="true" showSummary="false"
-			style="color:red;" />
-		<br />
-		<p:outputLabel value="Kategorie:" for="dd" />
-		<p:autoComplete id="dd" dropdown="true"
-			value="#{mainController.categoryController.category}"
-			completeMethod="#{mainController.categoryController.completeCategory}"
-			var="category" itemLabel="#{category.name}" itemValue="#{category}"
-			converter="categoryConverter" forceSelection="true" required="true"
-			requiredMessage="Geben sie bitte einen kategorie ein" />
-		<h:message for="dd" showDetail="true" showSummary="false"
-			style="color:red;" />
+			<p:outputLabel value="Name : " for="name" />
+			<p:inputText id="name"
+				value="#{mainController.fileUploadView.fileName}" required="true"
+				requiredMessage="geben Sie Bitte einen Namen ein" />
+			<h:message for="name" showDetail="true" showSummary="false"
+				style="color:red;" />
+			<p:outputLabel value="Kategorie:" for="dd" />
+			<p:autoComplete id="dd" dropdown="true"
+				value="#{mainController.categoryController.category}"
+				completeMethod="#{mainController.categoryController.completeCategory}"
+				var="category" itemLabel="#{category.name}" itemValue="#{category}"
+				converter="categoryConverter" forceSelection="true" required="true"
+				requiredMessage="Geben sie bitte einen kategorie ein" />
+			<h:message for="dd" showDetail="true" showSummary="false"
+				style="color:red;" />
+		</h:panelGrid>
+
 		<br />
 		<p:commandButton value="Submit" ajax="false"
 			actionListener="#{mainController.fileUploadView.upload}"
@@ -269,7 +272,7 @@
 	</h:form>
 
 	<!-- favorit Links -->
-	
+
 	<h:form rendered="#{mainController.linkController.showFavouriteLinks}">
 		<h2>Dein favorits Links</h2>
 
@@ -293,10 +296,10 @@
 				<h:outputText value="#{like.link.likesNumber}" />
 			</p:column>
 			<p:column styleClass="likeButon">
-					<p:commandButton ajax="false"
-						action="#{like.link.deleteUserLike(mainController.userController.user)}"
-						icon="fa fa-thumbs-down">
-					</p:commandButton>
+				<p:commandButton ajax="false"
+					action="#{like.link.deleteUserLike(mainController.userController.user)}"
+					icon="fa fa-thumbs-down">
+				</p:commandButton>
 			</p:column>
 
 

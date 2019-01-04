@@ -37,7 +37,7 @@
 		</h:form>
 
 	</div>
-
+	<!-- Links -->
 	<h:form rendered="#{mainController.linkController.showLinkForm}">
 		<!-- Filter -->
 
@@ -55,11 +55,11 @@
 		<!--  Links -->
 		<p:dataTable styleClass="data-table" var="link"
 			value="#{mainController.linkController.linksInCategory}">
-			
+
 			<p:column styleClass="category" headerText="Kategory">
 				<h:outputText value="#{link.category}" />
 			</p:column>
-			
+
 			<p:column styleClass="beschreibung" headerText="beschreibung">
 				<h:outputText value="#{link.beschreibung}" />
 			</p:column>
@@ -75,11 +75,11 @@
 				<h:outputText value="#{link.likesNumber}" />
 			</p:column>
 			<p:column styleClass="likeButon">
-					<p:commandButton ajax="false"
-						disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
-						action="#{link.addLike(mainController.userController.user)}"
-						icon="fa fa-thumbs-o-up">
-					</p:commandButton>
+				<p:commandButton ajax="false"
+					disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
+					action="#{link.addLike(mainController.userController.user)}"
+					icon="fa fa-thumbs-o-up">
+				</p:commandButton>
 			</p:column>
 
 
@@ -130,9 +130,15 @@
 		<br />
 
 		<p:accordionPanel dynamic="true" cache="true" multiple="true"
-			value="#{mainController.videoController.videosInCategory}" var="video">
+			value="#{mainController.videoController.videosInCategory}"
+			var="video">
 			<p:tab title="#{video.beschreibung}">
 				<iframe width="420" height="345" src="#{video.url}"> </iframe>
+				<p:commandButton ajax="false"
+					disabled="#{video.isUserEnteredLike(mainController.userController.user)}"
+					action="#{video.addLike(mainController.userController.user)}"
+					icon="fa fa-thumbs-o-up">
+				</p:commandButton>
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>
@@ -161,6 +167,11 @@
 					player="pdf">
 					<f:param name="pdfId" value="#{pdf.idPdf}" />
 				</p:media>
+				<p:commandButton ajax="false"
+					disabled="#{pdf.isUserEnteredLike(mainController.userController.user)}"
+					action="#{pdf.addLike(mainController.userController.user)}"
+					icon="fa fa-thumbs-o-up">
+				</p:commandButton>
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>

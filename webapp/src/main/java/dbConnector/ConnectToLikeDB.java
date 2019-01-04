@@ -1,5 +1,6 @@
 package dbConnector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -13,6 +14,7 @@ import entity.Li;
 import entity.Link;
 import entity.Pdf;
 import entity.User;
+import entity.YoutubeLink;
 
 public class ConnectToLikeDB {
 
@@ -116,14 +118,31 @@ public class ConnectToLikeDB {
 	}
 
 	public static List<Li> getLinkLikes(Link link) {
-		List<Li> userLikes = queryLike("From Li WHERE iduser ='" + link.getId() + "'");
+		List<Li> userLikes = queryLike("From Li WHERE idlink ='" + link.getId() + "'");
 		return userLikes;
 	}
-
+	
+	public static List<Li> getUserFavoritLinks(User user) {
+		List<Li> userLikes = queryLike("From Li WHERE iduser ='" + user.getId() + "'");
+		List<Li> userFavoritLinks = new ArrayList<>();
+		for(Li like : userLikes) {
+			if(!(like.getLink() instanceof YoutubeLink) && like.getLink() != null) {
+				userFavoritLinks.add(like);
+			}
+		}
+		return userFavoritLinks;
+	}
+	
 	public static List<Li> getUserLinkLikes(User user, Link link) {
 		List<Li> userLinkLikes = queryLike(
 				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idlink ='" + link.getId() + "'");
 		return userLinkLikes;
+	}
+	
+	public static List<Li> getUserPdfLikes(User user, Pdf pdf) {
+		List<Li> userPdfLikes = queryLike(
+				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idPdf ='" + pdf.getIdPdf() + "'");
+		return userPdfLikes;
 	}
 
 	public static void displayLikes(List<Li> theLikes) {

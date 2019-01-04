@@ -62,7 +62,7 @@ public class UserController {
 	}
 
 	public List<Li> favoritesLinks() {
-		List<Li> likes = ConnectToLikeDB.getUserLikes(user);
+		List<Li> likes = ConnectToLikeDB.getUserFavoritLinks(user);
 		return likes;
 	}
 
