@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+</h:head>
+<h:body>
+	<div class="ui-g-12 ui-md-10 ui-g-nopad">
+		<div class="ui-g-12">
+			<!-- Add Youtube video -->
+			<h:form
+				rendered="#{mainController.videoController.showAddYoutubeVideo}">
+				<h:panelGrid columns="3" cellpadding="2">
+					<p:outputLabel value="URL : " />
+					<p:inputText type="url" id="link"
+						value="#{mainController.videoController.youtubeLink.url}"
+						required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
+					<h:message for="link" showDetail="true" showSummary="false"
+						style="color:red;" />
+
+					<p:outputLabel value="Beschreibung : " />
+					<p:inputText id="beschreibung"
+						value="#{mainController.videoController.youtubeLink.beschreibung}"
+						required="true"
+						requiredMessage="geben Sie Bitte eine kurze Beschreibung" />
+					<h:message for="beschreibung" showDetail="true" showSummary="false"
+						style="color:red;" />
+
+					<p:outputLabel value="Kategorie:" for="dd" />
+					<p:autoComplete id="dd" dropdown="true"
+						value="#{mainController.categoryController.category}"
+						completeMethod="#{mainController.categoryController.completeCategory}"
+						var="category" itemLabel="#{category.name}"
+						itemValue="#{category}" converter="categoryConverter"
+						forceSelection="true" required="true"
+						requiredMessage="Geben sie bitte einen kategorie ein" />
+					<h:message for="dd" showDetail="true" showSummary="false"
+						style="color:red;" />
+
+					<p:commandButton value="add Youtube Video"
+						actionListener="#{mainController.videoController.addYoutubeVideo()}"
+						ajax="false"></p:commandButton>
+				</h:panelGrid>
+			</h:form>
+
+		</div>
+	</div>
+
+</h:body>
+
+
+</html>

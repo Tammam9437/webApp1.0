@@ -48,8 +48,8 @@ a:hover{
 .data-table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 90%;
-	margin: 0 auto;
+	width: 100%;
+	margin: 20px;
 }
 
 .data-table td, .data-table th {

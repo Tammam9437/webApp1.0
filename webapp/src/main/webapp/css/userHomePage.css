@@ -7,7 +7,7 @@ body {
 	padding: 10px;
 }
 
-.topnav a:hover{
+a:hover {
 	color: #6495ed;
 }
 
@@ -26,28 +26,19 @@ body {
 	background-color: #333;
 }
 
-.topnav-link {
-	float: left;
-	display: block;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	display: flex;
-	justify-content: space-around;
+.topnav-Link:hover {
+	color: blue;
 }
-
-.topnav form:hover {
-	background-color: #ddd;
-	color: black;
+div#filter{
+	padding: 5em;
+	margin: 10px !important;
+	width: 1em;;
 }
-
-
 .data-table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 90%;
-	margin: 0 auto;
+	width: 100%;
+	margin: 20px;
 }
 
 .data-table td, .data-table th {
@@ -75,7 +66,7 @@ body {
 	color: blue;
 }
 
-.category{
+.category {
 	width: 3cm;
 }
 
@@ -93,6 +84,10 @@ body {
 
 .likes {
 	width: 3cm;
+}
+
+.likeButton {
+	width: 5cm;
 }
 
 .deleteButton {

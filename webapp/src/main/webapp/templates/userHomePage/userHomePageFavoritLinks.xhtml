@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+</h:head>
+<h:body>
+	<div class="ui-g-12 ui-md-10 ui-g-nopad">
+		<div class="ui-g-12">
+			<!-- favorit Links -->
+
+			<h:form
+				rendered="#{mainController.linkController.showFavouriteLinks}">
+				<h2>Dein favorit Links</h2>
+
+				<!--  Links -->
+				<p:dataTable styleClass="data-table" var="like"
+					value="#{mainController.userController.favoritesLinks()}">
+
+					<p:column styleClass="category" headerText="Kategory">
+						<h:outputText value="#{like.link.category}" />
+					</p:column>
+
+					<p:column styleClass="beschreibung" headerText="beschreibung">
+						<h:outputText value="#{like.link.beschreibung}" />
+					</p:column>
+
+					<p:column styleClass="url" headerText="Url">
+						<a href="#{like.link.url}">#{like.link.url}</a>
+					</p:column>
+
+					<p:column styleClass="likes" headerText="Likes">
+						<h:outputText value="#{like.link.likesNumber}" />
+					</p:column>
+					<p:column styleClass="likeButon">
+						<p:commandButton ajax="false"
+							action="#{like.link.deleteUserLike(mainController.userController.user)}"
+							icon="fa fa-thumbs-down">
+						</p:commandButton>
+					</p:column>
+
+
+				</p:dataTable>
+			</h:form>
+
+		</div>
+	</div>
+
+</h:body>
+
+
+</html>

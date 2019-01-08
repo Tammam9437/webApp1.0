@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="css/userHomePage.css" />
+</h:head>
+<h:body>
+	<div class="ui-g-12 ui-md-2">
+		<h:form>
+			<p:megaMenu orientation="vertical"
+				style="margin-top:20px">
+
+				<p:menuitem styleClass="topnav-link" value="zu Main Page"
+					action="mainPage" />
+
+				<p:menuitem styleClass="topnav-link" value="add new Link"
+					actionListener="#{mainController.linkController.showAddLinkToggel}"
+					ajax="false" />
+
+				<p:menuitem styleClass="topnav-link" value="Upload" ajax="false"
+					actionListener="#{mainController.uploadController.showUploadToggel}" />
+
+				<p:menuitem styleClass="topnav-link" value="Show Links"
+					actionListener="#{mainController.linkController.showLinksToggel}"
+					ajax="false" />
+
+				<p:menuitem styleClass="topnav-link"
+					value="Dein youtube Videos anzeigen"
+					actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
+					ajax="false" />
+				<p:menuitem />
+
+				<p:menuitem styleClass="topnav-link" value="Add Youtube Video"
+					actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
+					ajax="false" />
+
+				<p:menuitem styleClass="topnav-link"
+					value="Show your favourite Links"
+					actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
+					ajax="false" />
+
+				<p:menuitem styleClass="topnav-link" value="Show your Fotos"
+					actionListener="#{mainController.imageController.showUserImagesToggel()}"
+					ajax="false" />
+
+				<p:menuitem styleClass="topnav-link" value="Show your Pdfs"
+					actionListener="#{mainController.uploadController.showPdfsToggel()}"
+					ajax="false" />
+
+				<p:menuitem styleClass="topnav-link" icon="fa fa-power-off"
+					action="#{mainController.userController.logOut()}" ajax="false" value=" Abmelden"/>
+			</p:megaMenu>
+		</h:form>
+	</div>
+
+
+</h:body>
+
+
+</html>

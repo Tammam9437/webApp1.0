@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+</h:head>
+<h:body>
+	<!-- Links -->
+	<div class="ui-g-12 ui-md-10 ui-g-nopad">
+		<div class="ui-g-12">
+			<!-- Show Pdfs -->
+			<h:form rendered="#{mainController.uploadController.showUpload}">
+				<h2>Pdfs</h2>
+
+				<!-- Filter -->
+
+				<br />
+				<p:outputLabel value="Kategorie:" for="dd" />
+				<p:autoComplete id="dd" dropdown="true"
+					value="#{mainController.filterController.currentCategory}"
+					completeMethod="#{mainController.filterController.completeCategory}"
+					var="categoryName" itemLabel="#{categoryName}"
+					itemValue="#{categoryName}" forceSelection="true" />
+
+				<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+				<br />
+
+				<p:accordionPanel dynamic="true" cache="true" multiple="true"
+					value="#{mainController.uploadController.pdfsInCategory}" var="pdf">
+					<p:tab title="#{pdf.name}">
+						<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
+							player="pdf">
+							<f:param name="pdfId" value="#{pdf.idPdf}" />
+						</p:media>
+						<p:commandButton ajax="false"
+							disabled="#{pdf.isUserEnteredLike(mainController.userController.user)}"
+							action="#{pdf.addLike(mainController.userController.user)}"
+							icon="fa fa-thumbs-o-up">
+						</p:commandButton>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
+		</div>
+	</div>
+
+</h:body>
+
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+</h:head>
+<h:body>
+	<div class="ui-g-12 ui-md-10 ui-g-nopad">
+		<div class="ui-g-12">
+			<!-- Show Pdfs -->
+			<h:form id="pdfForm"
+				rendered="#{mainController.uploadController.showPdfs}">
+				<h2>Pdfs</h2>
+
+				<!-- Filter -->
+
+				<br />
+				<p:outputLabel value="Kategorie:" for="dd" />
+				<p:autoComplete id="dd" dropdown="true"
+					value="#{mainController.filterController.currentCategory}"
+					completeMethod="#{mainController.filterController.completeCategory}"
+					var="categoryName" itemLabel="#{categoryName}"
+					itemValue="#{categoryName}" forceSelection="true" />
+
+				<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+				<br />
+				<!-- User Pdfs -->
+				<p:accordionPanel dynamic="true" cache="true" multiple="true"
+					value="#{mainController.uploadController.userPdfsInCategory}"
+					var="pdf">
+					<p:tab title="#{pdf.name}">
+						<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
+							player="pdf">
+							<f:param name="pdfId" value="#{pdf.idPdf}" />
+						</p:media>
+						<!-- Delete -->
+						<p:growl id="message" showDetail="true" />
+						<p:commandButton value="löschen"
+							actionListener="#{mainController.uploadController.deletePdf(pdf.idPdf)}"
+							update="pdfForm">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="fa fa-exclamation-triangle" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+						</p:confirmDialog>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
+
+		</div>
+	</div>
+
+</h:body>
+
+
+</html>
