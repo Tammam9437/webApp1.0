@@ -14,7 +14,7 @@
 		<h1>Willkommen zu main Page</h1>
 
 	</div>
-
+	
 	<!-- Buttons -->
 
 
@@ -36,7 +36,13 @@
 				ajax="false"></p:commandLink>
 		</h:form>
 
+
+
 	</div>
+
+		<ui:include src="templates/mainPageMenu.xhtml"></ui:include>
+
+
 	<!-- Links -->
 	<h:form rendered="#{mainController.linkController.showLinkForm}">
 		<!-- Filter -->
