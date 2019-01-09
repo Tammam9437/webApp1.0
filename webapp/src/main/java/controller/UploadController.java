@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import dbConnector.ConnectToCategoryDB;
+import dbConnector.ConnectToImageDB;
 import dbConnector.ConnectToPdfDB;
 import entity.Category;
 import entity.Pdf;
@@ -51,6 +52,11 @@ public class UploadController {
 	public void deletePdf(int pdfId) {
 		ConnectToPdfDB.deletePdfFromDB(pdfId);
 		addMessage("Delete Pdf","Pdf has been deleted."); 
+	}
+	
+	public void deleteImage(int imageId) {
+		ConnectToImageDB.deleteImageFromDB(imageId);
+		addMessage("Delete Image","Image has been deleted."); 
 	}
 	
 	public void addMessage(String summary, String detail) {  

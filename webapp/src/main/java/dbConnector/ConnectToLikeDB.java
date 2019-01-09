@@ -139,6 +139,12 @@ public class ConnectToLikeDB {
 		return userLinkLikes;
 	}
 	
+	public static List<Li> getUserImageLikes(User user, Image image) {
+		List<Li> userLinkLikes = queryLike(
+				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idImage ='" + image.getIdImage() + "'");
+		return userLinkLikes;
+	}
+	
 	public static List<Li> getUserPdfLikes(User user, Pdf pdf) {
 		List<Li> userPdfLikes = queryLike(
 				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idPdf ='" + pdf.getIdPdf() + "'");

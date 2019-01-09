@@ -23,17 +23,29 @@
 					var="categoryName" itemLabel="#{categoryName}"
 					itemValue="#{categoryName}" forceSelection="true" />
 
-				<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+				<p:commandButton style="margin-left:20px" type="submit"
+					value="submit" ajax="false"></p:commandButton>
 				<br />
+				<div style="margin-top: 50px">
 
-				<p:galleria cache="false"
-					value="#{mainController.imageController.imagesInCategory}"
-					var="image" panelWidth="500" panelHeight="313" showCaption="true">
-					<p:graphicImage title="" value="#{imageStreamer.image}" width="500"
-						height="313">
-						<f:param name="imageId" value="#{image.idImage}" />
-					</p:graphicImage>
-				</p:galleria>
+					<p:repeat var="image"
+						value="#{mainController.imageController.imagesInCategory}">
+						<p:outputLabel>image Name : #{image.name}</p:outputLabel>
+						<p:graphicImage onclick=""
+							style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
+							title="" value="#{imageStreamer.image}" width="500" height="313">
+							<f:param name="imageId" value="#{image.idImage}" />
+						</p:graphicImage>
+						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;" ajax="false"
+							disabled="#{image.isUserEnteredLike(mainController.userController.user)}"
+							action="#{image.addLike(mainController.userController.user)}"
+							icon="fa fa-thumbs-o-up">
+						</p:commandButton>
+						<p:outputLabel>likes : #{image.likesNumber}</p:outputLabel>
+						<p:separator></p:separator>
+					</p:repeat>
+
+				</div>
 
 			</h:form>
 		</div>

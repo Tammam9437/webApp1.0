@@ -43,6 +43,20 @@ public class ConnectToImageDB {
 		}
 
 	}
+	
+	public static void deleteImageFromDB(int imageId) {
+		Session session = getInstance();
+		try {
+			session.beginTransaction();
+			
+			session.createQuery("delete from Image where id= " + imageId ).executeUpdate();
+			
+			session.getTransaction().commit();
+			
+		}finally {
+			getInstance().close();
+		}
+	}
 
 	public static Image getImageFromDB(int idImage) {
 		Session session = getInstance();

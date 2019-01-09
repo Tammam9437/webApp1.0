@@ -14,16 +14,38 @@
 		<div class="ui-g-12">
 			<!--Show User Images -->
 
-			<h:form rendered="#{mainController.imageController.showUserImages}">
+			<h:form id="imageForm" rendered="#{mainController.imageController.showUserImages}">
 
-				<p:galleria cache="false"
-					value="#{mainController.imageController.userImages}" var="image"
-					panelWidth="500" panelHeight="313" showCaption="true">
-					<p:graphicImage title="" value="#{imageStreamer.image}" width="500"
-						height="313">
-						<f:param name="imageId" value="#{image.idImage}" />
-					</p:graphicImage>
-				</p:galleria>
+				<div >
+
+					<p:repeat var="image"
+						value="#{mainController.imageController.userImages}">
+						<p:outputLabel>image Name : #{image.name}</p:outputLabel>
+						<p:graphicImage
+							style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
+							title="" value="#{imageStreamer.image}" width="500" height="313">
+							<f:param name="imageId" value="#{image.idImage}" />
+						</p:graphicImage>
+						
+						<p:growl id="message" showDetail="true" />
+						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;" value="löschen"
+							actionListener="#{mainController.uploadController.deleteImage(image.idImage)}"
+							update="imageForm">
+							<p:confirm header="Confirmation" message="Are you sure?"
+								icon="fa fa-exclamation-triangle" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+						</p:confirmDialog>
+						<p:outputLabel>likes : #{image.likesNumber}</p:outputLabel>
+						<p:separator></p:separator>
+					</p:repeat>
+
+				</div>
 
 			</h:form>
 

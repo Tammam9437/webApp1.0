@@ -49,7 +49,7 @@ public class ConnectToPdfDB {
 		try {
 			session.beginTransaction();
 			
-			session.createQuery("delete from Pdf where id= " + pdfId).executeUpdate();
+			session.createQuery("delete from Pdf where id= " + pdfId ).executeUpdate();
 			
 			session.getTransaction().commit();
 			

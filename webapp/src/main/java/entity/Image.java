@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import dbConnector.ConnectToImageDB;
+import dbConnector.ConnectToLikeDB;
 
 @ManagedBean
 @Entity
@@ -63,6 +64,22 @@ public class Image implements Comparable<Image>{
 		return allImagesFromDB;
 	}
 	
+	public boolean isUserEnteredLike(User user) {
+		List<Li> userLinkLikes = ConnectToLikeDB.getUserImageLikes(user, this);
+		if (userLinkLikes.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void addLike(User user) {
+		Li like = new Li();
+		like.setImage(this);
+		like.setUser(user);
+		likes.add(like);
+		ConnectToLikeDB.saveLikeInDB(like);
+	}
+	
 
 	public byte [] getFile() {
 		return file;
@@ -106,6 +123,9 @@ public class Image implements Comparable<Image>{
 
 	public String getName() {
 		return name;
+	}
+	public int getLikesNumber() {
+		return this.likes.size();
 	}
 
 	public void setName(String name) {
