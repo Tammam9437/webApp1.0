@@ -13,23 +13,23 @@
 		<div class="ui-g-12 ui-md-2">
 			<h:form>
 				<p:megaMenu orientation="vertical"
-					style="margin-top:20px; width:150px">
-					<p:menuitem styleClass="topnav-link" value="zu HomePage"
-						action="userHomePage" />
+					style="margin-top:20px; background-color:#94d4d4;">
+					<p:menuitem value="zu HomePage"
+						outcome="toUserHomePage" />
 
-					<p:menuitem styleClass="topnav-link" value="show Fotos"
+					<p:menuitem value="show Fotos"
 						actionListener="#{mainController.imageController.showImagesToggel()}"
 						ajax="false" />
 
-					<p:menuitem styleClass="topnav-link" value="show Pdfs"
+					<p:menuitem style="float:left" value="show Pdfs"
 						actionListener="#{mainController.uploadController.showUploadToggel()}"
 						ajax="false" />
 
-					<p:menuitem styleClass="topnav-link" value="Show Links"
+					<p:menuitem value="show Links"
 						actionListener="#{mainController.linkController.showLinksToggel}"
 						ajax="false" />
 
-					<p:menuitem styleClass="topnav-link" value="show youtube Videos"
+					<p:menuitem value="show youtube Videos"
 						actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
 						ajax="false" />
 

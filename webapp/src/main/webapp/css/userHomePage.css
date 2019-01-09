@@ -21,18 +21,8 @@ a:hover {
 	font-size: 50px;
 }
 
-.topnav {
-	overflow: hidden;
-	background-color: #333;
-}
-
-.topnav-Link:hover {
-	color: blue;
-}
 div#filter{
-	padding: 5em;
 	margin: 10px !important;
-	width: 1em;;
 }
 .data-table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;

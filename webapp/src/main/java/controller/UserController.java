@@ -70,8 +70,10 @@ public class UserController {
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {
 			return "userHomePage";
+		}else {
+			return "error";
 		}
-		return "error";
+	
 	}
 
 	public MainController getMainController() {

@@ -55,23 +55,13 @@
 				action="#{mainController.userController.saveUserInDB()}"
 				ajax="false" />
 
-		<!-- 	<p:dialog modal="true" visible="true" header="Status">
-				<p:ajaxStatus>
-					<f:facet name="start">
-						<h:outputText value="Loading..." />
-					</f:facet>
-					<f:facet name="complete">
-						<h:outputText value="Completed" />
-					</f:facet>
-				</p:ajaxStatus>
-			</p:dialog> -->
 		</div>
 
 	</h:form>
 	<br />
 	<br />
 	<h:form styleClass="button-form">
-		<p:commandButton value="Zu Login" action="login" ajax="false" />
+		<p:button value="Zu Login" outcome="toLogin" ajax="false" />
 	</h:form>
 
 

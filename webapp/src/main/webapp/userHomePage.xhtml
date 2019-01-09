@@ -13,18 +13,42 @@
 	<div class="header">
 		<h1>Herzlich Welkommen #{mainController.userController.user.name}</h1>
 	</div>
-	
-	<ui:include src="templates/userHomePage/userHomePageMenu.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePageAddLink.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePageUpload.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePageLinks.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePageYoutubeVideos.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePageAddYoutubeVideo.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePageFavoritLinks.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePageUserImages.xhtml"></ui:include>
-	<ui:include src="templates/userHomePage/userHomePagePdfs.xhtml"></ui:include>
 
-	
+	<div>
+		<!-- Navigation zu mainPage -->
+		<ui:include src="templates/userHomePage/userHomePageMenu.xhtml"></ui:include>
+
+		<!--add new Link -->
+		<ui:include src="templates/userHomePage/userHomePageAddLink.xhtml"></ui:include>
+
+		<!-- Upload -->
+		<ui:include src="templates/userHomePage/userHomePageUpload.xhtml"></ui:include>
+
+		<!-- Show Links -->
+		<ui:include src="templates/userHomePage/userHomePageLinks.xhtml"></ui:include>
+
+		<!-- User Youtube Videos anzeigen -->
+		<ui:include
+			src="templates/userHomePage/userHomePageYoutubeVideos.xhtml"></ui:include>
+
+		<!-- add new Youtube Video -->
+		<ui:include
+			src="templates/userHomePage/userHomePageAddYoutubeVideo.xhtml"></ui:include>
+
+		<!-- User favorit Links -->
+		<ui:include
+			src="templates/userHomePage/userHomePageFavoritLinks.xhtml"></ui:include>
+
+		<!-- User Images -->
+		<ui:include src="templates/userHomePage/userHomePageUserImages.xhtml"></ui:include>
+
+		<!-- User Pdfs -->
+		<ui:include src="templates/userHomePage/userHomePagePdfs.xhtml"></ui:include>
+
+
+	</div>
+
+
 </h:body>
 
 
