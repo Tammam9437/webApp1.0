@@ -20,6 +20,7 @@ public class LinkController {
 
 	private MainController mainController;
 	private Link link;
+	private String currentSearchedLink;
 
 	private boolean showLinkForm;
 	private boolean showAddLink;
@@ -55,26 +56,47 @@ public class LinkController {
 		link.setBeschreibung("");
 		add.setUser(null);
 	}
-	
+
+	public void handleKeyEvent() {
+
+	}
+
 	public List<Link> getUserLinksInCategory() {
 		User user = mainController.getUserController().getUser();
 		String currentCategory = mainController.getFilterController().getCurrentCategory();
 		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
 		int categoryId = -1;
 		ArrayList<Link> filteredList;
-		for(Category category : categoryList) {
-			if(category.getName().equalsIgnoreCase(currentCategory)) {
+		for (Category category : categoryList) {
+			if (category.getName().equalsIgnoreCase(currentCategory)) {
 				categoryId = category.getIdCategory();
 			}
 		}
-		if(categoryId < 0) {
-			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE != 'YoutubeLink'");
-		}else {
-			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE != 'YoutubeLink' "+ "AND idcategory = "+ categoryId );
+		if (categoryId < 0) {
+			if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB
+						.queryLink("From Link WHERE iduser ='" + user.getId() + "' " + " AND DTYPE = 'Link'");
+			} else {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB
+						.queryLink("From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink + "%'"
+								+ " AND iduser ='" + user.getId() + "'");
+			}
+
+		} else {
+			if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId()
+						+ "'" + " AND DTYPE = 'Link' " + "AND idcategory = " + categoryId);
+			} else {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB
+						.queryLink("From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink + "%'"
+								+ " AND iduser ='" + user.getId() + "'" + "AND idcategory = " + categoryId);
+			}
+
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
 	}
+
 	public void deleteLink(int linkId) {
 		ConnectToLikeDB.queryDeleteLikeFromDB("delete from Li where idlink= " + linkId);
 		System.out.println(linkId);
@@ -86,15 +108,16 @@ public class LinkController {
 		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
 		int categoryId = -1;
 		ArrayList<Link> filteredList;
-		for(Category category : categoryList) {
-			if(category.getName().equalsIgnoreCase(currentCategory)) {
+		for (Category category : categoryList) {
+			if (category.getName().equalsIgnoreCase(currentCategory)) {
 				categoryId = category.getIdCategory();
 			}
 		}
-		if(categoryId < 0) {
+		if (categoryId < 0) {
 			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' ");
-		}else {
-			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' AND idcategory = "+ categoryId );
+		} else {
+			filteredList = (ArrayList<Link>) ConnectToLinkDB
+					.queryLink("From Link WHERE DTYPE != 'YoutubeLink' AND idcategory = " + categoryId);
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
@@ -158,6 +181,14 @@ public class LinkController {
 
 	public void setShowAddLink(boolean showAddLink) {
 		this.showAddLink = showAddLink;
+	}
+
+	public String getCurrentSearchedLink() {
+		return currentSearchedLink;
+	}
+
+	public void setCurrentSearchedLink(String currentSearchedLink) {
+		this.currentSearchedLink = currentSearchedLink;
 	}
 
 }

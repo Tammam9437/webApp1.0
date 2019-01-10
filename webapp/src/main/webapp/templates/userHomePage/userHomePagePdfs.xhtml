@@ -15,7 +15,7 @@
 			<!-- Show Pdfs -->
 			<h:form id="pdfForm"
 				rendered="#{mainController.uploadController.showPdfs}">
-				<h2>Pdfs</h2>
+				<h2>Dein Pdf Dateien</h2>
 
 				<!-- Filter -->
 
@@ -40,7 +40,7 @@
 						</p:media>
 						<!-- Delete -->
 						<p:growl id="message" showDetail="true" />
-						<p:commandButton value="löschen"
+						<p:commandButton icon="fa fa-trash"
 							actionListener="#{mainController.uploadController.deletePdf(pdf.idPdf)}"
 							update="pdfForm">
 							<p:confirm header="Confirmation" message="Are you sure?"

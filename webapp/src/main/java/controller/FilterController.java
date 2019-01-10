@@ -15,23 +15,19 @@ public class FilterController {
 
 	private MainController mainController;
 
-	private List<String> sortLikes;
+	private List<String> links;
+
+	
 
 	private List<String> categorys;
-
-	private List<String> types;
 
 	private String currentsortLike;
 
 	private String currentCategory;
 
-	private String currentType;
-
 	public FilterController(MainController mainController) {
 		this.mainController = mainController;
 		initFilterCategor();
-		initFilterLikes();
-		initFilterType();
 
 	}
 
@@ -47,25 +43,30 @@ public class FilterController {
 		this.currentsortLike = "All";
 
 	}
-
-	public void initFilterType() {
-		this.types = new ArrayList<>();
-
-		this.types.add("video");
-		this.types.add("pdf");
-		this.types.add("link");
-		this.types.add("foto");
-		this.types.add("All");
-		this.currentType = "All";
-	}
-
-	public void initFilterLikes() {
-
-		this.sortLikes = new ArrayList<>();
-		this.sortLikes.add("aufsteigend");
-		this.sortLikes.add("absteigend");
-		this.currentsortLike = "aufsteiged";
-	}
+//
+//	public void initFilterLinks() {
+//		this.categorys = new ArrayList<>();
+//		List<Link> listLink = ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'Link' ");
+//
+//		for (Link link : listLink) {
+//			this.links.add(link.getBeschreibung());
+//		}
+//	}
+//
+//
+//	public List<String> completeLink(String query) {
+//		List<String> allLinks = this.links;
+//		List<String> filteredLinks = new ArrayList<String>();
+//
+//		for (int i = 0; i < allLinks.size(); i++) {
+//			String skin = allLinks.get(i);
+//			if (skin.toLowerCase().contains(query)) {
+//				filteredLinks.add(skin);
+//			}
+//		}
+//
+//		return filteredLinks;
+//	}
 
 	public List<String> completeCategory(String query) {
 		List<String> allCategorys = this.categorys;
@@ -80,10 +81,6 @@ public class FilterController {
 
 		return filteredCategorys;
 	}
-	
-	public void print(){
-		System.out.println(currentCategory);
-	}
 
 	public MainController getMainController() {
 		return mainController;
@@ -93,28 +90,12 @@ public class FilterController {
 		this.mainController = mainController;
 	}
 
-	public List<String> getSortLikes() {
-		return sortLikes;
-	}
-
-	public void setSortLikes(List<String> sortLikes) {
-		this.sortLikes = sortLikes;
-	}
-
 	public List<String> getCategorys() {
 		return categorys;
 	}
 
 	public void setCategorys(List<String> categorys) {
 		this.categorys = categorys;
-	}
-
-	public List<String> getTypes() {
-		return types;
-	}
-
-	public void setTypes(List<String> types) {
-		this.types = types;
 	}
 
 	public String getCurrentsortLike() {
@@ -133,12 +114,13 @@ public class FilterController {
 		this.currentCategory = currentCategory;
 	}
 
-	public String getCurrentType() {
-		return currentType;
+	public List<String> getLinks() {
+		return links;
 	}
 
-	public void setCurrentType(String currentType) {
-		this.currentType = currentType;
+	public void setLinks(List<String> links) {
+		this.links = links;
 	}
+
 
 }

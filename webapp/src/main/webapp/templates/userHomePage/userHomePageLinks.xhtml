@@ -12,19 +12,36 @@
 <h:body>
 	<div class="ui-g-12 ui-md-10 ui-g-nopad">
 		<div class="ui-g-12" style="padding-top: 0px;">
-			<h:form rendered="#{mainController.linkController.showLinkForm}">
-				<!-- Filter -->
-				<div id="filter"  >
-				<p:outputLabel value="Kategorie:" for="dd" />
-				<p:autoComplete id="dd" dropdown="true"
-					value="#{mainController.filterController.currentCategory}"
-					completeMethod="#{mainController.filterController.completeCategory}"
-					var="categoryName" itemLabel="#{categoryName}"
-					itemValue="#{categoryName}" forceSelection="true" />
 
-				<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+			<!-- search -->
+			<h:form>
+
+			</h:form>
+
+
+			<h:form id="links"
+				rendered="#{mainController.linkController.showLinkForm}">
+				<h2>Dein Links</h2>
+				<h:panelGrid columns="2">
+					<h:outputText value="nach Beschreibung suchen: " />
+					<p:inputText
+						value="#{mainController.linkController.currentSearchedLink}">
+						<p:ajax event="keyup" update="links"
+							listener="#{mainController.linkController.handleKeyEvent}" />
+					</p:inputText>
+				</h:panelGrid>
+				<!-- Filter -->
+				<div id="filter">
+					<p:outputLabel value="Kategorie:" for="dd" />
+					<p:autoComplete id="dd" dropdown="true"
+						value="#{mainController.filterController.currentCategory}"
+						completeMethod="#{mainController.filterController.completeCategory}"
+						var="categoryName" itemLabel="#{categoryName}"
+						itemValue="#{categoryName}" forceSelection="true" />
+
+					<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
 				</div>
-				
+
 				<!--  Links -->
 				<p:dataTable styleClass="data-table" var="link"
 					value="#{mainController.linkController.userLinksInCategory}">

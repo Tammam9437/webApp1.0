@@ -123,7 +123,7 @@ public class ConnectToLikeDB {
 	}
 	
 	public static List<Li> getUserFavoritLinks(User user) {
-		List<Li> userLikes = queryLike("From Li WHERE iduser ='" + user.getId() + "'");
+		List<Li> userLikes = queryLike("From Li WHERE idLink IS NOT NULL AND iduser ='" + user.getId() + "'");
 		List<Li> userFavoritLinks = new ArrayList<>();
 		for(Li like : userLikes) {
 			if(!(like.getLink() instanceof YoutubeLink) && like.getLink() != null) {

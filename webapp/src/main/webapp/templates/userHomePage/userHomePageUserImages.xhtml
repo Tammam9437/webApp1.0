@@ -15,7 +15,7 @@
 			<!--Show User Images -->
 
 			<h:form id="imageForm" rendered="#{mainController.imageController.showUserImages}">
-
+			<h2>Dein Images</h2>
 				<div >
 
 					<p:repeat var="image"
@@ -28,7 +28,7 @@
 						</p:graphicImage>
 						
 						<p:growl id="message" showDetail="true" />
-						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;" value="löschen"
+						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;" icon="fa fa-trash"
 							actionListener="#{mainController.uploadController.deleteImage(image.idImage)}"
 							update="imageForm">
 							<p:confirm header="Confirmation" message="Are you sure?"
