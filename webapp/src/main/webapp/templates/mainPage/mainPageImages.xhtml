@@ -14,7 +14,7 @@
 		<div class="ui-g-12">
 			<!-- Images -->
 			<h:form rendered="#{mainController.imageController.showImages}">
-			<h2>Images</h2>
+				<h2>Images</h2>
 				<!-- Filter -->
 				<br />
 				<p:outputLabel value="Kategorie:" for="dd" />
@@ -32,12 +32,16 @@
 					<p:repeat var="image"
 						value="#{mainController.imageController.imagesInCategory}">
 						<p:outputLabel>image Name : #{image.name}</p:outputLabel>
-						<p:graphicImage onclick=""
-							style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
-							title="" value="#{imageStreamer.image}" width="500" height="313">
-							<f:param name="imageId" value="#{image.idImage}" />
-						</p:graphicImage>
-						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;" ajax="false"
+						<p:commandLink
+							action="imageInfos">
+							<p:graphicImage
+								style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
+								title="" value="#{imageStreamer.image}" width="500" height="313">
+								<f:param name="imageId" value="#{image.idImage}" />
+							</p:graphicImage>
+						</p:commandLink>
+						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;"
+							ajax="false"
 							disabled="#{image.isUserEnteredLike(mainController.userController.user)}"
 							action="#{image.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">

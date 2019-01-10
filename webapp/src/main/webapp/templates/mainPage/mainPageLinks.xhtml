@@ -13,10 +13,19 @@
 	<!-- Links -->
 	<div class="ui-g-12 ui-md-10 ui-g-nopad">
 		<div class="ui-g-12">
-			<h:form rendered="#{mainController.linkController.showLinkForm}">
-			
+			<h:form id="links" rendered="#{mainController.linkController.showLinkForm}">
+
 				<h2>Links</h2>
 				<!-- Filter -->
+				<h:panelGrid columns="2">
+					<h:outputText value="nach Beschreibung suchen: " />
+					<p:inputText
+						value="#{mainController.linkController.currentSearchedLink}">
+						<p:ajax event="keyup" update="links"
+							listener="#{mainController.linkController.handleKeyEvent}" />
+					</p:inputText>
+				</h:panelGrid>
+
 				<br />
 				<p:outputLabel value="Kategorie:" for="dd" />
 				<p:autoComplete id="dd" dropdown="true"
@@ -57,7 +66,6 @@
 							icon="fa fa-thumbs-o-up">
 						</p:commandButton>
 					</p:column>
-
 
 				</p:dataTable>
 			</h:form>

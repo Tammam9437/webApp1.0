@@ -14,21 +14,25 @@
 		<div class="ui-g-12">
 			<!--Show User Images -->
 
-			<h:form id="imageForm" rendered="#{mainController.imageController.showUserImages}">
-			<h2>Dein Images</h2>
-				<div >
+			<h:form id="imageForm"
+				rendered="#{mainController.imageController.showUserImages}">
+				<h2>Dein Images</h2>
+				<div>
 
 					<p:repeat var="image"
 						value="#{mainController.imageController.userImages}">
 						<p:outputLabel>image Name : #{image.name}</p:outputLabel>
-						<p:graphicImage
-							style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
-							title="" value="#{imageStreamer.image}" width="500" height="313">
-							<f:param name="imageId" value="#{image.idImage}" />
-						</p:graphicImage>
-						
+						<p:commandLink action="imageInfos">
+							<p:graphicImage
+								style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
+								title="" value="#{imageStreamer.image}" width="500" height="313">
+								<f:param name="imageId" value="#{image.idImage}" />
+							</p:graphicImage>
+						</p:commandLink>
+
 						<p:growl id="message" showDetail="true" />
-						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;" icon="fa fa-trash"
+						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;"
+							icon="fa fa-trash"
 							actionListener="#{mainController.uploadController.deleteImage(image.idImage)}"
 							update="imageForm">
 							<p:confirm header="Confirmation" message="Are you sure?"

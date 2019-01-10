@@ -61,6 +61,12 @@ public class LinkController {
 
 	}
 
+	public void deleteLink(int linkId) {
+		ConnectToLikeDB.queryDeleteLikeFromDB("delete from Li where idlink= " + linkId);
+		System.out.println(linkId);
+		ConnectToLinkDB.deleteLinkFromDB(linkId);
+	}
+
 	public List<Link> getUserLinksInCategory() {
 		User user = mainController.getUserController().getUser();
 		String currentCategory = mainController.getFilterController().getCurrentCategory();
@@ -97,12 +103,6 @@ public class LinkController {
 		return filteredList;
 	}
 
-	public void deleteLink(int linkId) {
-		ConnectToLikeDB.queryDeleteLikeFromDB("delete from Li where idlink= " + linkId);
-		System.out.println(linkId);
-		ConnectToLinkDB.deleteLinkFromDB(linkId);
-	}
-
 	public List<Link> getLinksInCategory() {
 		String currentCategory = mainController.getFilterController().getCurrentCategory();
 		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
@@ -114,10 +114,21 @@ public class LinkController {
 			}
 		}
 		if (categoryId < 0) {
-			filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' ");
+			if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'Link' ");
+			} else {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink(
+						"From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink + "%'");
+			}
 		} else {
-			filteredList = (ArrayList<Link>) ConnectToLinkDB
-					.queryLink("From Link WHERE DTYPE != 'YoutubeLink' AND idcategory = " + categoryId);
+			if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB
+						.queryLink("From Link WHERE DTYPE = 'Link' AND idcategory = " + categoryId);
+			} else {
+				filteredList = (ArrayList<Link>) ConnectToLinkDB
+						.queryLink("From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink + "%'"
+								+ "AND idcategory = " + categoryId);
+			}
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
