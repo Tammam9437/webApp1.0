@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import entity.Category;
+import entity.Comment;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -25,7 +26,7 @@ public class ConnectToLikeDB {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
 					.addAnnotatedClass(Email.class).addAnnotatedClass(Email.class).addAnnotatedClass(Li.class)
-					.addAnnotatedClass(Category.class).buildSessionFactory();
+					.addAnnotatedClass(Comment.class).addAnnotatedClass(Category.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
@@ -59,7 +60,7 @@ public class ConnectToLikeDB {
 			getInstance().close();
 		}
 	}
-	
+
 	public static void queryDeleteLikeFromDB(String query) {
 		Session session = getInstance();
 		try {
@@ -76,21 +77,21 @@ public class ConnectToLikeDB {
 
 	@SuppressWarnings("unchecked")
 	public static List<Li> queryLike(String query) {
-	
+
 		Session session = getInstance();
 		List<Li> theLikes;
-	
+
 		try {
-	
+
 			// start a transaction
 			session.beginTransaction();
-	
+
 			// query students
 			theLikes = session.createQuery(query).list();
-	
+
 			// commit transaction
 			session.getTransaction().commit();
-	
+
 		} finally {
 			getInstance().close();
 		}
@@ -121,30 +122,30 @@ public class ConnectToLikeDB {
 		List<Li> userLikes = queryLike("From Li WHERE idlink ='" + link.getId() + "'");
 		return userLikes;
 	}
-	
+
 	public static List<Li> getUserFavoritLinks(User user) {
 		List<Li> userLikes = queryLike("From Li WHERE idLink IS NOT NULL AND iduser ='" + user.getId() + "'");
 		List<Li> userFavoritLinks = new ArrayList<>();
-		for(Li like : userLikes) {
-			if(!(like.getLink() instanceof YoutubeLink) && like.getLink() != null) {
+		for (Li like : userLikes) {
+			if (!(like.getLink() instanceof YoutubeLink) && like.getLink() != null) {
 				userFavoritLinks.add(like);
 			}
 		}
 		return userFavoritLinks;
 	}
-	
+
 	public static List<Li> getUserLinkLikes(User user, Link link) {
 		List<Li> userLinkLikes = queryLike(
 				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idlink ='" + link.getId() + "'");
 		return userLinkLikes;
 	}
-	
+
 	public static List<Li> getUserImageLikes(User user, Image image) {
 		List<Li> userLinkLikes = queryLike(
 				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idImage ='" + image.getIdImage() + "'");
 		return userLinkLikes;
 	}
-	
+
 	public static List<Li> getUserPdfLikes(User user, Pdf pdf) {
 		List<Li> userPdfLikes = queryLike(
 				"From Li WHERE iduser ='" + user.getId() + "'" + " AND idPdf ='" + pdf.getIdPdf() + "'");

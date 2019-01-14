@@ -8,40 +8,49 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>toMainPage</from-outcome>
-			<to-view-id>mainPage.xhtml</to-view-id>
+			<to-view-id>/mainPage.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
 			<from-outcome>toLogin</from-outcome>
-			<to-view-id>login.xhtml</to-view-id>
+			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
 			<from-outcome>toUserHomePage</from-outcome>
-			<to-view-id>userHomePage.xhtml</to-view-id>
+			<to-view-id>/userHomePage.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
 			<from-outcome>toIndex</from-outcome>
-			<to-view-id>index.xhtml</to-view-id>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-action>#{mainController.userController.navigationFromLogin}</from-action>
+			<if>#{mainController.userController.confirmLoginData()}</if>
+			<to-view-id>/userHomePage.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 
 		<navigation-case>
 
 			<from-outcome>toError</from-outcome>
-			<to-view-id>error.xhtml</to-view-id>
+			<to-view-id>/error.xhtml</to-view-id>
 		</navigation-case>
 
 		<navigation-case>
-			<from-action>#{mainController.userController.navigationFromLogin}</from-action>
+			<from-action>#{mainController.userController.navigationFromLogin}
+			</from-action>
 			<from-outcome>userHomePage</from-outcome>
-			<to-view-id>userHomePage.xhtml</to-view-id>
+			<to-view-id>/userHomePage.xhtml</to-view-id>
 		</navigation-case>
-		
-			<navigation-case>
-			<from-action>#{mainController.userController.navigationFromLogin}</from-action>
+
+		<navigation-case>
+			<from-action>#{mainController.userController.navigationFromLogin}
+			</from-action>
 			<from-outcome>error</from-outcome>
-			<to-view-id>error.xhtml</to-view-id>
+			<to-view-id>/error.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>

@@ -40,13 +40,14 @@
 								<f:param name="imageId" value="#{image.idImage}" />
 							</p:graphicImage>
 						</p:commandLink>
-						<p:commandButton style="margin-left: 300px; margin-bottom: 50px;"
-							ajax="false"
+							<p:commandButton id="imageButton" style="margin-left: 300px; margin-bottom: 50px;"
+							update="imageLikes imageButton"
 							disabled="#{image.isUserEnteredLike(mainController.userController.user)}"
 							action="#{image.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">
+						
 						</p:commandButton>
-						<p:outputLabel>likes : #{image.likesNumber}</p:outputLabel>
+						<p:outputLabel id="imageLikes" >likes : #{image.likesNumber}</p:outputLabel>
 						<p:separator></p:separator>
 					</p:repeat>
 

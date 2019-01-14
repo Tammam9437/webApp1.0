@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import entity.Category;
+import entity.Comment;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -24,7 +25,7 @@ public class ConnectToEmailDB {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
 					.addAnnotatedClass(Li.class).addAnnotatedClass(YoutubeLink.class).addAnnotatedClass(Category.class)
-					.addAnnotatedClass(Email.class).buildSessionFactory();
+					.addAnnotatedClass(Comment.class).addAnnotatedClass(Email.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}

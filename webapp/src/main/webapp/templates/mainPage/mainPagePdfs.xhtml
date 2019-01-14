@@ -37,7 +37,7 @@
 							player="pdf">
 							<f:param name="pdfId" value="#{pdf.idPdf}" />
 						</p:media>
-						<p:commandButton ajax="false"
+						<p:commandButton id="pdfButton" update="pdfButton"
 							disabled="#{pdf.isUserEnteredLike(mainController.userController.user)}"
 							action="#{pdf.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">

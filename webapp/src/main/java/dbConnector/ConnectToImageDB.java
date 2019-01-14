@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import entity.Category;
+import entity.Comment;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -23,7 +24,7 @@ public class ConnectToImageDB {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
 					.addAnnotatedClass(Email.class).addAnnotatedClass(Li.class).addAnnotatedClass(Category.class)
-					.buildSessionFactory();
+					.addAnnotatedClass(Comment.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
@@ -43,17 +44,17 @@ public class ConnectToImageDB {
 		}
 
 	}
-	
+
 	public static void deleteImageFromDB(int imageId) {
 		Session session = getInstance();
 		try {
 			session.beginTransaction();
-			
-			session.createQuery("delete from Image where id= " + imageId ).executeUpdate();
-			
+
+			session.createQuery("delete from Image where id= " + imageId).executeUpdate();
+
 			session.getTransaction().commit();
-			
-		}finally {
+
+		} finally {
 			getInstance().close();
 		}
 	}

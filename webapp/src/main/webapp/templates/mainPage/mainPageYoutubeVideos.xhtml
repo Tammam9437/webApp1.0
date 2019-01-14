@@ -33,7 +33,7 @@
 					var="video">
 					<p:tab title="#{video.beschreibung}">
 						<iframe width="420" height="345" src="#{video.url}"> </iframe>
-						<p:commandButton ajax="false"
+						<p:commandButton id="videoButton" update="videoButton"
 							disabled="#{video.isUserEnteredLike(mainController.userController.user)}"
 							action="#{video.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">

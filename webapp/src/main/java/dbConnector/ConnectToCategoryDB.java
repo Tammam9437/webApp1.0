@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import entity.Category;
+import entity.Comment;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -23,7 +24,7 @@ public class ConnectToCategoryDB {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
 					.addAnnotatedClass(Email.class).addAnnotatedClass(Li.class).addAnnotatedClass(Category.class)
-					.buildSessionFactory();
+					.addAnnotatedClass(Comment.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
@@ -43,7 +44,6 @@ public class ConnectToCategoryDB {
 		}
 
 	}
-	
 
 	public static Category getCategoryFromDB(int idCategory) {
 		Session session = getInstance();
@@ -59,9 +59,9 @@ public class ConnectToCategoryDB {
 		}
 		return category;
 	}
-	
+
 	public static Category getCategoryByName(String name) {
-		
+
 		List<Category> list = ConnectToCategoryDB.queryCategory("From Category WHERE name ='" + name + "'");
 		Category category = list.get(list.size() - 1);
 		return category;

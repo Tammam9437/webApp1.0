@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import entity.Category;
+import entity.Comment;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -23,7 +24,7 @@ public class ConnectToUserDB {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
 					.addAnnotatedClass(Email.class).addAnnotatedClass(Li.class).addAnnotatedClass(Category.class)
-					.buildSessionFactory();
+					.addAnnotatedClass(Comment.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}

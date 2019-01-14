@@ -69,9 +69,9 @@ public class UserController {
 
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {
-			return "userHomePage";
+			return "userHomePage?faces-redirect = true";
 		}else {
-			return "error";
+			return "error?faces-redirect = true";
 		}
 	
 	}

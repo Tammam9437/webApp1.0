@@ -47,6 +47,11 @@ public class Image implements Comparable<Image>{
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "image", cascade = CascadeType.ALL)
 	private List<Li> likes = new ArrayList<Li>();
 	
+	@OneToMany(targetEntity = Comment.class, mappedBy = "image", cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<Comment>();
+	
+	
+	
 	public Image() {
 		
 	}

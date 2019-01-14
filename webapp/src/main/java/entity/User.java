@@ -48,6 +48,9 @@ public class User {
 
 	@OneToOne(targetEntity = Email.class, mappedBy = "user", cascade = CascadeType.ALL)
 	private Email email;
+	
+	@OneToMany(targetEntity = Comment.class, mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Comment> comments = new ArrayList<Comment>();
 
 	public User() {
 		this.email = new Email();

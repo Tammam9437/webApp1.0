@@ -57,10 +57,11 @@
 						<h:outputText value="#{link.user.name}" />
 					</p:column>
 					<p:column styleClass="likes" headerText="Likes">
-						<h:outputText value="#{link.likesNumber}" />
+						<h:outputText id="likes"  value="#{link.likesNumber}" />
 					</p:column>
 					<p:column styleClass="likeButon">
-						<p:commandButton ajax="false"
+						<p:commandButton id="likeButton"
+						update="likeButton likes"
 							disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
 							action="#{link.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">

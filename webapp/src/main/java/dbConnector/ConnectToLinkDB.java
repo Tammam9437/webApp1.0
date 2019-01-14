@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import entity.Category;
+import entity.Comment;
 import entity.Email;
 import entity.Image;
 import entity.Li;
@@ -24,7 +25,7 @@ public class ConnectToLinkDB {
 			instance = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(User.class)
 					.addAnnotatedClass(Pdf.class).addAnnotatedClass(Link.class).addAnnotatedClass(Image.class)
 					.addAnnotatedClass(Li.class).addAnnotatedClass(YoutubeLink.class).addAnnotatedClass(Email.class)
-					.addAnnotatedClass(Category.class).buildSessionFactory();
+					.addAnnotatedClass(Comment.class).addAnnotatedClass(Category.class).buildSessionFactory();
 		}
 		return instance.getCurrentSession();
 	}
@@ -52,7 +53,7 @@ public class ConnectToLinkDB {
 		}
 		return theLinks;
 	}
-	
+
 	public static Link getLinkFromDB(int linkId) {
 		Session session = getInstance();
 		Link link;
@@ -67,21 +68,20 @@ public class ConnectToLinkDB {
 		}
 		return link;
 	}
-	
+
 	public static void deleteLinkFromDB(int linkId) {
 		Session session = getInstance();
 		try {
 			session.beginTransaction();
-			
+
 			session.createQuery("delete from Link where id= " + linkId).executeUpdate();
-			
+
 			session.getTransaction().commit();
-			
-		}finally {
+
+		} finally {
 			getInstance().close();
 		}
 	}
-	
 
 	public static void saveLinkInDB(Link link) {
 		Session session = getInstance();
