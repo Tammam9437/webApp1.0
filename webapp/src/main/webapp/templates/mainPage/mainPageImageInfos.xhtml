@@ -18,10 +18,29 @@
 			<p:graphicImage
 				style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
 				title="" value="#{imageStreamer.image}" width="500" height="313">
-				<f:param name="imageId" value="#{image.idImage}" />
+				<f:param name="imageId"
+					value="#{mainController.commentController.imageIdInfo}" />
 			</p:graphicImage>
+			<br />
+			<h3>Kommentar schreiben</h3>
+			<h:form>
+				<p:inputTextarea id="input"
+					value="#{mainController.commentController.text}"></p:inputTextarea>
+				<p:commandButton value="submit" ajax="false"
+					actionListener="#{mainController.commentController.saveComment()}">
+					<f:param name="imageId"
+						value="#{mainController.commentController.imageIdInfo}" />
+				</p:commandButton>
+			</h:form>
 			<p:separator />
 			<h3>Kommentare</h3>
+				<p:repeat var="comment"
+					value="#{mainController.commentController.image.comments}">
+					<p:outputLabel>user : #{comment.user.name}</p:outputLabel>
+					<br />
+					<p:outputLabel>#{comment.text}</p:outputLabel>
+					<p:separator />
+				</p:repeat>
 
 		</ui:define>
 

@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import dbConnector.ConnectToImageDB;
 import dbConnector.ConnectToLikeDB;
 
@@ -47,6 +50,7 @@ public class Image implements Comparable<Image>{
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "image", cascade = CascadeType.ALL)
 	private List<Li> likes = new ArrayList<Li>();
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(targetEntity = Comment.class, mappedBy = "image", cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<Comment>();
 	
@@ -132,9 +136,21 @@ public class Image implements Comparable<Image>{
 	public int getLikesNumber() {
 		return this.likes.size();
 	}
+	
+	public int getcommentsNumber() {
+		return this.comments.size();
+	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override

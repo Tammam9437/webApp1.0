@@ -181,6 +181,7 @@
 			</from-outcome>
 			<to-view-id>/templates/mainPage/mainPageImageInfos
 			</to-view-id>
+			<redirect></redirect>
 		</navigation-case>
 
 	</navigation-rule>

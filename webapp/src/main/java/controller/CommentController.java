@@ -2,6 +2,13 @@ package controller;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import dbConnector.ConnectToCommentDB;
+import dbConnector.ConnectToImageDB;
+import entity.Comment;
+import entity.Image;
+import entity.User;
 
 @ManagedBean
 @SessionScoped
@@ -9,44 +16,56 @@ public class CommentController {
 
 	private MainController mainController;
 	
-	private boolean showCommentArea;
+	private String text;
+	
+	private int imageIdInfo;
 	
 
 	public CommentController(MainController mainController) {
 		this.mainController = mainController;
-		this.showCommentArea = false;
 	}
 	
-	
-	public void showCommentAreaToggel() {
-		if (showCommentArea) {
-			showCommentArea = false;
-		} else {
-			showCommentArea = true;
-		}
-		System.out.println(showCommentArea);
+	public void saveComment() {
+		User user =mainController.getUserController().getUser(); 
+		
+		FacesContext context = FacesContext.getCurrentInstance();		
+		String imageId = context.getExternalContext().getRequestParameterMap().get("imageId");
+		Image image = ConnectToImageDB.getImageFromDB(Integer.parseInt(imageId));
+		
+		Comment comment = new Comment(text,user,image);
+		ConnectToCommentDB.saveCommentInDB(comment);
+		this.text = null;
 	}
-
-
+	
+	public Image getImage() {
+		return ConnectToImageDB.getImageFromDB(imageIdInfo);
+		
+	}
+	
 	public MainController getMainController() {
 		return mainController;
 	}
 
-
-	public void setMainController(MainController mainController) {
-		this.mainController = mainController;
+	public String getText() {
+		return text;
 	}
 
-
-	public boolean isShowCommentArea() {
-		return showCommentArea;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-
-	public void setShowCommentArea(boolean showCommentArea) {
-		this.showCommentArea = showCommentArea;
+	public int getImageIdInfo() {
+		return imageIdInfo;
 	}
 	
-	
+	public void ImageIdInfoSet(int imageIdInfo) {
+		this.imageIdInfo = imageIdInfo;
+	}
+
+	public void setImageIdInfo(int imageIdInfo) {
+		this.imageIdInfo = imageIdInfo;
+	}
+
+
 
 }

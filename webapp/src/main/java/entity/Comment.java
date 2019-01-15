@@ -32,6 +32,14 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "idImage")
 	private Image image;
+	
+	
+
+	public Comment(String text, User user, Image image) {
+		this.text = text;
+		this.user = user;
+		this.image = image;
+	}
 
 	public Comment() {
 
