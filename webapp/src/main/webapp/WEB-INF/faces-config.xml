@@ -56,7 +56,7 @@
 
 	</navigation-rule>
 
-
+	<!-- from UserHomePage -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
@@ -74,12 +74,102 @@
 			<to-view-id>/templates/userHomePage/userHomePageLinks</to-view-id>
 
 		</navigation-case>
-		
-			<navigation-case>
+
+		<navigation-case>
 			<from-outcome>
 				toFavoritLinks
 			</from-outcome>
-			<to-view-id>/templates/userHomePage/userHomePageFavoritLinks</to-view-id>
+			<to-view-id>/templates/userHomePage/userHomePageFavoritLinks
+			</to-view-id>
+
+		</navigation-case>
+
+
+		<navigation-case>
+			<from-outcome>
+				toAddYoutube
+			</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePageAddYoutubeVideo
+			</to-view-id>
+
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>
+				toYoutubeAnzeigen
+			</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePageYoutubeVideos
+			</to-view-id>
+
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>
+				toUpload
+			</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePageUpload
+			</to-view-id>
+
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>
+				toUserImages
+			</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePageUserImages
+			</to-view-id>
+
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>
+				toUserPdfs
+			</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePagePdfs
+			</to-view-id>
+
+		</navigation-case>
+
+	</navigation-rule>
+
+	<!-- from mainPage -->
+	<navigation-rule>
+
+		<from-view-id>*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>
+				toImages
+			</from-outcome>
+			<to-view-id>/templates/mainPage/mainPageImages
+			</to-view-id>
+
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>
+				toPdfs
+			</from-outcome>
+			<to-view-id>/templates/mainPage/mainPagePdfs
+			</to-view-id>
+
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>
+				toLinks
+			</from-outcome>
+			<to-view-id>/templates/mainPage/mainPageLinks
+			</to-view-id>
+
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>
+				toYoutube
+			</from-outcome>
+			<to-view-id>/templates/mainPage/mainPageYoutubeVideos
+			</to-view-id>
 
 		</navigation-case>
 

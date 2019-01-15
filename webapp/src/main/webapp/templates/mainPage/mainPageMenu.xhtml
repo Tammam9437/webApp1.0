@@ -19,18 +19,22 @@
 
 					<p:menuitem value="show Fotos"
 						actionListener="#{mainController.imageController.showImagesToggel()}"
+						outcome="toImages"
 						ajax="false" />
 
 					<p:menuitem style="float:left" value="show Pdfs"
 						actionListener="#{mainController.uploadController.showUploadToggel()}"
+						outcome="toPdfs"
 						ajax="false" />
 
 					<p:menuitem value="show Links"
 						actionListener="#{mainController.linkController.showLinksToggel}"
+						outcome="toLinks"
 						ajax="false" />
 
 					<p:menuitem value="show youtube Videos"
 						actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
+						outcome="toYoutube"
 						ajax="false" />
 
 				</p:megaMenu>

@@ -7,14 +7,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!-- Show Pdfs -->
-			<h:form id="pdfForm"
-				rendered="#{mainController.uploadController.showPdfs}">
+	<ui:decorate template="../page.xhtml">
+		<ui:define name="content">
+			<h:form id="pdfForm">
 				<h2>Dein Pdf Dateien</h2>
 
 				<!-- Filter -->
@@ -57,9 +56,9 @@
 				</p:accordionPanel>
 			</h:form>
 
-		</div>
-	</div>
+		</ui:define>
 
+	</ui:decorate>
 </h:body>
 
 

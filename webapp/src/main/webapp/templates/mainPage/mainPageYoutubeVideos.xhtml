@@ -7,15 +7,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mainPage.css" />
 </h:head>
 <h:body>
-	<!-- Links -->
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!-- Youtube vedios -->
-			<h:form
-				rendered="#{mainController.videoController.showYoutubeVideos}">
+	<ui:decorate template="../mainPage.xhtml">
+		<ui:define name="content">
+			<h:form>
 				<h2>Youtube Videos</h2>
 				<br />
 				<p:outputLabel value="Kategorie:" for="dd" />
@@ -42,8 +39,9 @@
 				</p:accordionPanel>
 			</h:form>
 
-		</div>
-	</div>
+		</ui:define>
+
+	</ui:decorate>
 
 </h:body>
 

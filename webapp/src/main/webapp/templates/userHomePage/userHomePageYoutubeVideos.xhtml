@@ -7,14 +7,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!-- Youtube videos -->
-			<h:form id="videoForm"
-				rendered="#{mainController.videoController.showYoutubeVideos}">
+	<ui:decorate template="../page.xhtml">
+		<ui:define name="content">
+			<h:form id="videoForm">
 				<h2>Dein Youtube Videos</h2>
 				<p:accordionPanel dynamic="true" cache="true" multiple="true"
 					value="#{mainController.videoController.userYoutubeLinks}"
@@ -40,10 +39,9 @@
 				</p:accordionPanel>
 
 			</h:form>
+		</ui:define>
 
-		</div>
-	</div>
-
+	</ui:decorate>
 </h:body>
 
 

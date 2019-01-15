@@ -7,13 +7,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mainPage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!-- Images -->
-			<h:form rendered="#{mainController.imageController.showImages}">
+	<ui:decorate template="../mainPage.xhtml">
+		<ui:define name="content">
+			<h:form>
 				<h2>Images</h2>
 				<!-- Filter -->
 				<br />
@@ -29,7 +28,7 @@
 				<br />
 				<div style="margin-top: 50px">
 
-					<p:repeat var="image" 
+					<p:repeat var="image"
 						value="#{mainController.imageController.imagesInCategory}">
 						<p:outputLabel>image Name : #{image.name}</p:outputLabel>
 						<p:commandLink action="imageInfos">
@@ -46,13 +45,13 @@
 							action="#{image.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">
 
-						</p:commandButton  >
-						<p:outputLabel  id="imageLikes">likes : #{image.likesNumber}</p:outputLabel>
-						<br/>
+						</p:commandButton>
+						<p:outputLabel id="imageLikes">likes : #{image.likesNumber}</p:outputLabel>
+						<br />
 						<p:outputLabel style="margin-left: 300px;" for="comment">kommentar schreiben</p:outputLabel>
-						<br/>
-						<p:inputTextarea  style="margin-left: 300px;" id="comment"></p:inputTextarea>
-						
+						<br />
+						<p:inputTextarea style="margin-left: 300px;" id="comment"></p:inputTextarea>
+
 
 						<p:separator></p:separator>
 					</p:repeat>
@@ -60,9 +59,9 @@
 				</div>
 
 			</h:form>
-		</div>
-	</div>
+		</ui:define>
 
+	</ui:decorate>
 </h:body>
 
 

@@ -7,13 +7,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mainPage.css" />
 </h:head>
 <h:body>
-	<!-- Links -->
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<h:form id="links" rendered="#{mainController.linkController.showLinkForm}">
+	<ui:decorate template="../mainPage.xhtml">
+		<ui:define name="content">
+			<h:form id="links">
 
 				<h2>Links</h2>
 				<!-- Filter -->
@@ -57,11 +56,10 @@
 						<h:outputText value="#{link.user.name}" />
 					</p:column>
 					<p:column styleClass="likes" headerText="Likes">
-						<h:outputText id="likes"  value="#{link.likesNumber}" />
+						<h:outputText id="likes" value="#{link.likesNumber}" />
 					</p:column>
 					<p:column styleClass="likeButon">
-						<p:commandButton id="likeButton"
-						update="likeButton likes"
+						<p:commandButton id="likeButton" update="likeButton likes"
 							disabled="#{link.isUserEnteredLike(mainController.userController.user)}"
 							action="#{link.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">
@@ -71,8 +69,9 @@
 				</p:dataTable>
 			</h:form>
 
-		</div>
-	</div>
+		</ui:define>
+
+	</ui:decorate>
 
 </h:body>
 

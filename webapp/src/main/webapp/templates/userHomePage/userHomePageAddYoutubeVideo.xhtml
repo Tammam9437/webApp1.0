@@ -7,14 +7,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!-- Add Youtube video -->
-			<h:form
-				rendered="#{mainController.videoController.showAddYoutubeVideo}">
+	<ui:decorate template="../page.xhtml">
+		<ui:define name="content">
+			<h:form>
 				<h2>Add Youtube Video</h2>
 				<h:panelGrid columns="3" cellpadding="2">
 					<p:outputLabel value="URL : " />
@@ -49,9 +48,9 @@
 				</h:panelGrid>
 			</h:form>
 
-		</div>
-	</div>
+		</ui:define>
 
+	</ui:decorate>
 </h:body>
 
 

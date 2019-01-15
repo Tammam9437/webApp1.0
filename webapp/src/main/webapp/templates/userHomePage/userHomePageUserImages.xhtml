@@ -7,15 +7,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!--Show User Images -->
-
-			<h:form id="imageForm"
-				rendered="#{mainController.imageController.showUserImages}">
+	<ui:decorate template="../page.xhtml">
+		<ui:define name="content">
+			<h:form id="imageForm">
 				<h2>Dein Images</h2>
 				<div>
 
@@ -53,9 +51,9 @@
 
 			</h:form>
 
+		</ui:define>
 
-		</div>
-	</div>
+	</ui:decorate>
 
 </h:body>
 
