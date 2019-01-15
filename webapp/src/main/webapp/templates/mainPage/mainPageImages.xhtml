@@ -29,25 +29,31 @@
 				<br />
 				<div style="margin-top: 50px">
 
-					<p:repeat var="image"
+					<p:repeat var="image" 
 						value="#{mainController.imageController.imagesInCategory}">
 						<p:outputLabel>image Name : #{image.name}</p:outputLabel>
-						<p:commandLink
-							action="imageInfos">
+						<p:commandLink action="imageInfos">
 							<p:graphicImage
 								style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
 								title="" value="#{imageStreamer.image}" width="500" height="313">
 								<f:param name="imageId" value="#{image.idImage}" />
 							</p:graphicImage>
 						</p:commandLink>
-							<p:commandButton id="imageButton" style="margin-left: 300px; margin-bottom: 50px;"
-							update="imageLikes imageButton"
+						<p:commandButton id="likeButton"
+							style="margin-left: 300px; margin-bottom: 50px;"
+							update="imageLikes likeButton"
 							disabled="#{image.isUserEnteredLike(mainController.userController.user)}"
 							action="#{image.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">
+
+						</p:commandButton  >
+						<p:outputLabel  id="imageLikes">likes : #{image.likesNumber}</p:outputLabel>
+						<br/>
+						<p:outputLabel style="margin-left: 300px;" for="comment">kommentar schreiben</p:outputLabel>
+						<br/>
+						<p:inputTextarea  style="margin-left: 300px;" id="comment"></p:inputTextarea>
 						
-						</p:commandButton>
-						<p:outputLabel id="imageLikes" >likes : #{image.likesNumber}</p:outputLabel>
+
 						<p:separator></p:separator>
 					</p:repeat>
 

@@ -7,23 +7,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/userHomePage.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12" style="padding-top: 0px;">
-
-			<!-- search -->
-			<h:form>
-
-			</h:form>
+	<ui:decorate template="../page.xhtml">
+		<ui:define name="content">
 
 
-			<h:form id="links"
-				rendered="#{mainController.linkController.showLinkForm}">
-				
+			<h:form id="links">
+
 				<h2>Dein Links</h2>
-				
+
 				<h:panelGrid columns="2">
 					<h:outputText value="nach Beschreibung suchen: " />
 					<p:inputText
@@ -82,9 +77,9 @@
 
 				</p:dataTable>
 			</h:form>
+		</ui:define>
 
-		</div>
-	</div>
+	</ui:decorate>
 
 </h:body>
 

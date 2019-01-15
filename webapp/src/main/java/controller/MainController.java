@@ -18,6 +18,7 @@ public class MainController {
 	private SendEmailController sendEmailController;
 	private CategoryController categoryController;
 	private FilterController filterController;
+	private CommentController commentController;
 
 	public MainController() {
 		this.userController = new UserController(this);
@@ -30,6 +31,7 @@ public class MainController {
 		this.sendEmailController = new SendEmailController(this);
 		this.categoryController = new CategoryController(this);
 		this.filterController = new FilterController(this);
+		this.commentController = new CommentController(this);
 	}
 	
 	public void closeAll(){
@@ -123,6 +125,14 @@ public class MainController {
 
 	public void setFilterController(FilterController filterController) {
 		this.filterController = filterController;
+	}
+
+	public CommentController getCommentController() {
+		return commentController;
+	}
+
+	public void setCommentController(CommentController commentController) {
+		this.commentController = commentController;
 	}
 
 }

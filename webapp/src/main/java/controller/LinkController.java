@@ -1,12 +1,10 @@
 package controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import dbConnector.ConnectToCategoryDB;
 import dbConnector.ConnectToLikeDB;
@@ -136,14 +134,12 @@ public class LinkController {
 		return filteredList;
 	}
 
-	public void showAddLinkToggel() throws IOException {
+	public void showAddLinkToggel() {
 		if (showAddLink) {
 			showAddLink = false;
-			FacesContext.getCurrentInstance().getExternalContext().dispatch("/templates/userHomePage/userHomePageAddLink.xhtml");
 		} else {
 			mainController.closeAll();
 			showAddLink = true;
-			FacesContext.getCurrentInstance().getExternalContext().dispatch("/templates/userHomePage/userHomePageAddLink.xhtml");	
 		}
 	}
 

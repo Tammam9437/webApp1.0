@@ -7,15 +7,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!-- favorit Links -->
-
-			<h:form
-				rendered="#{mainController.linkController.showFavouriteLinks}">
+	<ui:decorate template="../page.xhtml">
+		<ui:define name="content">
+			<h:form>
 				<h2>Dein favorit Links</h2>
 
 				<!--  Links -->
@@ -48,9 +46,9 @@
 				</p:dataTable>
 			</h:form>
 
-		</div>
-	</div>
+		</ui:define>
 
+	</ui:decorate>
 </h:body>
 
 

@@ -7,13 +7,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
-			<!-- AddLink -->
-			<h:form rendered="#{mainController.linkController.showAddLink}">
+	<ui:decorate template="../page.xhtml">
+		<ui:define name="content">
+			<h:form>
 				<h2>Add new Link</h2>
 				<h:panelGrid columns="3" cellpadding="2">
 					<p:outputLabel value="URL : " />
@@ -48,8 +47,11 @@
 						ajax="false"></p:commandButton>
 				</h:panelGrid>
 			</h:form>
-		</div>
-	</div>
+
+		</ui:define>
+
+	</ui:decorate>
+
 
 </h:body>
 
