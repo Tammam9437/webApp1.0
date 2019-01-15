@@ -21,15 +21,12 @@
 					<p:column>
 						<p:submenu style="background-color:#94d4d4;">
 							<p:menuitem value="add new Link"
-								actionListener="#{mainController.linkController.showAddLinkToggel}"
 								outcome="toAddLink"
 								ajax="false" />
 							<p:menuitem value="Show Links"
-								actionListener="#{mainController.linkController.showLinksToggel}"
 								outcome="toShowLinks"
 								ajax="false" />
 							<p:menuitem value="Show your favourite Links"
-								actionListener="#{mainController.linkController.showFavouriteLinksToggel}"
 								outcome="toFavoritLinks"
 								ajax="false" />
 
@@ -43,12 +40,10 @@
 						<p:submenu style="background-color:#94d4d4;">
 
 							<p:menuitem value="Add Youtube Video"
-								actionListener="#{mainController.videoController.showAddYoutubeVideoToggel()}"
 								outcome="toAddYoutube"
 								ajax="false" />
 
 							<p:menuitem value="Dein youtube Videos anzeigen"
-								actionListener="#{mainController.videoController.showYoutubeVideosToggel()}"
 								outcome="toYoutubeAnzeigen"
 								ajax="false" />
 							<p:menuitem />
@@ -63,15 +58,13 @@
 					<p:column>
 						<p:submenu style="background-color:#94d4d4;">
 							<p:menuitem value="Upload" ajax="false"
-								actionListener="#{mainController.uploadController.showUploadToggel}" outcome="toUpload" />
+								outcome="toUpload" />
 
 							<p:menuitem value="Show your Fotos"
-								actionListener="#{mainController.imageController.showUserImagesToggel()}"
 								outcome="toUserImages"
 								ajax="false" />
 
 							<p:menuitem value="Show your Pdfs"
-								actionListener="#{mainController.uploadController.showPdfsToggel()}"
 								outcome="toUserPdfs"
 								ajax="false" />
 						</p:submenu>

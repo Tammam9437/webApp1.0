@@ -33,19 +33,6 @@ public class MainController {
 		this.filterController = new FilterController(this);
 		this.commentController = new CommentController(this);
 	}
-	
-	public void closeAll(){
-		imageController.setShowImages(false);
-		imageController.setShowUserImages(false);
-		linkController.setShowAddLink(false);
-		linkController.setShowFavouriteLinks(false);
-		linkController.setShowLinkForm(false);
-		uploadController.setShowUpload(false);
-		videoController.setShowAddYoutubeVideo(false);
-		videoController.setShowYoutubeVideos(false);
-		uploadController.setShowPdfs(false);
-	}
-	
 
 	public SendEmailController getSendEmailController() {
 		return sendEmailController;

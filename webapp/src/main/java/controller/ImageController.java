@@ -17,13 +17,8 @@ import entity.User;
 public class ImageController {
 
 	private MainController mainController;
-	private boolean showImages;
-	private boolean showUserImages;
-
 	public ImageController(MainController mainController) {
 		this.mainController = mainController;
-		this.showImages = false;
-		this.showUserImages = false;
 	}
 	
 	public List<Image> getAllImagesFromDB() {
@@ -37,23 +32,6 @@ public class ImageController {
 		User user = mainController.getUserController().getUser();
 		List<Image> list = ConnectToImageDB.queryImage("From Image WHERE iduser ='" + user.getId() + "'");
 		return list;
-	}
-	
-	public void showImagesToggel() {
-		if (showImages) {
-			showImages = false;
-		} else {
-			mainController.closeAll();
-			showImages = true;
-		}
-	}
-	public void showUserImagesToggel() {
-		if (showUserImages) {
-			showUserImages = false;
-		} else {
-			mainController.closeAll();
-			showUserImages = true;
-		}
 	}
 	
 	public List<Image> getImagesInCategory() {
@@ -79,20 +57,4 @@ public class ImageController {
 		return mainController;
 	}
 
-	public boolean isShowImages() {
-		return showImages;
-	}
-
-	public void setShowImages(boolean showImages) {
-		this.showImages = showImages;
-	}
-
-	public boolean isShowUserImages() {
-		return showUserImages;
-	}
-
-	public void setShowUserImages(boolean showUserImages) {
-		this.showUserImages = showUserImages;
-	}
-	
 }

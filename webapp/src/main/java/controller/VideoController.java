@@ -21,41 +21,16 @@ public class VideoController {
 
 	private YoutubeLink youtubeLink;
 
-	private boolean showAddYoutubeVideo;
-
-	private boolean showYoutubeVideos;
-
 	public VideoController(MainController mainController) {
 		this.mainController = mainController;
 		this.youtubeLink = new YoutubeLink();
-		this.showYoutubeVideos = false;
-		this.showAddYoutubeVideo = false;
 	}
 
-	public void showYoutubeVideosToggel() {
-		if (showYoutubeVideos) {
-			showYoutubeVideos = false;
-		} else {
-			mainController.closeAll();
-			showYoutubeVideos = true;
-		}
-	}
-
-	public void showAddYoutubeVideoToggel() {
-		if (showAddYoutubeVideo) {
-			showAddYoutubeVideo = false;
-		} else {
-			mainController.closeAll();
-			showAddYoutubeVideo = true;
-		}
-	}
 
 	public void addYoutubeVideo() {
 		YoutubeLink add = new YoutubeLink(youtubeLink.getUrl(), youtubeLink.getBeschreibung());
 		User user = mainController.getUserController().getUser();
 		Category category = mainController.getCategoryController().getCategory();
-		showAddYoutubeVideo = false;
-		showYoutubeVideos = true;
 		user.getLinks().add(add);
 		add.setUser(user);
 		add.setCategory(category);
@@ -103,14 +78,6 @@ public class VideoController {
 		return list;
 	}
 
-	public boolean isShowYoutubeVideos() {
-		return showYoutubeVideos;
-	}
-
-	public void setShowYoutubeVideos(boolean showYoutubeVideos) {
-		this.showYoutubeVideos = showYoutubeVideos;
-	}
-
 	public MainController getMainController() {
 		return mainController;
 	}
@@ -125,18 +92,6 @@ public class VideoController {
 
 	public void setYoutubeLink(YoutubeLink youtubeLink) {
 		this.youtubeLink = youtubeLink;
-	}
-
-	public boolean isShowAddYoutubeVideok() {
-		return showAddYoutubeVideo;
-	}
-
-	public void setShowAddYoutubeVideo(boolean showAddYoutubeVideo) {
-		this.showAddYoutubeVideo = showAddYoutubeVideo;
-	}
-
-	public boolean isShowAddYoutubeVideo() {
-		return showAddYoutubeVideo;
 	}
 
 }

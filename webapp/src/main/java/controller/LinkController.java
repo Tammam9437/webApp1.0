@@ -22,32 +22,15 @@ public class LinkController {
 	private Link link;
 	private String currentSearchedLink;
 
-	private boolean showLinkForm;
-	private boolean showAddLink;
-	private boolean showFavouriteLinks;
-
-	public boolean isShowFavouriteLinks() {
-		return showFavouriteLinks;
-	}
-
-	public void setShowFavouriteLinks(boolean showFavouriteLinks) {
-		this.showFavouriteLinks = showFavouriteLinks;
-	}
-
 	public LinkController(MainController mainController) {
 		this.mainController = mainController;
 		this.link = new Link();
-		this.showAddLink = false;
-		this.showLinkForm = false;
-		this.showFavouriteLinks = false;
 	}
 
 	public void addLink() {
 		Link add = new Link(link.getUrl(), link.getBeschreibung());
 		User user = mainController.getUserController().getUser();
 		Category category = mainController.getCategoryController().getCategory();
-		showAddLink = false;
-		showLinkForm = true;
 		user.getLinks().add(add);
 		add.setUser(user);
 		add.setCategory(category);
@@ -134,37 +117,12 @@ public class LinkController {
 		return filteredList;
 	}
 
-	public void showAddLinkToggel() {
-		if (showAddLink) {
-			showAddLink = false;
-		} else {
-			mainController.closeAll();
-			showAddLink = true;
-		}
-	}
-
-	public void showFavouriteLinksToggel() {
-		if (showFavouriteLinks) {
-			showFavouriteLinks = false;
-		} else {
-			mainController.closeAll();
-			showFavouriteLinks = true;
-		}
-	}
 
 	public void saveLike() {
 		Li like = new Li();
 		like.saveInDB();
 	}
 
-	public void showLinksToggel() {
-		if (showLinkForm) {
-			showLinkForm = false;
-		} else {
-			mainController.closeAll();
-			showLinkForm = true;
-		}
-	}
 
 	public MainController getMainController() {
 		return mainController;
@@ -178,21 +136,6 @@ public class LinkController {
 		this.link = link;
 	}
 
-	public boolean isShowLinkForm() {
-		return showLinkForm;
-	}
-
-	public void setShowLinkForm(boolean showLinkForm) {
-		this.showLinkForm = showLinkForm;
-	}
-
-	public boolean isShowAddLink() {
-		return showAddLink;
-	}
-
-	public void setShowAddLink(boolean showAddLink) {
-		this.showAddLink = showAddLink;
-	}
 
 	public String getCurrentSearchedLink() {
 		return currentSearchedLink;

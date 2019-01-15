@@ -20,35 +20,11 @@ public class UploadController {
 
 	private MainController mainController;
 
-	private boolean showUpload;
-	
-	private boolean showPdfs;
 
 	public UploadController(MainController mainController) {
 		this.mainController = mainController;
-
-		this.showUpload = false;
-		this.showPdfs = false;
 	}
 
-	public void showPdfsToggel() {
-		if (showPdfs) {
-			showPdfs = false;
-		} else {
-			mainController.closeAll();
-			showPdfs = true;
-		}
-	}
-	
-	public void showUploadToggel() {
-		if (showUpload) {
-			showUpload = false;
-		} else {
-			mainController.closeAll();
-			showUpload = true;
-		}
-	}
-	
 	public void deletePdf(int pdfId) {
 		ConnectToPdfDB.deletePdfFromDB(pdfId);
 		addMessage("Delete Pdf","Pdf has been deleted."); 
@@ -114,22 +90,6 @@ public class UploadController {
 
 	public MainController getMainController() {
 		return mainController;
-	}
-
-	public boolean isShowUpload() {
-		return showUpload;
-	}
-
-	public void setShowUpload(boolean showUpload) {
-		this.showUpload = showUpload;
-	}
-
-	public boolean isShowPdfs() {
-		return showPdfs;
-	}
-
-	public void setShowPdfs(boolean showPdfs) {
-		this.showPdfs = showPdfs;
 	}
 
 }
