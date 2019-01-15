@@ -52,6 +52,10 @@ public class ImageController {
 		java.util.Collections.sort(filteredList);
 		return filteredList;
 	}
+	
+	public String toImageInfos() {
+		return "toImageInfos";
+	}
 
 	public MainController getMainController() {
 		return mainController;

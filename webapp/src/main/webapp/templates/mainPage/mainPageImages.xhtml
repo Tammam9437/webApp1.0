@@ -31,7 +31,7 @@
 					<p:repeat var="image"
 						value="#{mainController.imageController.imagesInCategory}">
 						<p:outputLabel>image Name : #{image.name}</p:outputLabel>
-						<p:commandLink action="imageInfos">
+						<p:commandLink action="#{mainController.imageController.toImageInfos()}" >
 							<p:graphicImage
 								style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
 								title="" value="#{imageStreamer.image}" width="500" height="313">

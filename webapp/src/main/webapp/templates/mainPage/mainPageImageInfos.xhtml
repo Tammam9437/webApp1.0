@@ -7,17 +7,11 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-	<title>Registrieren</title>
-	<link rel="stylesheet" type="text/css" href="css/login.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/mainPage.css" />
 </h:head>
 <h:body>
-	<div class="header">
-		<h1>Image</h1>
-	</div>
-	<ui:include src="templates/mainPage/mainPageMenu.xhtml"></ui:include>
-
-	<div class="ui-g-12 ui-md-10 ui-g-nopad">
-		<div class="ui-g-12">
+	<ui:decorate template="../mainPage.xhtml">
+		<ui:define name="content">
 
 			<h2>Image Infos</h2>
 
@@ -26,11 +20,12 @@
 				title="" value="#{imageStreamer.image}" width="500" height="313">
 				<f:param name="imageId" value="#{image.idImage}" />
 			</p:graphicImage>
-			<p:separator/>
+			<p:separator />
 			<h3>Kommentare</h3>
 
-		</div>
-	</div>
+		</ui:define>
+
+	</ui:decorate>
 
 
 

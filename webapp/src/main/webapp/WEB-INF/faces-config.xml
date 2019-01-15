@@ -173,6 +173,16 @@
 
 		</navigation-case>
 
+		<navigation-case>
+			<from-action>#{mainController.imageController.toImageInfos()}
+			</from-action>
+			<from-outcome>
+				toImageInfos
+			</from-outcome>
+			<to-view-id>/templates/mainPage/mainPageImageInfos
+			</to-view-id>
+		</navigation-case>
+
 	</navigation-rule>
 
 
