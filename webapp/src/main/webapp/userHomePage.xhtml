@@ -14,16 +14,12 @@
 		<h1>Herzlich Welkommen #{mainController.userController.user.name}</h1>
 	</div>
 
-	<div>
 		<!-- Navigation zu mainPage -->
 		<ui:include src="templates/userHomePage/userHomePageMenu.xhtml"></ui:include>
 
 
 		<!-- Upload -->
 		<ui:include src="templates/userHomePage/userHomePageUpload.xhtml"></ui:include>
-
-		<!-- Show Links -->
-		<ui:include src="templates/userHomePage/userHomePageLinks.xhtml"></ui:include>
 
 		<!-- User Youtube Videos anzeigen -->
 		<ui:include
@@ -42,16 +38,6 @@
 
 		<!-- User Pdfs -->
 		<ui:include src="templates/userHomePage/userHomePagePdfs.xhtml"></ui:include>
-
-		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-			<p:commandButton value="Yes" type="button"
-				styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
-			<p:commandButton value="No" type="button"
-				styleClass="ui-confirmdialog-no" icon="fa fa-times" />
-		</p:confirmDialog>
-
-
-	</div>
 
 
 </h:body>
