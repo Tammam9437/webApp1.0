@@ -24,23 +24,35 @@
 			<br />
 			<h3>Kommentar schreiben</h3>
 			<h:form>
-				<p:inputTextarea id="input"
-					value="#{mainController.commentController.text}"></p:inputTextarea>
-				<p:commandButton value="submit" ajax="false"
-					actionListener="#{mainController.commentController.saveComment()}">
-					<f:param name="imageId"
-						value="#{mainController.commentController.imageIdInfo}" />
-				</p:commandButton>
+
+				<div style="float: left">
+					<p:inputTextarea style="float:left ;height: 120px!important; width: 600px;" id="input" required="true"
+						requiredMessage="geben Sie bitte einen Kommentar ein"
+						value="#{mainController.commentController.text}"></p:inputTextarea>
+					<h:message id="message" for="input" showDetail="true"
+						showSummary="false" style="color:red;" />
+					<br />
+					<p:commandButton style="margin-top: 10px;" value="submit" update="input comments message"
+						actionListener="#{mainController.commentController.saveComment()}">
+						<f:param name="imageId"
+							value="#{mainController.commentController.imageIdInfo}" />
+					</p:commandButton>
+				</div>
+
 			</h:form>
-			<p:separator />
+			<p:separator style="margin-top: 200px;" />
 			<h3>Kommentare</h3>
+
+			<h:form id="comments">
 				<p:repeat var="comment"
 					value="#{mainController.commentController.image.comments}">
-					<p:outputLabel>user : #{comment.user.name}</p:outputLabel>
-					<br />
+
 					<p:outputLabel>#{comment.text}</p:outputLabel>
+					<br />
+					<p:outputLabel style="    margin-left: 1000px; color: cadetblue;">kommentar von #{comment.user.name}</p:outputLabel>
 					<p:separator />
 				</p:repeat>
+			</h:form>
 
 		</ui:define>
 
