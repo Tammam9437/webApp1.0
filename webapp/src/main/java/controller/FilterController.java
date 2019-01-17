@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
+
+import com.mysql.cj.util.StringUtils;
 
 import dbConnector.ConnectToCategoryDB;
 import entity.Category;
@@ -16,8 +19,6 @@ public class FilterController {
 	private MainController mainController;
 
 	private List<String> links;
-
-	
 
 	private List<String> categorys;
 
@@ -41,6 +42,7 @@ public class FilterController {
 
 		this.categorys.add("All");
 		this.currentsortLike = "All";
+		this.currentCategory = "All";
 
 	}
 //
@@ -121,6 +123,5 @@ public class FilterController {
 	public void setLinks(List<String> links) {
 		this.links = links;
 	}
-
 
 }

@@ -72,6 +72,15 @@ public class Link implements Comparable<Link> {
 		this.url = url;
 		this.beschreibung = beschreibung;
 	}
+	
+	
+
+	public Link(String url, String beschreibung, User user, Category category) {
+		this.url = url;
+		this.beschreibung = beschreibung;
+		this.user = user;
+		this.category = category;
+	}
 
 	public List<Link> getLinksFromDB() {
 		ArrayList<Link> list = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE DTYPE != 'YoutubeLink' ");

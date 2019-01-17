@@ -10,6 +10,7 @@ import dbConnector.ConnectToUserDB;
 import entity.Email;
 import entity.Li;
 import entity.User;
+import exception.PassowrdNotCorrectException;
 
 @ManagedBean
 @SessionScoped
@@ -71,7 +72,10 @@ public class UserController {
 		if (confirmLoginData()) {
 			return "userHomePage?faces-redirect = true";
 		}else {
-			return "error?faces-redirect = true";
+//			new 
+			return "loginError?faces-redirect = true";
+//			old
+//			return "error?faces-redirect = true";
 		}
 	
 	}
