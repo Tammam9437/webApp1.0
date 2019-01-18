@@ -13,7 +13,7 @@
 <h:body>
 	<ui:decorate template="../page.xhtml">
 		<ui:define name="content">
-			<h:form>
+			<h:form id="addVideo">
 				<h2>Add Youtube Video</h2>
 				<p:growl showDetail="false"/>
 				<h:panelGrid columns="3" cellpadding="2">
@@ -43,9 +43,9 @@
 					<h:message for="dd" showDetail="true" showSummary="false"
 						style="color:red;" />
 
-					<p:commandButton value="add Youtube Video" resetValues="true"
+					<p:commandButton value="add Youtube Video"
 						actionListener="#{mainController.videoController.addYoutubeVideo()}"
-						ajax="false"></p:commandButton>
+						update="addVideo"></p:commandButton>
 				</h:panelGrid>
 			</h:form>
 

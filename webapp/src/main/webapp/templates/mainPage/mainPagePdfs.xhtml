@@ -12,7 +12,7 @@
 <h:body>
 	<ui:decorate template="../mainPage.xhtml">
 		<ui:define name="content">
-			<h:form>
+			<h:form id="form">
 				<h2>Pdfs</h2>
 
 				<!-- Filter -->
@@ -25,12 +25,12 @@
 					var="categoryName" itemLabel="#{categoryName}"
 					itemValue="#{categoryName}" forceSelection="true" />
 
-				<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+				<p:commandButton type="submit" value="submit" update="form"></p:commandButton>
 				<br />
 
 				<p:accordionPanel dynamic="true" cache="true" multiple="true"
 					value="#{mainController.uploadController.pdfsInCategory}" var="pdf">
-					<p:tab title="#{pdf.name}">
+					<p:tab title="Name: #{pdf.name}">
 						<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
 							player="pdf">
 							<f:param name="pdfId" value="#{pdf.idPdf}" />

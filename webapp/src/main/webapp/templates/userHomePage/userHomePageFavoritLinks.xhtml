@@ -13,7 +13,7 @@
 <h:body>
 	<ui:decorate template="../page.xhtml">
 		<ui:define name="content">
-			<h:form>
+			<h:form id="links">
 				<h2>Dein favorit Links</h2>
 
 				<!--  Links -->
@@ -36,7 +36,7 @@
 						<h:outputText value="#{like.link.likesNumber}" />
 					</p:column>
 					<p:column styleClass="likeButon">
-						<p:commandButton ajax="false"
+						<p:commandButton update="links"
 							action="#{like.link.deleteUserLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-down">
 						</p:commandButton>

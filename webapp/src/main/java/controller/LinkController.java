@@ -42,10 +42,6 @@ public class LinkController {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public void handleKeyEvent() {
-
-	}
-
 	public void deleteLink(int linkId) {
 		ConnectToLikeDB.queryDeleteLikeFromDB("delete from Li where idlink= " + linkId);
 		System.out.println(linkId);

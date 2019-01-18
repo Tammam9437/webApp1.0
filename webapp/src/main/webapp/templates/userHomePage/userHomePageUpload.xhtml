@@ -14,7 +14,7 @@
 	<ui:decorate template="../page.xhtml">
 		<ui:define name="content">
 
-			<h:form enctype="multipart/form-data">
+			<h:form id="form" enctype="multipart/form-data">
 				<h2>Upload</h2>
 				<p:growl id="messages" showDetail="false" />
 
@@ -51,7 +51,7 @@
 				</h:panelGrid>
 
 				<br />
-				<p:commandButton value="Submit" ajax="false"
+				<p:commandButton value="Submit" update="form"
 					actionListener="#{mainController.fileUploadView.upload}"
 					disabled="false" />
 				<!-- Image -->

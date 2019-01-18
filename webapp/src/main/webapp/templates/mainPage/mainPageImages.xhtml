@@ -12,7 +12,7 @@
 <h:body>
 	<ui:decorate template="../mainPage.xhtml">
 		<ui:define name="content">
-			<h:form>
+			<h:form id="form">
 				<h2>Images</h2>
 				<!-- Filter -->
 				<br />
@@ -24,7 +24,7 @@
 					itemValue="#{categoryName}" forceSelection="true" />
 
 				<p:commandButton style="margin-left:20px" type="submit"
-					value="submit" ajax="false"></p:commandButton>
+					value="submit" update="form"></p:commandButton>
 				<br />
 				<div style="margin-top: 50px">
 

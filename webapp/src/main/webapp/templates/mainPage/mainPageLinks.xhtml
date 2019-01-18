@@ -19,10 +19,7 @@
 				<h:panelGrid columns="2">
 					<h:outputText value="nach Beschreibung suchen: " />
 					<p:inputText
-						value="#{mainController.linkController.currentSearchedLink}">
-						<p:ajax event="keyup" update="links"
-							listener="#{mainController.linkController.handleKeyEvent}" />
-					</p:inputText>
+						value="#{mainController.linkController.currentSearchedLink}"/> 
 				</h:panelGrid>
 
 				<br />
@@ -33,7 +30,7 @@
 					var="categoryName" itemLabel="#{categoryName}"
 					itemValue="#{categoryName}" forceSelection="true" />
 
-				<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+				<p:commandButton type="submit" value="submit" update="links"></p:commandButton>
 				<br />
 
 				<!--  Links -->

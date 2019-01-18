@@ -12,7 +12,7 @@
 <h:body>
 	<ui:decorate template="../page.xhtml">
 		<ui:define name="content">
-			<h:form>
+			<h:form id="form">
 				<h2>Add new Link</h2>
 				<p:growl showDetail="false"/>
 				<h:panelGrid columns="3" cellpadding="2">
@@ -45,7 +45,7 @@
 
 					<p:commandButton value="add Link"
 						actionListener="#{mainController.linkController.addLink}"
-						ajax="false"></p:commandButton>
+						update="form"></p:commandButton>
 				</h:panelGrid>
 			</h:form>
 

@@ -12,7 +12,7 @@
 <h:body>
 	<ui:decorate template="../mainPage.xhtml">
 		<ui:define name="content">
-			<h:form>
+			<h:form id="form">
 				<h2>Youtube Videos</h2>
 				<br />
 				<p:outputLabel value="Kategorie:" for="dd" />
@@ -22,7 +22,7 @@
 					var="categoryName" itemLabel="#{categoryName}"
 					itemValue="#{categoryName}" forceSelection="true" />
 
-				<p:commandButton type="submit" value="submit" ajax="false"></p:commandButton>
+				<p:commandButton type="submit" value="submit" update="form"></p:commandButton>
 				<br />
 
 				<p:accordionPanel dynamic="true" cache="true" multiple="true"
