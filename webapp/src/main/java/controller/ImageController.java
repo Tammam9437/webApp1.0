@@ -11,48 +11,56 @@ import dbConnector.ConnectToImageDB;
 import entity.Category;
 import entity.Image;
 import entity.User;
+import exception.UserIsNullException;
 
 @ManagedBean
 @SessionScoped
 public class ImageController {
 
 	private MainController mainController;
+
 	public ImageController(MainController mainController) {
 		this.mainController = mainController;
 	}
-	
+
 	public List<Image> getAllImagesFromDB() {
 		List<Image> imageList = ConnectToImageDB.queryImage("From Image");
-		
+
 		return imageList;
-		
+
 	}
-	
+
 	public List<Image> getUserImages() {
 		User user = mainController.getUserController().getUser();
-		List<Image> list = ConnectToImageDB.queryImage("From Image WHERE iduser ='" + user.getId() + "'");
-		return list;
+		if (user != null) {
+			List<Image> list = ConnectToImageDB.queryImage("From Image WHERE iduser ='" + user.getId() + "'");
+			return list;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
 	}
-	
+
 	public List<Image> getImagesInCategory() {
 		String currentCategory = mainController.getFilterController().getCurrentCategory();
 		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
 		int categoryId = -1;
 		ArrayList<Image> filteredList;
-		for(Category category : categoryList) {
-			if(category.getName().equalsIgnoreCase(currentCategory)) {
+		for (Category category : categoryList) {
+			if (category.getName().equalsIgnoreCase(currentCategory)) {
 				categoryId = category.getIdCategory();
 			}
 		}
-		if(categoryId < 0) {
+		if (categoryId < 0) {
 			filteredList = (ArrayList<Image>) ConnectToImageDB.queryImage("From Image");
-		}else {
-			filteredList = (ArrayList<Image>) ConnectToImageDB.queryImage("From Image WHERE idcategory = "+ categoryId );
+		} else {
+			filteredList = (ArrayList<Image>) ConnectToImageDB
+					.queryImage("From Image WHERE idcategory = " + categoryId);
 		}
 		java.util.Collections.sort(filteredList);
 		return filteredList;
 	}
-	
+
 	public String toImageInfos() {
 		return "toImageInfos";
 	}

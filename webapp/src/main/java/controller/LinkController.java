@@ -15,6 +15,7 @@ import entity.Category;
 import entity.Li;
 import entity.Link;
 import entity.User;
+import exception.UserIsNullException;
 
 @ManagedBean
 @SessionScoped
@@ -31,15 +32,20 @@ public class LinkController {
 
 	public void addLink() {
 		User user = mainController.getUserController().getUser();
-		Category category = mainController.getCategoryController().getCategory();
-		Link add = new Link(link.getUrl(), link.getBeschreibung(),user,category );
-		user.getLinks().add(add);
-		ConnectToLinkDB.saveLinkInDB(add);
-		link.setUrl("");
-		link.setBeschreibung("");
-		mainController.getCategoryController().setCategory(null);
-		FacesMessage message = new FacesMessage("Der Link ist erfolgrich eingefügt.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
+		if (user != null) {
+			Category category = mainController.getCategoryController().getCategory();
+			Link add = new Link(link.getUrl(), link.getBeschreibung(), user, category);
+			user.getLinks().add(add);
+			ConnectToLinkDB.saveLinkInDB(add);
+			link.setUrl("");
+			link.setBeschreibung("");
+			mainController.getCategoryController().setCategory(null);
+			FacesMessage message = new FacesMessage("Der Link ist erfolgrich eingefügt.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
 	}
 
 	public void deleteLink(int linkId) {
@@ -50,38 +56,43 @@ public class LinkController {
 
 	public List<Link> getUserLinksInCategory() {
 		User user = mainController.getUserController().getUser();
-		String currentCategory = mainController.getFilterController().getCurrentCategory();
-		List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
-		int categoryId = -1;
-		ArrayList<Link> filteredList;
-		for (Category category : categoryList) {
-			if (category.getName().equalsIgnoreCase(currentCategory)) {
-				categoryId = category.getIdCategory();
+		if (user != null) {
+			String currentCategory = mainController.getFilterController().getCurrentCategory();
+			List<Category> categoryList = ConnectToCategoryDB.queryCategory("From Category");
+			int categoryId = -1;
+			ArrayList<Link> filteredList;
+			for (Category category : categoryList) {
+				if (category.getName().equalsIgnoreCase(currentCategory)) {
+					categoryId = category.getIdCategory();
+				}
 			}
-		}
-		if (categoryId < 0) {
-			if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
-				filteredList = (ArrayList<Link>) ConnectToLinkDB
-						.queryLink("From Link WHERE iduser ='" + user.getId() + "' " + " AND DTYPE = 'Link'");
-			} else {
-				filteredList = (ArrayList<Link>) ConnectToLinkDB
-						.queryLink("From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink + "%'"
-								+ " AND iduser ='" + user.getId() + "'");
-			}
+			if (categoryId < 0) {
+				if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
+					filteredList = (ArrayList<Link>) ConnectToLinkDB
+							.queryLink("From Link WHERE iduser ='" + user.getId() + "' " + " AND DTYPE = 'Link'");
+				} else {
+					filteredList = (ArrayList<Link>) ConnectToLinkDB
+							.queryLink("From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink
+									+ "%'" + " AND iduser ='" + user.getId() + "'");
+				}
 
+			} else {
+				if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
+					filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE iduser ='"
+							+ user.getId() + "'" + " AND DTYPE = 'Link' " + "AND idcategory = " + categoryId);
+				} else {
+					filteredList = (ArrayList<Link>) ConnectToLinkDB
+							.queryLink("From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink
+									+ "%'" + " AND iduser ='" + user.getId() + "'" + "AND idcategory = " + categoryId);
+				}
+
+			}
+			java.util.Collections.sort(filteredList);
+			return filteredList;
 		} else {
-			if (currentSearchedLink == null || currentSearchedLink.replaceFirst("^\\s*", "").length() == 0) {
-				filteredList = (ArrayList<Link>) ConnectToLinkDB.queryLink("From Link WHERE iduser ='" + user.getId()
-						+ "'" + " AND DTYPE = 'Link' " + "AND idcategory = " + categoryId);
-			} else {
-				filteredList = (ArrayList<Link>) ConnectToLinkDB
-						.queryLink("From Link WHERE DTYPE ='Link' AND beschreibung LIKE '%" + currentSearchedLink + "%'"
-								+ " AND iduser ='" + user.getId() + "'" + "AND idcategory = " + categoryId);
-			}
-
+			throw new UserIsNullException("melden sie sich bitte erneut an");
 		}
-		java.util.Collections.sort(filteredList);
-		return filteredList;
+
 	}
 
 	public List<Link> getLinksInCategory() {
@@ -115,12 +126,10 @@ public class LinkController {
 		return filteredList;
 	}
 
-
 	public void saveLike() {
 		Li like = new Li();
 		like.saveInDB();
 	}
-
 
 	public MainController getMainController() {
 		return mainController;
@@ -133,7 +142,6 @@ public class LinkController {
 	public void setLink(Link link) {
 		this.link = link;
 	}
-
 
 	public String getCurrentSearchedLink() {
 		return currentSearchedLink;

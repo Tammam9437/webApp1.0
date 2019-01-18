@@ -1,4 +1,5 @@
 package entity;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,75 +20,84 @@ import javax.persistence.Table;
 
 import dbConnector.ConnectToLikeDB;
 import dbConnector.ConnectToPdfDB;
+import exception.UserIsNullException;
 
 @ManagedBean
 @Entity
 @Table(name = "Pdf")
 @SessionScoped
-public class Pdf implements Comparable<Pdf>{
+public class Pdf implements Comparable<Pdf> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idPdf")
 	private int idPdf;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "file")
-	private byte [] file;
-	
+	private byte[] file;
+
 	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idcategory")
 	private Category category;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "pdf", cascade = CascadeType.ALL)
 	private List<Li> likes = new ArrayList<Li>();
-	
+
 	public Pdf() {
 		name = " ";
 	}
-	
+
 	public void saveInDB() {
 		ConnectToPdfDB.savePdfInDB(this);
 	}
 
-	public byte [] getFile() {
+	public byte[] getFile() {
 		return file;
 	}
 
-	public void setFile(byte [] file) {
+	public void setFile(byte[] file) {
 		this.file = file;
 	}
-	
-	public List<byte[]> getAllPdfsFromDB(){
+
+	public List<byte[]> getAllPdfsFromDB() {
 		List<byte[]> allPdfsFromDB = new ArrayList<byte[]>();
 		List<Pdf> pdfs = ConnectToPdfDB.queryPdf("from Pdf");
-		for(Pdf pdf : pdfs) {
+		for (Pdf pdf : pdfs) {
 			allPdfsFromDB.add(pdf.getFile());
 		}
 		return allPdfsFromDB;
 	}
-	
+
 	public boolean isUserEnteredLike(User user) {
-		List<Li> userPdfLikes = ConnectToLikeDB.getUserPdfLikes(user, this);
-		if (userPdfLikes.isEmpty()) {
-			return false;
+		if (user != null) {
+			List<Li> userPdfLikes = ConnectToLikeDB.getUserPdfLikes(user, this);
+			if (userPdfLikes.isEmpty()) {
+				return false;
+			}
+			return true;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
 		}
-		return true;
-	}
-	
-	public void addLike(User user) {
-		Li like = new Li();
-		like.setPdf(this);
-		like.setUser(user);
-		likes.add(like);
-		ConnectToLikeDB.saveLikeInDB(like);
+
 	}
 
+	public void addLike(User user) {
+		if (user != null) {
+			Li like = new Li();
+			like.setPdf(this);
+			like.setUser(user);
+			likes.add(like);
+			ConnectToLikeDB.saveLikeInDB(like);
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+	}
 
 	public User getUser() {
 		return user;
@@ -134,5 +144,5 @@ public class Pdf implements Comparable<Pdf>{
 	public int compareTo(Pdf anotherPdf) {
 		return anotherPdf.getLikes().size() - this.likes.size();
 	}
-	
+
 }

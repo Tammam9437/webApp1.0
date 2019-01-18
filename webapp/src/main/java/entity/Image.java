@@ -1,4 +1,5 @@
 package entity;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,82 +23,90 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import dbConnector.ConnectToImageDB;
 import dbConnector.ConnectToLikeDB;
+import exception.UserIsNullException;
 
 @ManagedBean
 @Entity
 @Table(name = "Image")
 @SessionScoped
-public class Image implements Comparable<Image>{
+public class Image implements Comparable<Image> {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idImage")
 	private int idImage;
-	
+
 	@Column(name = "file")
-	private byte [] file;
-	
+	private byte[] file;
+
 	@Column(name = "name")
 	private String name;
-		
+
 	@ManyToOne
 	@JoinColumn(name = "iduser")
 	private User user;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "idcategory")
 	private Category category;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, targetEntity = Li.class, mappedBy = "image", cascade = CascadeType.ALL)
 	private List<Li> likes = new ArrayList<Li>();
-	
+
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(targetEntity = Comment.class, mappedBy = "image", cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<Comment>();
-	
-	
-	
+
 	public Image() {
-		
+
 	}
-	
+
 	public void saveInDB() {
 		ConnectToImageDB.saveImageInDB(this);
 	}
-	
-	public List<byte[]> getAllImagesFromDB(){
+
+	public List<byte[]> getAllImagesFromDB() {
 		List<byte[]> allImagesFromDB = new ArrayList<byte[]>();
 		List<Image> images = ConnectToImageDB.queryImage("from Image");
-		for(Image image : images) {
+		for (Image image : images) {
 			allImagesFromDB.add(image.getFile());
 		}
 		return allImagesFromDB;
 	}
-	
-	public boolean isUserEnteredLike(User user) {
-		List<Li> userLinkLikes = ConnectToLikeDB.getUserImageLikes(user, this);
-		if (userLinkLikes.isEmpty()) {
-			return false;
-		}
-		return true;
-	}
-	
-	public void addLike(User user) {
-		Li like = new Li();
-		like.setImage(this);
-		like.setUser(user);
-		likes.add(like);
-		ConnectToLikeDB.saveLikeInDB(like);
-	}
-	
 
-	public byte [] getFile() {
+	public boolean isUserEnteredLike(User user) {
+		if (user != null) {
+			List<Li> userLinkLikes = ConnectToLikeDB.getUserImageLikes(user, this);
+			if (userLinkLikes.isEmpty()) {
+				return false;
+			}
+			return true;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
+	}
+
+	public void addLike(User user) {
+		if (user != null) {
+			Li like = new Li();
+			like.setImage(this);
+			like.setUser(user);
+			likes.add(like);
+			ConnectToLikeDB.saveLikeInDB(like);
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
+	}
+
+	public byte[] getFile() {
 		return file;
 	}
 
-	public void setFile(byte [] file) {
+	public void setFile(byte[] file) {
 		this.file = file;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -125,6 +134,7 @@ public class Image implements Comparable<Image>{
 	public void setLikes(List<Li> likes) {
 		this.likes = likes;
 	}
+
 	@Override
 	public int compareTo(Image anotherImage) {
 		return anotherImage.getLikes().size() - this.likes.size();
@@ -133,10 +143,11 @@ public class Image implements Comparable<Image>{
 	public String getName() {
 		return name;
 	}
+
 	public int getLikesNumber() {
 		return this.likes.size();
 	}
-	
+
 	public int getcommentsNumber() {
 		return this.comments.size();
 	}
@@ -158,7 +169,4 @@ public class Image implements Comparable<Image>{
 		return "Image [id=" + idImage + ", file=" + Arrays.toString(file) + "]";
 	}
 
-
-	
-	
 }

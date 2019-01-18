@@ -10,7 +10,7 @@ import dbConnector.ConnectToUserDB;
 import entity.Email;
 import entity.Li;
 import entity.User;
-import exception.PassowrdNotCorrectException;
+import exception.UserIsNullException;
 
 @ManagedBean
 @SessionScoped
@@ -37,23 +37,32 @@ public class UserController {
 	}
 
 	public String changePassword() {
-		ConnectToUserDB.updateUserPassword(user.getId(), user.getPassword());
-		return "successChangePassword";
+		if (user != null) {
+			ConnectToUserDB.updateUserPassword(user.getId(), user.getPassword());
+			return "successChangePassword";
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
 	}
 
 	public boolean confirmLoginData() {
+		if (user != null) {
+			List<User> identicalUsers;
+			identicalUsers = ConnectToUserDB.queryUser(
+					"from User u where u.name = '" + user.getName() + "' And u.password= '" + user.getPassword() + "'");
 
-		List<User> identicalUsers;
-		identicalUsers = ConnectToUserDB.queryUser(
-				"from User u where u.name = '" + user.getName() + "' And u.password= '" + user.getPassword() + "'");
-
-		if (identicalUsers.isEmpty()) {
-			return false;
+			if (identicalUsers.isEmpty()) {
+				return false;
+			}
+			ConnectToUserDB.displayUsers(identicalUsers);
+			// da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
+			user.setId(identicalUsers.get(0).getId());
+			return true;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
 		}
-		ConnectToUserDB.displayUsers(identicalUsers);
-		// da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
-		user.setId(identicalUsers.get(0).getId());
-		return true;
+
 	}
 
 	public String logOut() {
@@ -63,21 +72,25 @@ public class UserController {
 	}
 
 	public List<Li> favoritesLinks() {
-		List<Li> likes = ConnectToLikeDB.getUserFavoritLinks(user);
-		return likes;
-	}
+		if (user != null) {
+			List<Li> likes = ConnectToLikeDB.getUserFavoritLinks(user);
+			return likes;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
 
+	}
 
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {
 			return "userHomePage?faces-redirect = true";
-		}else {
+		} else {
 //			new 
 			return "loginError?faces-redirect = true";
 //			old
 //			return "error?faces-redirect = true";
 		}
-	
+
 	}
 
 	public MainController getMainController() {

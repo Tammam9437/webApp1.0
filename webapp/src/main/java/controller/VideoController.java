@@ -14,6 +14,7 @@ import entity.Category;
 import entity.Link;
 import entity.User;
 import entity.YoutubeLink;
+import exception.UserIsNullException;
 
 @ManagedBean
 @SessionScoped
@@ -28,27 +29,36 @@ public class VideoController {
 		this.youtubeLink = new YoutubeLink();
 	}
 
-
 	public void addYoutubeVideo() {
-		YoutubeLink add = new YoutubeLink(youtubeLink.getUrl(), youtubeLink.getBeschreibung());
 		User user = mainController.getUserController().getUser();
-		Category category = mainController.getCategoryController().getCategory();
-		user.getLinks().add(add);
-		add.setUser(user);
-		add.setCategory(category);
-		ConnectToLinkDB.saveLinkInDB(add);
-		youtubeLink.setyoutubeUrl("");
-		youtubeLink.setBeschreibung("");
-		 mainController.getCategoryController().setCategory(null);
-		FacesMessage message = new FacesMessage("Youtube Video wurde erfolgreich eingefügt.");
-		FacesContext.getCurrentInstance().addMessage(null, message);
+		if (user != null) {
+			YoutubeLink add = new YoutubeLink(youtubeLink.getUrl(), youtubeLink.getBeschreibung());
+			Category category = mainController.getCategoryController().getCategory();
+			user.getLinks().add(add);
+			add.setUser(user);
+			add.setCategory(category);
+			ConnectToLinkDB.saveLinkInDB(add);
+			youtubeLink.setyoutubeUrl("");
+			youtubeLink.setBeschreibung("");
+			mainController.getCategoryController().setCategory(null);
+			FacesMessage message = new FacesMessage("Youtube Video wurde erfolgreich eingefügt.");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
 	}
 
 	public List<Link> getUserYoutubeLinks() {
 		User user = mainController.getUserController().getUser();
-		List<Link> list = ConnectToLinkDB
-				.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE = 'YoutubeLink'");
-		return list;
+		if (user != null) {
+			List<Link> list = ConnectToLinkDB
+					.queryLink("From Link WHERE iduser ='" + user.getId() + "'" + " AND DTYPE = 'YoutubeLink'");
+			return list;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
 	}
 
 	public List<Link> getVideosInCategory() {
@@ -75,7 +85,6 @@ public class VideoController {
 		System.out.println("Deleting Video");
 		ConnectToLinkDB.deleteLinkFromDB(videoId);
 	}
-
 
 	public List<Link> getYoutubeLinks() {
 		List<Link> list = ConnectToLinkDB.queryLink("From Link WHERE DTYPE = 'YoutubeLink'");

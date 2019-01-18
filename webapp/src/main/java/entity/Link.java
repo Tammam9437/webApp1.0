@@ -19,6 +19,7 @@ import javax.persistence.Table;
 
 import dbConnector.ConnectToLikeDB;
 import dbConnector.ConnectToLinkDB;
+import exception.UserIsNullException;
 
 @ManagedBean
 @Entity
@@ -72,8 +73,6 @@ public class Link implements Comparable<Link> {
 		this.url = url;
 		this.beschreibung = beschreibung;
 	}
-	
-	
 
 	public Link(String url, String beschreibung, User user, Category category) {
 		this.url = url;
@@ -89,23 +88,39 @@ public class Link implements Comparable<Link> {
 	}
 
 	public void addLike(User user) {
-		Li like = new Li();
-		like.setLink(this);
-		like.setUser(user);
-		likes.add(like);
-		ConnectToLikeDB.saveLikeInDB(like);
+		if (user != null) {
+			Li like = new Li();
+			like.setLink(this);
+			like.setUser(user);
+			likes.add(like);
+			ConnectToLikeDB.saveLikeInDB(like);
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
 	}
 
 	public void deleteUserLike(User user) {
-		ConnectToLikeDB.queryDeleteLikeFromDB("DELETE FROM Li WHERE idlink = " + this.id + " AND iduser = "+ user.getId() );
+		if (user != null) {
+			ConnectToLikeDB.queryDeleteLikeFromDB(
+					"DELETE FROM Li WHERE idlink = " + this.id + " AND iduser = " + user.getId());
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+
 	}
 
 	public boolean isUserEnteredLike(User user) {
-		List<Li> userLinkLikes = ConnectToLikeDB.getUserLinkLikes(user, this);
-		if (userLinkLikes.isEmpty()) {
-			return false;
+		if (user != null) {
+			List<Li> userLinkLikes = ConnectToLikeDB.getUserLinkLikes(user, this);
+			if (userLinkLikes.isEmpty()) {
+				return false;
+			}
+			return true;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
 		}
-		return true;
+
 	}
 
 	public String getUrl() {
