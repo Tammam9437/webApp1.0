@@ -2,17 +2,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>error</title>
+	<link rel="stylesheet" type="text/css" href="css/errorPage.css" />
 </h:head>
 <h:body>
-	<h1>Leider</h1>
-	<h2>das Passwort und der Benutzername stimmen nicht zu einander</h2>
+	<h1 class="header">Leider</h1>
+	<h2 style="color:red">das Passwort und der Benutzername stimmen nicht zu einander</h2>
 
 	<h:form>
-		<h:commandButton value="zurüch zu Login" action="login" />
+		<p:commandButton value="zurüch zu Login" action="login" />
 
 	</h:form>
 

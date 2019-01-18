@@ -15,11 +15,12 @@
 		<ui:define name="content">
 			<h:form>
 				<h2>Add Youtube Video</h2>
+				<p:growl showDetail="false"/>
 				<h:panelGrid columns="3" cellpadding="2">
 					<p:outputLabel value="URL : " />
 					<p:inputText type="url" id="link"
 						value="#{mainController.videoController.youtubeLink.url}"
-						required="true" requiredMessage="Bitte Pflichtfeld eingeben" />
+						required="true" requiredMessage="Bitte Pflichtfeld eingeben"  />
 					<h:message for="link" showDetail="true" showSummary="false"
 						style="color:red;" />
 
@@ -42,7 +43,7 @@
 					<h:message for="dd" showDetail="true" showSummary="false"
 						style="color:red;" />
 
-					<p:commandButton value="add Youtube Video"
+					<p:commandButton value="add Youtube Video" resetValues="true"
 						actionListener="#{mainController.videoController.addYoutubeVideo()}"
 						ajax="false"></p:commandButton>
 				</h:panelGrid>

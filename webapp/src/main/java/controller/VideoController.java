@@ -3,8 +3,10 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import dbConnector.ConnectToCategoryDB;
 import dbConnector.ConnectToLinkDB;
@@ -35,9 +37,11 @@ public class VideoController {
 		add.setUser(user);
 		add.setCategory(category);
 		ConnectToLinkDB.saveLinkInDB(add);
-		youtubeLink.setUrl("");
+		youtubeLink.setyoutubeUrl("");
 		youtubeLink.setBeschreibung("");
-		add.setUser(null);
+		 mainController.getCategoryController().setCategory(null);
+		FacesMessage message = new FacesMessage("Youtube Video wurde erfolgreich eingefügt.");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public List<Link> getUserYoutubeLinks() {

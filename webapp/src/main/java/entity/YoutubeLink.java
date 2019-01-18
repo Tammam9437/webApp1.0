@@ -36,10 +36,6 @@ public class YoutubeLink extends Link{
 		return idVedio;
 	}
 	
-
-
-
-
 	public static String getYoutubeVedioUrl(String url) {
 		String http = "https://www.youtube.com/embed/";
 		String idVedio = getYoutubeVedioId(url);
@@ -50,6 +46,10 @@ public class YoutubeLink extends Link{
 	public void setUrl(String url) {
 		String YoutubeUrl = getYoutubeVedioUrl(url);
 		super.setUrl(YoutubeUrl);
+	}
+	
+	public void setyoutubeUrl(String url) {
+		super.setUrl(url);
 	}
 	
 	

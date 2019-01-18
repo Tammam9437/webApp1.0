@@ -45,7 +45,14 @@
 			<from-outcome>toError</from-outcome>
 			<to-view-id>/error.xhtml</to-view-id>
 		</navigation-case>
-
+		<!-- from login -->
+		
+		<navigation-case>
+			<from-outcome>forgetPassword</from-outcome>
+			<to-view-id>/forgetPassword.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+		
 		<navigation-case>
 			<from-action>#{mainController.userController.navigationFromLogin}
 			</from-action>
@@ -58,6 +65,13 @@
 			</from-action>
 			<from-outcome>error</from-outcome>
 			<to-view-id>/error.xhtml</to-view-id>
+		</navigation-case>
+		
+		<!-- frorgetPassword -->
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect></redirect>
 		</navigation-case>
 
 	</navigation-rule>

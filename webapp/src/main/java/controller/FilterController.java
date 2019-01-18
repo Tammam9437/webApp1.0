@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ValueChangeEvent;
-
-import com.mysql.cj.util.StringUtils;
 
 import dbConnector.ConnectToCategoryDB;
 import entity.Category;

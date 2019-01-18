@@ -60,6 +60,8 @@ public class FileUploadView {
 				image.setName(fileName);
 				image.saveInDB();
 				allBooleanValueFalse();
+				fileName = "";
+				mainController.getCategoryController().setCategory(null);
 				imageFile = true;
 				FacesMessage message = new FacesMessage("Succesful", file.getFileName() + "As Image is uploaded.");
 				FacesContext.getCurrentInstance().addMessage(null, message);
@@ -74,6 +76,8 @@ public class FileUploadView {
 				pdf.saveInDB();
 				allBooleanValueFalse();
 				pdfFile = true;
+				fileName = "";
+				mainController.getCategoryController().setCategory(null);
 				FacesMessage message = new FacesMessage("Succesful", file.getFileName() + "As Pdf is uploaded.");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
