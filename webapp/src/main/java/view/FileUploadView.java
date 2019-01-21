@@ -30,10 +30,6 @@ public class FileUploadView {
 		pdfFile = false;
 	}
 
-	public FileUploadView() {
-
-	}
-
 	public UploadedFile getFile() {
 		return file;
 	}
@@ -48,7 +44,6 @@ public class FileUploadView {
 	}
 
 	public void upload() {
-		System.out.println(file.getContentType());
 		String fileType;
 		if (file != null) {
 			fileType = file.getContentType();

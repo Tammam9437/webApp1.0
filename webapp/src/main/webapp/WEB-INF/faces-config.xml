@@ -10,81 +10,80 @@
 		</exception-handler-factory>
 	</factory>
 
+	<!-- from index -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>toMainPage</from-outcome>
-			<to-view-id>/mainPage.xhtml</to-view-id>
-		</navigation-case>
 
-		<navigation-case>
-			<from-outcome>toLogin</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
-		</navigation-case>
-
-		<navigation-case>
-			<from-outcome>toUserHomePage</from-outcome>
-			<to-view-id>/userHomePage.xhtml</to-view-id>
-		</navigation-case>
-
-		<navigation-case>
-			<from-outcome>toIndex</from-outcome>
-			<to-view-id>/index.xhtml</to-view-id>
-		</navigation-case>
-
-		<navigation-case>
-			<from-action>#{mainController.userController.navigationFromLogin}
-			</from-action>
-			<if>#{mainController.userController.confirmLoginData()}</if>
-			<to-view-id>/userHomePage.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-
-		<navigation-case>
-
-			<from-outcome>toError</from-outcome>
-			<to-view-id>/error.xhtml</to-view-id>
-		</navigation-case>
-		<!-- from login -->
-		
-		<navigation-case>
-			<from-outcome>forgetPassword</from-outcome>
-			<to-view-id>/forgetPassword.xhtml</to-view-id>
-			<redirect></redirect>
-		</navigation-case>
-		
-		<navigation-case>
-			<from-action>#{mainController.userController.navigationFromLogin}
-			</from-action>
-			<from-outcome>userHomePage</from-outcome>
-			<to-view-id>/userHomePage.xhtml</to-view-id>
-		</navigation-case>
-
-		<navigation-case>
-			<from-action>#{mainController.userController.navigationFromLogin}
-			</from-action>
-			<from-outcome>error</from-outcome>
-			<to-view-id>/error.xhtml</to-view-id>
-		</navigation-case>
-		
-		<!-- frorgetPassword -->
 		<navigation-case>
 			<from-outcome>login</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
 
+
 	</navigation-rule>
+
+	<!-- from login -->
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-outcome>toIndex</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>forgetPassword</from-outcome>
+			<to-view-id>/forgetPassword.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+		<navigation-case>
+			<from-action>#{mainController.userController.navigationFromLogin}
+			</from-action>
+			<from-outcome>userHomePage</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePage.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+		<navigation-case>
+			<from-action>#{mainController.userController.navigationFromLogin}
+			</from-action>
+			<from-outcome>loginError</from-outcome>
+			<to-view-id>/loginError.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+	</navigation-rule>
+
+	<!-- from forgetPassword -->
+	<navigation-rule>
+		<from-view-id>/forgetPassword.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
 
 	<!-- from UserHomePage -->
 	<navigation-rule>
-		<from-view-id>*</from-view-id>
+		<from-view-id>/templates/userHomePage/*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>toMainPage</from-outcome>
+			<to-view-id>/templates/mainPage/mainPage.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
 		<navigation-case>
 			<from-outcome>
 				toAddLink
 			</from-outcome>
 			<to-view-id>/templates/userHomePage/userHomePageAddLink</to-view-id>
-
+			<redirect></redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -101,6 +100,7 @@
 			</from-outcome>
 			<to-view-id>/templates/userHomePage/userHomePageFavoritLinks
 			</to-view-id>
+			<redirect></redirect>
 
 		</navigation-case>
 
@@ -111,7 +111,7 @@
 			</from-outcome>
 			<to-view-id>/templates/userHomePage/userHomePageAddYoutubeVideo
 			</to-view-id>
-
+			<redirect></redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -129,7 +129,7 @@
 			</from-outcome>
 			<to-view-id>/templates/userHomePage/userHomePageUpload
 			</to-view-id>
-
+			<redirect></redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -138,7 +138,7 @@
 			</from-outcome>
 			<to-view-id>/templates/userHomePage/userHomePageUserImages
 			</to-view-id>
-
+			<redirect></redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -147,7 +147,23 @@
 			</from-outcome>
 			<to-view-id>/templates/userHomePage/userHomePagePdfs
 			</to-view-id>
+		</navigation-case>
 
+		<navigation-case>
+			<from-action>#{mainController.imageController.toImageInfos()}
+			</from-action>
+			<from-outcome>
+				toImageInfos
+			</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePageImageInfos
+			</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect></redirect>
 		</navigation-case>
 
 	</navigation-rule>
@@ -155,7 +171,13 @@
 	<!-- from mainPage -->
 	<navigation-rule>
 
-		<from-view-id>*</from-view-id>
+		<from-view-id>/templates/mainPage/*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>toUserHomePage</from-outcome>
+			<to-view-id>/templates/userHomePage/userHomePage.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
 
 		<navigation-case>
 			<from-outcome>
@@ -163,7 +185,8 @@
 			</from-outcome>
 			<to-view-id>/templates/mainPage/mainPageImages
 			</to-view-id>
-
+			<redirect>
+			</redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -172,7 +195,7 @@
 			</from-outcome>
 			<to-view-id>/templates/mainPage/mainPagePdfs
 			</to-view-id>
-
+			<redirect></redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -181,7 +204,7 @@
 			</from-outcome>
 			<to-view-id>/templates/mainPage/mainPageLinks
 			</to-view-id>
-
+			<redirect></redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -190,7 +213,7 @@
 			</from-outcome>
 			<to-view-id>/templates/mainPage/mainPageYoutubeVideos
 			</to-view-id>
-
+			<redirect></redirect>
 		</navigation-case>
 
 		<navigation-case>
@@ -203,8 +226,48 @@
 			</to-view-id>
 			<redirect></redirect>
 		</navigation-case>
-
 	</navigation-rule>
+
+	<!-- from error -->
+	<navigation-rule>
+		<from-view-id>/error.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- from loginError -->
+	<navigation-rule>
+		<from-view-id>/loginError.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/login.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
+	<!-- from changePassword -->
+
+	<navigation-rule>
+		<from-view-id>/changePassword.xhtml</from-view-id>
+
+		<navigation-case>
+			<from-outcome>successChangePassword</from-outcome>
+			<to-view-id>/successChangePassword.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>toIndex</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect></redirect>
+		</navigation-case>
+	</navigation-rule>
+
 
 
 </faces-config>

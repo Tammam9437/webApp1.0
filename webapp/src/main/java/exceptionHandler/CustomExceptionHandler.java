@@ -51,9 +51,9 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 				// redirect error page
 				requestMap.put("exceptionMessage", t.getMessage());
 				if (t instanceof PassowrdNotCorrectException) {
-					nav.handleNavigation(fc, null, "/loginError");
+					nav.handleNavigation(fc, null, "/loginError?faces-redirect=true");
 				} else {
-					nav.handleNavigation(fc, null, "/error");
+					nav.handleNavigation(fc, null, "/error?faces-redirect=true");
 				}
 
 				fc.renderResponse();

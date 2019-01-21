@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../../css/userHomePage.css" />
+</h:head>
+<h:body>
+	<ui:decorate template="../Page.xhtml">
+		<ui:define name="content">
+
+			<h2>Image Infos</h2>
+
+			<p:graphicImage
+				style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
+				title="" value="#{imageStreamer.image}" width="500" height="313">
+				<f:param name="imageId"
+					value="#{mainController.commentController.imageIdInfo}" />
+			</p:graphicImage>
+			<br />
+			<h3>Kommentar schreiben</h3>
+			<h:form>
+
+				<div style="float: left">
+					<p:inputTextarea style="float:left ;height: 120px!important; width: 600px;" id="input" required="true"
+						requiredMessage="geben Sie bitte einen Kommentar ein"
+						value="#{mainController.commentController.text}"></p:inputTextarea>
+					<h:message id="message" for="input" showDetail="true"
+						showSummary="false" style="color:red;" />
+					<br />
+					<p:commandButton style="margin-top: 10px;" value="submit" update="input comments message"
+						actionListener="#{mainController.commentController.saveComment()}">
+						<f:param name="imageId"
+							value="#{mainController.commentController.imageIdInfo}" />
+					</p:commandButton>
+				</div>
+
+			</h:form>
+			<p:separator style="margin-top: 200px;" />
+			<h3>Kommentare</h3>
+
+			<h:form id="comments">
+				<p:repeat var="comment"
+					value="#{mainController.commentController.image.comments}">
+
+					<p:outputLabel>#{comment.text}</p:outputLabel>
+					<br />
+					<p:outputLabel style="margin-left: 1000px; color: cadetblue;">kommentar von #{comment.user.name}</p:outputLabel>
+					<p:separator />
+				</p:repeat>
+			</h:form>
+
+		</ui:define>
+
+	</ui:decorate>
+
+
+
+</h:body>
+</html>

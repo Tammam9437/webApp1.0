@@ -5,18 +5,17 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Main Page</title>
-	<link rel="stylesheet" type="text/css" href="css/mainPage.css" />
+	<title>User Home Page</title>
+	<link rel="stylesheet" type="text/css" href="../../css/userHomePage.css" />
 </h:head>
 
 <h:body>
 	<div class="header">
-		<h1>Willkommen zu main Page</h1>
-
+		<h1>Herzlich Welkommen #{mainController.userController.user.name}</h1>
 	</div>
 
-	<ui:include src="templates/mainPage/mainPageMenu.xhtml"></ui:include>
-	
+		<!-- Navigation zu mainPage -->
+		<ui:include src="userHomePageMenu.xhtml"></ui:include>
 
 
 </h:body>

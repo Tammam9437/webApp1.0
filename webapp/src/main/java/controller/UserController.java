@@ -55,7 +55,6 @@ public class UserController {
 			if (identicalUsers.isEmpty()) {
 				return false;
 			}
-			ConnectToUserDB.displayUsers(identicalUsers);
 			// da den id blebt wie der id von user der in DB geschpeichert "RequestScobe"
 			user.setId(identicalUsers.get(0).getId());
 			return true;
@@ -83,12 +82,9 @@ public class UserController {
 
 	public String navigationFromLogin() {
 		if (confirmLoginData()) {
-			return "userHomePage?faces-redirect = true";
+			return "userHomePage";
 		} else {
-//			new 
-			return "loginError?faces-redirect = true";
-//			old
-//			return "error?faces-redirect = true";
+			return "loginError";
 		}
 
 	}
