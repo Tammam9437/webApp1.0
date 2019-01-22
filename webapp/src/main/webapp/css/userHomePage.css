@@ -21,6 +21,10 @@ a:hover {
 	font-size: 50px;
 }
 
+.ui-menu .ui-menu-list .ui-widget-header{
+	display:none;
+}
+
 div#filter{
 	margin: 10px !important;
 }
