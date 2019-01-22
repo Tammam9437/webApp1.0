@@ -23,8 +23,7 @@
 					<h:outputText value="nach Beschreibung suchen: " />
 					<p:inputText
 						value="#{mainController.linkController.currentSearchedLink}">
-						<p:ajax event="keyup" update="links"
-							listener="#{mainController.linkController.handleKeyEvent}" />
+						<p:ajax event="keyup" update="links" />
 					</p:inputText>
 				</h:panelGrid>
 				<!-- Filter -->
@@ -34,7 +33,7 @@
 						value="#{mainController.filterController.currentCategory}"
 						completeMethod="#{mainController.filterController.completeCategory}"
 						var="categoryName" itemLabel="#{categoryName}"
-						itemValue="#{categoryName}" forceSelection="true"/>
+						itemValue="#{categoryName}" forceSelection="true" />
 
 					<p:commandButton type="submit" value="submit" update="links"></p:commandButton>
 				</div>
@@ -62,7 +61,7 @@
 						<p:growl id="message" showDetail="true" />
 						<p:commandButton styleClass="deleteButton" icon="fa fa-trash"
 							actionListener="#{mainController.linkController.deleteLink(link.id)}"
-							ajax="false">
+							update="links">
 							<p:confirm header="Confirmation" message="Are you sure?"
 								icon="fa fa-exclamation-triangle" />
 						</p:commandButton>

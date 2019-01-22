@@ -30,12 +30,12 @@
 					var="video">
 					<p:tab title="#{video.beschreibung}">
 						<iframe width="420" height="345" src="#{video.url}"> </iframe>
-						<p:commandButton id="videoButton" update="videoButton"
+						<p:commandButton id="videoButton" update="videoButton likes"
 							disabled="#{video.isUserEnteredLike(mainController.userController.user)}"
 							action="#{video.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">
 						</p:commandButton>
-						<p:outputLabel style="margin-left:30px">Likes: #{video.likes.size()}</p:outputLabel>
+						<p:outputLabel id="likes" style="margin-left:30px">Likes: #{video.likes.size()}</p:outputLabel>
 					</p:tab>
 				</p:accordionPanel>
 			</h:form>

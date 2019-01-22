@@ -35,12 +35,12 @@
 							player="pdf">
 							<f:param name="pdfId" value="#{pdf.idPdf}" />
 						</p:media>
-						<p:commandButton id="pdfButton" update="pdfButton"
+						<p:commandButton id="pdfButton" update="pdfButton likes"
 							disabled="#{pdf.isUserEnteredLike(mainController.userController.user)}"
 							action="#{pdf.addLike(mainController.userController.user)}"
 							icon="fa fa-thumbs-o-up">
 						</p:commandButton>
-						<p:outputLabel style="margin-left:30px">Likes: #{pdf.likes.size()}</p:outputLabel>
+						<p:outputLabel id="likes" style="margin-left:30px">Likes: #{pdf.likes.size()}</p:outputLabel>
 					</p:tab>
 				</p:accordionPanel>
 			</h:form>
