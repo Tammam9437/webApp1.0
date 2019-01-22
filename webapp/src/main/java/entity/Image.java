@@ -2,6 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -157,6 +158,7 @@ public class Image implements Comparable<Image> {
 	}
 
 	public List<Comment> getComments() {
+		java.util.Collections.reverse(comments);
 		return comments;
 	}
 
