@@ -25,7 +25,7 @@
 				<p:commandButton type="submit" value="submit" update="form"></p:commandButton>
 				<br />
 
-				<p:accordionPanel dynamic="true" cache="true" multiple="true"
+				<p:accordionPanel styleClass="accordionPanel" dynamic="true" cache="true" multiple="true"
 					value="#{mainController.videoController.videosInCategory}"
 					var="video">
 					<p:tab title="#{video.beschreibung}">

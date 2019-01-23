@@ -116,3 +116,12 @@ div#filter {
 .ui-widget-header .ui-state-default {
 	width: 30px;
 }
+
+.accordionPanel {
+	width: 20cm;
+	margin-top: 30px;
+	margin-left:auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	width: 65%;
+}

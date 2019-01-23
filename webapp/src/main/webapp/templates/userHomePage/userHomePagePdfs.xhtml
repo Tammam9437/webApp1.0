@@ -29,7 +29,7 @@
 				<p:commandButton type="submit" value="submit" update="pdfForm"></p:commandButton>
 				<br />
 				<!-- User Pdfs -->
-				<p:accordionPanel dynamic="true" cache="true" multiple="true"
+				<p:accordionPanel styleClass="accordionPanel" dynamic="true" cache="true" multiple="true"
 					value="#{mainController.uploadController.userPdfsInCategory}"
 					var="pdf">
 					<p:tab title="Name: #{pdf.name}">

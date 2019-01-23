@@ -15,7 +15,7 @@
 		<ui:define name="content">
 			<h:form id="videoForm">
 				<h2>Dein Youtube Videos</h2>
-				<p:accordionPanel dynamic="true" cache="true" multiple="true"
+				<p:accordionPanel styleClass="accordionPanel" dynamic="true" cache="true" multiple="true"
 					value="#{mainController.videoController.userYoutubeLinks}"
 					var="video">
 					<p:tab title="#{video.beschreibung}">
