@@ -5,6 +5,7 @@
 body {
 	font-family: Arial;
 	padding: 10px;
+	background-color: #deeaee;
 }
 
 a:hover {
@@ -15,24 +16,33 @@ a:hover {
 	padding: 30px;
 	text-align: center;
 	background: white;
+	background-color: #deeaee;
 }
 
 .header h1 {
 	font-size: 50px;
 }
-
-.ui-menu .ui-menu-list .ui-widget-header{
-	display:none;
+/* menu header*/
+.ui-menu .ui-menu-list .ui-widget-header {
+	display: none;
 }
 
-div#filter{
-	margin: 10px !important;
+/* sub menu */
+.ui-menu.ui-megamenu .ui-menu-parent .ui-menu-child {
+	background-color: #f5bbb5;
 }
+
+div#filter {
+	margin-top: 10px;
+}
+
 .data-table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 100%;
-	margin: 20px;
+	width: auto;
+	table-layout: auto;
+	margin-top: 20px;
+	margin-right: 50px;
 }
 
 .data-table td, .data-table th {
@@ -51,7 +61,7 @@ div#filter{
 .data-table th {
 	padding-top: 12px;
 	padding-bottom: 12px;
-	background-color: #6699ff;
+	background-color: #c94c4c;
 	color: white;
 }
 
@@ -70,6 +80,7 @@ div#filter{
 
 .url {
 	width: 15cm;
+	max-width: 15cm;
 }
 
 .userId {
@@ -84,6 +95,24 @@ div#filter{
 	width: 5cm;
 }
 
-.deleteButton {
-	width: 5cm;
+.deletecolumn {
+	max-width: 3cm
+}
+/* Pdf Tab header*/
+.ui-accordion .ui-accordion-header {
+	background-color: #b1cbbb;
+}
+
+.ui-accordion .ui-accordion-header:hover {
+	background-color: #9fc1fd;
+}
+
+/* Pdf Tab*/
+.ui-accordion .ui-accordion-content {
+	background-color: #deeaee;
+}
+
+/* delete Button */
+.ui-widget-header .ui-state-default {
+	width: 30px;
 }

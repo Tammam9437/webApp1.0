@@ -5,20 +5,18 @@
 body {
 	font-family: Arial;
 	padding: 10px;
+	background-color: #deeaee;
 }
 
-a:hover{
+a:hover {
 	color: #6495ed;
-}
-
-.megaMenu{
-	background-color: aqua;
 }
 
 .header {
 	padding: 30px;
 	text-align: center;
 	background: white;
+	background-color: #deeaee;
 }
 
 .header h1 {
@@ -28,8 +26,10 @@ a:hover{
 .data-table {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 100%;
-	margin: 20px;
+	width: auto;
+	table-layout: auto;
+	margin-top: 20px;
+	margin-right: 50px;
 }
 
 .data-table td, .data-table th {
@@ -48,7 +48,7 @@ a:hover{
 .data-table th {
 	padding-top: 12px;
 	padding-bottom: 12px;
-	background-color: #6699ff;
+	background-color: #c94c4c;
 	color: white;
 }
 
@@ -57,7 +57,7 @@ a:hover{
 	color: blue;
 }
 
-.category{
+.category {
 	width: 3cm;
 }
 
@@ -67,6 +67,7 @@ a:hover{
 
 .url {
 	width: 15cm;
+	max-width: 15cm;
 }
 
 .userId {
@@ -80,6 +81,21 @@ a:hover{
 .likeButton {
 	width: 5cm;
 }
+
 .deleteButton {
 	width: 5cm;
+}
+
+/* Pdf Tab header*/
+.ui-accordion .ui-accordion-header {
+	background-color: #b1cbbb;
+}
+
+.ui-accordion .ui-accordion-header:hover {
+	background-color: #9fc1fd;
+}
+
+/* Pdf Tab*/
+.ui-accordion .ui-accordion-content {
+	background-color: #deeaee;
 }
