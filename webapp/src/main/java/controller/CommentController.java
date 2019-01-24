@@ -31,7 +31,6 @@ public class CommentController {
 			FacesContext context = FacesContext.getCurrentInstance();
 			String imageId = context.getExternalContext().getRequestParameterMap().get("imageId");
 			Image image = ConnectToImageDB.getImageFromDB(Integer.parseInt(imageId));
-
 			Comment comment = new Comment(text, user, image);
 			ConnectToCommentDB.saveCommentInDB(comment);
 			this.text = null;

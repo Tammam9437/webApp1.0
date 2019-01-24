@@ -25,7 +25,7 @@
 					update="messages" sizeLimit="4194304" fileLimit="1"
 					allowTypes="/(pdf)|((\.|\/)(gif|jpe?g|png))$/"
 					validator="fileUploadValidator"
-					fileLimitMessage="Der Datei muss kleiner als 4 MB  " />
+					fileLimitMessage="Der Datei muss kleiner als 4 MB "/>
 
 				<h:message for="fileUpload" showDetail="true" showSummary="false"
 					style="color:red;" />
@@ -64,12 +64,12 @@
 					rendered="#{mainController.fileUploadView.imageFile}" />
 				<h:outputLink value="#{request.contextPath}/Image?id=#{mainController.userController.user.id}"
 					rendered="#{mainController.fileUploadView.imageFile}"
-					target="_blank">öffne Image in new Tap</h:outputLink>
+					target="_blank">öffne Image in neuem Tap</h:outputLink>
 				<!-- Pdf -->
 				<p:media value="/Pdf?id=#{mainController.userController.user.id}" width="700px" height="700px" player="pdf"
 					rendered="#{mainController.fileUploadView.pdfFile}" />
 				<h:outputLink value="#{request.contextPath}/Pdf?id=#{mainController.userController.user.id}"
-					rendered="#{mainController.fileUploadView.pdfFile}" target="_blank">öffne Pdf in new Tap</h:outputLink>
+					rendered="#{mainController.fileUploadView.pdfFile}" target="_blank">öffne Pdf in neuem Tap</h:outputLink>
 			</h:form>
 		</ui:define>
 

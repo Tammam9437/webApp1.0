@@ -15,19 +15,22 @@ import entity.User;
 
 public class PdfServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String userId = req.getParameter("id");
-		// Get last uploaded Pdf
-		try {
+		byte[] pdfBytes;
+		if (userId != null) {
 			User user = ConnectToUserDB.getUserFromDB(Integer.parseInt(userId));
 			List<Pdf> userPdfs = ConnectToPdfDB.getUserPdfsFromDB(user);
-			byte[] pdfBytes = userPdfs.get(userPdfs.size()-1).getFile();
+			pdfBytes = userPdfs.get(userPdfs.size()-1).getFile();
+		}else {
+			String idPdf = req.getParameter("idPdf");
+			Pdf pdf = ConnectToPdfDB.getPdfFromDB(Integer.parseInt(idPdf));
+			pdfBytes = pdf.getFile();
+		}
+		try {
 			resp.getOutputStream().write(pdfBytes);
 			resp.getOutputStream().close();
 		} catch (Exception e) {

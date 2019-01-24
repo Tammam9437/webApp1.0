@@ -28,7 +28,8 @@
 				<p:commandButton type="submit" value="submit" update="form"></p:commandButton>
 				<br />
 
-				<p:accordionPanel styleClass="accordionPanel" dynamic="true" cache="true" multiple="true"
+				<p:accordionPanel styleClass="accordionPanel" dynamic="true"
+					cache="true" multiple="true"
 					value="#{mainController.uploadController.pdfsInCategory}" var="pdf">
 					<p:tab title="Name: #{pdf.name}">
 						<p:media value="#{pdfStreamer.pdf}" width="700px" height="700px"
@@ -41,6 +42,9 @@
 							icon="fa fa-thumbs-o-up">
 						</p:commandButton>
 						<p:outputLabel id="likes" style="margin-left:30px">Likes: #{pdf.likes.size()}</p:outputLabel>
+						<h:outputLink style="margin-left:30px"
+							value="#{request.contextPath}/Pdf?idPdf=#{pdf.idPdf}"
+							target="_blank">öffne Pdf in neuem Tap</h:outputLink>
 					</p:tab>
 				</p:accordionPanel>
 			</h:form>

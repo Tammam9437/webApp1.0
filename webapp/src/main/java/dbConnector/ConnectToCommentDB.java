@@ -1,6 +1,5 @@
 package dbConnector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -15,7 +14,6 @@ import entity.Li;
 import entity.Link;
 import entity.Pdf;
 import entity.User;
-import entity.YoutubeLink;
 
 public class ConnectToCommentDB {
 

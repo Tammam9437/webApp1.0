@@ -7,32 +7,37 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="../../css/userHomePage.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/userHomePage.css" />
 </h:head>
 <h:body>
 	<ui:decorate template="../Page.xhtml">
 		<ui:define name="content">
 
 			<h2>Image Infos</h2>
-
-			<p:graphicImage
-				style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
-				title="" value="#{imageStreamer.image}" width="500" height="313">
-				<f:param name="imageId"
-					value="#{mainController.commentController.imageIdInfo}" />
-			</p:graphicImage>
+			<h:outputLink value="#{request.contextPath}/Image?idImage=#{mainController.commentController.imageIdInfo}" target="_blank">
+				<p:graphicImage
+					style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-top:50px "
+					title="" value="#{imageStreamer.image}" width="500" height="313">
+					<f:param name="imageId"
+						value="#{mainController.commentController.imageIdInfo}" />
+				</p:graphicImage>
+			</h:outputLink>
 			<br />
 			<h3>Kommentar schreiben</h3>
 			<h:form>
 
 				<div style="float: left">
-					<p:inputTextarea style="float:left ;height: 120px!important; width: 600px;" id="input" required="true"
+					<p:inputTextarea
+						style="float:left ;height: 120px!important; width: 600px;"
+						id="input" required="true"
 						requiredMessage="geben Sie bitte einen Kommentar ein"
 						value="#{mainController.commentController.text}"></p:inputTextarea>
 					<h:message id="message" for="input" showDetail="true"
 						showSummary="false" style="color:red; margin-left: 30px;" />
 					<br />
-					<p:commandButton style="margin-top: 10px; margin-right: 30cm;" value="submit" update="input comments message"
+					<p:commandButton style="margin-top: 10px; margin-right: 30cm;"
+						value="submit" update="input comments message"
 						actionListener="#{mainController.commentController.saveComment()}">
 						<f:param name="imageId"
 							value="#{mainController.commentController.imageIdInfo}" />
