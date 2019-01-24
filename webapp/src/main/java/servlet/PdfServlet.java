@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dbConnector.ConnectToPdfDB;
+import dbConnector.ConnectToUserDB;
 import entity.Pdf;
+import entity.User;
 
 public class PdfServlet extends HttpServlet {
 
@@ -16,25 +19,17 @@ public class PdfServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Pdf pdf;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		String userId = req.getParameter("id");
 		// Get last uploaded Pdf
 		try {
-			// Pdf bytes
-			pdf = new Pdf();
-			List<byte[]> allPdfsFromDB = pdf.getAllPdfsFromDB();
-
-            byte[] PdfBytes = allPdfsFromDB.get(allPdfsFromDB.size()-1);
-
-			resp.getOutputStream().write(PdfBytes);
+			User user = ConnectToUserDB.getUserFromDB(Integer.parseInt(userId));
+			List<Pdf> userPdfs = ConnectToPdfDB.getUserPdfsFromDB(user);
+			byte[] pdfBytes = userPdfs.get(userPdfs.size()-1).getFile();
+			resp.getOutputStream().write(pdfBytes);
 			resp.getOutputStream().close();
-			
-
-			
-
 		} catch (Exception e) {
 			// Display error message
 			resp.getWriter().write(e.getMessage());

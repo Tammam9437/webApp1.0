@@ -11,7 +11,6 @@ import dbConnector.ConnectToImageDB;
 import entity.Category;
 import entity.Image;
 import entity.User;
-import exception.UserIsNullException;
 
 @ManagedBean
 @SessionScoped
@@ -32,12 +31,7 @@ public class ImageController {
 
 	public List<Image> getUserImages() {
 		User user = mainController.getUserController().getUser();
-		if (user != null) {
-			List<Image> list = ConnectToImageDB.queryImage("From Image WHERE iduser ='" + user.getId() + "'");
-			return list;
-		} else {
-			throw new UserIsNullException("melden sie sich bitte erneut an");
-		}
+		return ConnectToImageDB.getUserImagesFromDB(user);
 
 	}
 

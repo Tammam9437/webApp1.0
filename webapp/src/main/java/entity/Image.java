@@ -2,7 +2,6 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -63,15 +62,6 @@ public class Image implements Comparable<Image> {
 
 	public void saveInDB() {
 		ConnectToImageDB.saveImageInDB(this);
-	}
-
-	public List<byte[]> getAllImagesFromDB() {
-		List<byte[]> allImagesFromDB = new ArrayList<byte[]>();
-		List<Image> images = ConnectToImageDB.queryImage("from Image");
-		for (Image image : images) {
-			allImagesFromDB.add(image.getFile());
-		}
-		return allImagesFromDB;
 	}
 
 	public boolean isUserEnteredLike(User user) {

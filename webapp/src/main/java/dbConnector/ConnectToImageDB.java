@@ -14,6 +14,7 @@ import entity.Li;
 import entity.Link;
 import entity.Pdf;
 import entity.User;
+import exception.UserIsNullException;
 
 public class ConnectToImageDB {
 
@@ -96,6 +97,16 @@ public class ConnectToImageDB {
 		}
 		return theImages;
 	}
+	
+	public static List<Image> getUserImagesFromDB(User user) {
+		if (user != null) {
+			List<Image> list = ConnectToImageDB.queryImage("From Image WHERE iduser ='" + user.getId() + "'");
+			return list;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
+	}
+
 
 	public static void displayImages(List<Image> theImages) {
 		for (Image tempImage : theImages) {

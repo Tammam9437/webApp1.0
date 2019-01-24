@@ -65,15 +65,6 @@ public class Pdf implements Comparable<Pdf> {
 		this.file = file;
 	}
 
-	public List<byte[]> getAllPdfsFromDB() {
-		List<byte[]> allPdfsFromDB = new ArrayList<byte[]>();
-		List<Pdf> pdfs = ConnectToPdfDB.queryPdf("from Pdf");
-		for (Pdf pdf : pdfs) {
-			allPdfsFromDB.add(pdf.getFile());
-		}
-		return allPdfsFromDB;
-	}
-
 	public boolean isUserEnteredLike(User user) {
 		if (user != null) {
 			List<Li> userPdfLikes = ConnectToLikeDB.getUserPdfLikes(user, this);

@@ -14,6 +14,7 @@ import entity.Li;
 import entity.Link;
 import entity.Pdf;
 import entity.User;
+import exception.UserIsNullException;
 
 public class ConnectToPdfDB {
 
@@ -95,6 +96,15 @@ public class ConnectToPdfDB {
 			getInstance().close();
 		}
 		return thePdfs;
+	}
+	
+	public static List<Pdf> getUserPdfsFromDB(User user) {
+		if (user != null) {
+			List<Pdf> list = ConnectToPdfDB.queryPdf("From Pdf WHERE iduser ='" + user.getId() + "'");
+			return list;
+		} else {
+			throw new UserIsNullException("melden sie sich bitte erneut an");
+		}
 	}
 
 	public static void displayPdfs(List<Pdf> thePdfs) {

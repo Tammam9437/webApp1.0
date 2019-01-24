@@ -60,7 +60,6 @@ public class FileUploadView {
 				imageFile = true;
 				FacesMessage message = new FacesMessage("Succesful", file.getFileName() + "As Image is uploaded.");
 				FacesContext.getCurrentInstance().addMessage(null, message);
-
 			}
 			if (fileType.equals("application/pdf")) {
 				pdf = new Pdf();

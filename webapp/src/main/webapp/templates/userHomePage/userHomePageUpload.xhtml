@@ -54,20 +54,21 @@
 				<br />
 				<p:commandButton value="Submit" ajax="false"
 					actionListener="#{mainController.fileUploadView.upload()}"
-					disabled="false" />
+					disabled="false" >
+					</p:commandButton>
 				<!-- Image -->
 				<br />
 				<h3>Dein hochgeladene Datei</h3>
-				<p:graphicImage id="image" alt="uploaded image" url="/Image"
+				<p:graphicImage id="image" alt="uploaded image" url="/Image?id=#{mainController.userController.user.id}"
 					height="300" width="300"
 					rendered="#{mainController.fileUploadView.imageFile}" />
-				<h:outputLink value="#{request.contextPath}/Image"
+				<h:outputLink value="#{request.contextPath}/Image?id=#{mainController.userController.user.id}"
 					rendered="#{mainController.fileUploadView.imageFile}"
 					target="_blank">öffne Image in new Tap</h:outputLink>
 				<!-- Pdf -->
-				<p:media value="/Pdf" width="700px" height="700px" player="pdf"
+				<p:media value="/Pdf?id=#{mainController.userController.user.id}" width="700px" height="700px" player="pdf"
 					rendered="#{mainController.fileUploadView.pdfFile}" />
-				<h:outputLink value="#{request.contextPath}/Pdf"
+				<h:outputLink value="#{request.contextPath}/Pdf?id=#{mainController.userController.user.id}"
 					rendered="#{mainController.fileUploadView.pdfFile}" target="_blank">öffne Pdf in new Tap</h:outputLink>
 			</h:form>
 		</ui:define>
